@@ -1,12 +1,105 @@
 /* INDEX + LANDMARK STYLING */
 body {
-    background-color: #0a0a0a;
+    background: linear-gradient(to right, #262626, #1d1d1d);
     color: white;
     font-family: 'Trebuchet MS';
+    margin-bottom: 50px;
+
+    /* Animation stuff */
+    animation-name: TextAnimation;
+    animation-duration: 3s;
+}
+
+@keyframes TextAnimation {
+    from {opacity: 0%;}
+    to {opacity: 100%;}
+}
+
+
+
+nav {
+    margin: 0 auto;
+    width: fit-content;
+    background: #0a0a0a;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+h1 {
+    background: #0a0a0a;
+    border: 2px solid white;
+    border-radius: 12px;
+    padding: 10px;
+    width: fit-content;
+}
+
+.intro-text {
+    margin: 30px auto;
+    font-size: 15px;
+    text-align: center;
+    background: #0a0a0a;
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+h2 {
+    margin: 0 auto;
+    border-bottom: 1px solid white;
+    width: fit-content;
+    font-size: 25px;
+}
+
+p {
+    font-size: 16px;
+}
+
+.card {
+    background: #0a0a0a;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 10px 10px;
+    width: fit-content;
 }
 
 
 /* INDEX STYLING */
+.header-container {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-box-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.index-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 0;
+    gap: 15px;
+    width: 800px;
+}
+
+.flex-image {
+    border-radius: 60px;
+    padding: 50px;
+
+    /* Animation Stuff */
+    animation-name: ImageAnimation;
+    animation-duration: 4.5s;
+}
+
+@keyframes ImageAnimation {
+    from {transform: translateX(-400px);}
+    to {transform: translateX(0px);}
+}
 
 
 
