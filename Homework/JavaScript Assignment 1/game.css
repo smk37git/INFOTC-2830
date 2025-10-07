@@ -47,14 +47,71 @@ html, body {
     border-radius: 12px;
     padding: 0px 10px;
     width: 33%;
-    height: 300px;
+    height: 350px;
     font-family:'Trebuchet MS';
+}
+
+.player-symbol-x {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 200px;
+    color: rgba(255, 73, 73, 0.863);
+    text-shadow: 0px 0px 30px rgba(255, 73, 73, 0.505);
+}
+
+.player-symbol-o {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 200px;
+    color: rgba(73, 131, 255, 0.863);
+    text-shadow: 0px 0px 30px rgba(73, 131, 255, 0.505);
 }
 
 .player-card h2 {
     margin: 15px auto;
     border-bottom: 1px solid white;
     width: fit-content;
+}
+
+.player-form-row {
+    margin-top: 5px;
+    gap: 20px;
+    display: flex;
+    padding-right: 5px;
+}
+
+.player-form input {
+    border-radius: 5px;
+    padding: 1px 5px;
+    border: 1px solid white;
+    color: white;
+    background: rgb(57, 57, 57);
+    font-size: 15px;
+    width: 60%;
+}
+
+.player-form input::placeholder {
+    color: rgba(255, 255, 255, 0.461);
+}
+
+.player-form input:hover {
+    background: rgb(77, 77, 77);
+}
+
+.player-form button {
+    color: rgba(255, 255, 255, 0.461);
+    width: 30%;
+    height: 25px;
+    font-size: 13px;
+    padding: 1px 5px;
+    border-radius: 6px;
+    border: 1px solid white;
+    background: rgb(57, 57, 57);
+}
+
+.player-form button:hover {
+    background: rgb(77, 77, 77);
+    color: white;
 }
 
 .game-container {
@@ -66,11 +123,67 @@ html, body {
     border-radius: 12px;
     padding: 10px;
     width: 66%;
-    height: 400px;
+    height: 440px;
+    align-items: center;
 }
 
-.game-container h2 {
-    margin: 10px auto;
-    border-bottom: 1px solid white;
-    width: fit-content;
+.message-container {
+    margin: 5px auto;
+    width: 90%;
+    height: fit-content;
+    background: rgb(28, 28, 28);
+    border-radius: 8px;
+    border: 2px solid white;
+    padding: 2px;
+}
+
+.message-container p {
+    text-align: center;
+    font-size: 12px;
+}
+
+.game {
+    margin: 20px auto;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 5px;
+    width: 300px;
+    height: 300px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.game-item {
+    background: rgb(40, 40, 40);
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-item:hover {
+    background: rgb(71, 71, 71);
+}
+
+.restart-button-container {
+    justify-content: center;
+    display: flex;
+}
+
+.restart-button-container button {
+    color: rgba(255, 255, 255, 0.461);
+    width: 100px;
+    height: 25px;
+    font-size: 13px;
+    padding: 1px 5px;
+    border-radius: 6px;
+    border: 1px solid white;
+    background: rgb(57, 57, 57);
+}
+
+.restart-button-container button:hover {
+    background: rgb(77, 77, 77);
+    color: white;
 }
