@@ -3,6 +3,8 @@ html, body {
     background-color: #131313;
 }
 
+/* HEADER */
+
 .header-container {
     margin: 0 auto;
     color: white;
@@ -26,4 +28,49 @@ html, body {
     margin: 10px 0;
     font-size: 20px;
     font-family:'Trebuchet MS';
+}
+
+/* DASHBOARD / PLAYER CARDS / GAME */
+.dashboard {
+    margin: 50px 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 25px;
+}
+
+.player-card {
+    margin: 50px auto;
+    color: white;
+    border: 2px solid white;
+    background: #0a0a0a;
+    border-radius: 12px;
+    padding: 0px 10px;
+    width: 33%;
+    height: 300px;
+    font-family:'Trebuchet MS';
+}
+
+.player-card h2 {
+    margin: 15px auto;
+    border-bottom: 1px solid white;
+    width: fit-content;
+}
+
+.game-container {
+    margin: 0 auto;
+    color: white;
+    font-family:'Trebuchet MS';
+    border: 2px solid white;
+    background: #0a0a0a;
+    border-radius: 12px;
+    padding: 10px;
+    width: 66%;
+    height: 400px;
+}
+
+.game-container h2 {
+    margin: 10px auto;
+    border-bottom: 1px solid white;
+    width: fit-content;
 }
