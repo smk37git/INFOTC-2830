@@ -2,8 +2,8 @@
 
 /* GAME DATA */
 let game = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-let x;
-let o;
+let x = 'x';
+let o = 'o';
 let gameOver = false;
 let currentPlayer = 0;
 
@@ -78,7 +78,37 @@ function gameCheck(index) {
         return square != 0;
     });
 
+    let possibleCombinations = [
+        /* Row Wins */
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        /* Column Wins */
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        /* Diagonal Wins */
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    for (let combination of possibleCombinations) {
+        if(game[combination[0]] !== 0 &&
+            game[combination[0]] == game[combination[1]] &&
+            game[combination[1]] == game[combination[2]]) {
+                
+                gameOver = true;
+
+                if (game[combination[0]] === 'x') {
+                    XwinnerMessage(playerNames.get("Player 1"));
+                }else{
+                    OwinnerMessage(playerNames.get("Player 2"));
+                }
+            }
+    }
+
     if (filledGame) {
+        gameOver = true;
         tiedGame();
     }
 }
@@ -110,4 +140,14 @@ function startGame() {
 function tiedGame() {
     let tiedMessage = document.getElementById("message-text");
     tiedMessage.innerHTML = `<p>Tied Game! No One Wins!</p>`;
+}
+
+function XwinnerMessage(playerName) {
+    let winnerMessage = document.getElementById("message-text");
+    winnerMessage.innerHTML = `<p>${playerName} WON THE GAME!</p>`;
+}
+
+function OwinnerMessage(playerName) {
+    let winnerMessage = document.getElementById("message-text");
+    winnerMessage.innerHTML = `<p>${playerName} WON THE GAME!</p>`;
 }
