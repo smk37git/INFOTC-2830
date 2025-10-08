@@ -30,30 +30,33 @@ player2.addEventListener("submit", function(event) {
 });
 
 /* Square Data */
-const square = document.querySelectorAll(".game-item");
-square.addEventListener("click", function() {
+const squares = document.querySelectorAll(".game-item");
+squares.forEach(function (box, index) {
+    box.addEventListener("click", function() {
+        if (game[index] === 0) {
+            checkTurn(box, index);
+        }
 
-    
-    
+    });
 });
 
-function makeMove() {
+function playerXTurn (box, index) {
+    game[index] = x;
+    box.textContent = "X";
     currentPlayer ++;
 }
 
-function playerXTurn () {
-    console.log("X Move");
+function playerOTurn (box, index) {
+    game[index] = o;
+    box.textContent = "O";
+    currentPlayer ++;
 }
 
-function playerOTurn () {
-    console.log("O Move");
-}
-
-function checkTurn() {
+function checkTurn(box, index) {
     if (currentPlayer % 2 === 0) {
-        playerXTurn();
+        playerXTurn(box, index);
     } else if (currentPlayer % 2 !== 0) {
-        playerOTurn();
+        playerOTurn(box, index);
     } else if(currentPlayer === 9) {
         gameOver = true;
     }
