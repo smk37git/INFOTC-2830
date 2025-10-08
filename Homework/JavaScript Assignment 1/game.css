@@ -112,6 +112,7 @@ html, body {
 .player-form button:hover {
     background: rgb(77, 77, 77);
     color: white;
+    cursor: pointer;
 }
 
 .game-container {
@@ -161,6 +162,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .game-item:hover {
@@ -186,4 +188,5 @@ html, body {
 .restart-button-container button:hover {
     background: rgb(77, 77, 77);
     color: white;
+    cursor: pointer;
 }
