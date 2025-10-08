@@ -35,6 +35,7 @@ squares.forEach(function (box, index) {
         if (playerNames.size === 2) {
             if (game[index] === 0) {
                 checkTurn(box, index);
+                gameCheck(index);
             }
         }else{
             missingNames();
@@ -72,8 +73,14 @@ function checkTurn(box, index) {
     }
 }
 
-function gameCheck() {
+function gameCheck(index) {
+    const filledGame = game.every(function(square) {
+        return square != 0;
+    });
 
+    if (filledGame) {
+        tiedGame();
+    }
 }
 
 
@@ -96,7 +103,11 @@ function missingNames() {
 
 function startGame() {
     let beginMessage = document.getElementById("message-text");
-
     setTimeout(function() {
         beginMessage.innerHTML = `<p>The Game Has Begun!</p>`;}, 3000); /* Start Game Message */
+}
+
+function tiedGame() {
+    let tiedMessage = document.getElementById("message-text");
+    tiedMessage.innerHTML = `<p>Tied Game! No One Wins!</p>`;
 }
