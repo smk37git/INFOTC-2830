@@ -41,12 +41,18 @@ squares.forEach(function (box, index) {
 function playerXTurn (box, index) {
     game[index] = x;
     box.textContent = "X";
+    box.style.fontSize = "70px";
+    box.style.color = "rgba(255, 73, 73, 0.863)";
+    box.style.textShadow = "0px 0px 30px rgba(255, 73, 73, 0.505)";
     currentPlayer ++;
 }
 
 function playerOTurn (box, index) {
     game[index] = o;
     box.textContent = "O";
+    box.style.fontSize = "70px";
+    box.style.color = "rgba(73, 131, 255, 0.863)";
+    box.style.textShadow = "0px 0px 30px rgba(73, 131, 255, 0.505)";
     currentPlayer ++;
 }
 
@@ -63,7 +69,21 @@ function checkTurn(box, index) {
 /* EVENT DATA */
 
 /* Messages */
+let messageTracker = 0;
 function displayNames(textInput) {
     let playerNameMessage = document.getElementById("message-text"); /* Get original message text */
     playerNameMessage.innerHTML = `<p>Welcome ${textInput.value}!</p>`; /* insert welcome message */
+    messageTracker ++;
+    console.log(messageTracker);
+    
+    if (messageTracker == 2) {
+        startGame();
+    }
+}
+
+function startGame() {
+    let beginMessage = document.getElementById("message-text");
+
+    setTimeout(function() {
+        beginMessage.innerHTML = `<p>The Game Has Begun!</p>`;}, 3000); /* Start Game Message */
 }
