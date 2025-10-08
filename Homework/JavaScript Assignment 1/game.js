@@ -2,9 +2,8 @@
 
 /* GAME DATA */
 let game = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-let empty = 0
-let x = 1;
-let o = 2;
+let x;
+let o;
 let gameOver = false;
 let currentPlayer = 0;
 
@@ -36,7 +35,6 @@ squares.forEach(function (box, index) {
         if (game[index] === 0) {
             checkTurn(box, index);
         }
-
     });
 });
 
