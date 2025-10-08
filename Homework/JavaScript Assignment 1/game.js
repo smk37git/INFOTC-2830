@@ -32,12 +32,18 @@ player2.addEventListener("submit", function(event) {
 const squares = document.querySelectorAll(".game-item");
 squares.forEach(function (box, index) {
     box.addEventListener("click", function() {
-        if (game[index] === 0) {
-            checkTurn(box, index);
+        if (playerNames.size === 2) {
+            if (game[index] === 0) {
+                checkTurn(box, index);
+            }
+        }else{
+            missingNames();
+            return;
         }
     });
 });
 
+/* EVENT DATA */
 function playerXTurn (box, index) {
     game[index] = x;
     box.textContent = "X";
@@ -66,7 +72,10 @@ function checkTurn(box, index) {
     }
 }
 
-/* EVENT DATA */
+function gameCheck() {
+
+}
+
 
 /* Messages */
 let messageTracker = 0;
@@ -74,11 +83,15 @@ function displayNames(textInput) {
     let playerNameMessage = document.getElementById("message-text"); /* Get original message text */
     playerNameMessage.innerHTML = `<p>Welcome ${textInput.value}!</p>`; /* insert welcome message */
     messageTracker ++;
-    console.log(messageTracker);
     
     if (messageTracker == 2) {
         startGame();
     }
+}
+
+function missingNames() {
+    let noNameMessage = document.getElementById("message-text");
+    noNameMessage.innerHTML = `<p>Please Enter Both Names Before Playing!</p>`;
 }
 
 function startGame() {
