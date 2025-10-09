@@ -17,9 +17,11 @@ player1.addEventListener("submit", function(event) {
     const textInput = document.getElementById("player1-input"); /* Store Player 1's Name in Map */
     playerNames.set("Player 1", textInput.value);
 
-    if (textInput.value.length) {
+    if (textInput.value.length > 0) {
         displayNames(textInput)
         let playerUsername = document.getElementById("player-one"); /* Get the username text */
+        playerUsername.classList.add("fade-in");
+        playerUsername.style.animationDuration = "1s";
         playerUsername.textContent = `${textInput.value}` /* Replace username */
     } else {
         errorNames(textInput);
@@ -36,6 +38,8 @@ player2.addEventListener("submit", function(event) {
     if (textInput.value.length > 0) {
         displayNames(textInput);
         let playerUsername = document.getElementById("player-two"); /* Get the username text */
+        playerUsername.classList.add("fade-in");
+        playerUsername.style.animationDuration = "1s";
         playerUsername.textContent = `${textInput.value}` /* Replace username */
     } else {
         errorNames(textInput);
@@ -63,19 +67,25 @@ function playGame() {
 /* EVENT DATA */
 function playerXTurn (box, index) {
     game[index] = x;
-    box.textContent = "X";
-    box.style.fontSize = "70px";
-    box.style.color = "rgba(255, 73, 73, 0.863)";
-    box.style.textShadow = "0px 0px 30px rgba(255, 73, 73, 0.505)";
+    const span = document.createElement('span');
+    span.textContent = "X";
+    span.className = "fade-in";
+    span.style.fontSize = "70px";
+    span.style.color = "rgba(255, 73, 73, 0.863)";
+    span.style.textShadow = "0px 0px 30px rgba(255, 73, 73, 0.505)";
+    box.appendChild(span);
     currentPlayer ++;
 }
 
 function playerOTurn (box, index) {
     game[index] = o;
-    box.textContent = "O";
-    box.style.fontSize = "70px";
-    box.style.color = "rgba(73, 131, 255, 0.863)";
-    box.style.textShadow = "0px 0px 30px rgba(73, 131, 255, 0.505)";
+    const span = document.createElement('span');
+    span.textContent = "O";
+    span.className = "fade-in";
+    span.style.fontSize = "70px";
+    span.style.color = "rgba(73, 131, 255, 0.863)";
+    span.style.textShadow = "0px 0px 30px rgba(73, 131, 255, 0.505)";
+    box.appendChild(span);
     currentPlayer ++;
 }
 
@@ -136,7 +146,7 @@ resetButton.addEventListener('click', function() {
     squares.forEach(function (box, index) {
         if (game[index] !== 0) { /* Reset each index to 0 */
             game[index] = 0;
-            box.textContent = "";
+            box.innerHTML = "";
         }
     });
     gameOver = false; /* Reset game variables */
@@ -144,12 +154,11 @@ resetButton.addEventListener('click', function() {
     startGame();
 });
 
-
-
 /* Messages */
 let messageTracker = 0;
 function displayNames(textInput) {
     let playerNameMessage = document.getElementById("message-text"); /* Get original message text */
+    playerNameMessage.classList.add("fade-in");
     playerNameMessage.innerHTML = `<p>Welcome ${textInput.value}!</p>`; /* insert welcome message */
     messageTracker ++;
     
@@ -160,17 +169,20 @@ function displayNames(textInput) {
 
 function errorNames(textInput) {
     let nameErrorMessage = document.getElementById("message-text");
+    nameErrorMessage.classList.add("fade-in");
     nameErrorMessage.innerHTML = `<p>Error With Name, Please Try Again.</p>`
 }
 
 function missingNames() {
     let noNameMessage = document.getElementById("message-text");
+    noNameMessage.classList.add("fade-in");
     noNameMessage.innerHTML = `<p>Please Enter Both Names Before Playing!</p>`;
 }
 
 function startGame() {
     let beginMessage = document.getElementById("message-text");
     setTimeout(function() {
+        beginMessage.classList.add("fade-in");
         beginMessage.innerHTML = `<p>The Game Has Begun!</p>`;
         playGame();
     }, 3000); /* Start Game Message */
@@ -182,6 +194,7 @@ function startGame() {
 
 function tiedGame() {
     let tiedMessage = document.getElementById("message-text");
+    tiedMessage.classList.add("fade-in");
     tiedMessage.innerHTML = `<p>Tied Game! No One Wins!</p>`;
 
     /* Change Background */
@@ -191,6 +204,7 @@ function tiedGame() {
 
 function XwinnerMessage(playerName) {
     let winnerMessage = document.getElementById("message-text");
+    winnerMessage.classList.add("fade-in");
     winnerMessage.innerHTML = `<p>${playerName} WON THE GAME!</p>`;
 
     /* Change Background */
@@ -200,6 +214,7 @@ function XwinnerMessage(playerName) {
 
 function OwinnerMessage(playerName) {
     let winnerMessage = document.getElementById("message-text");
+    winnerMessage.classList.add("fade-in");
     winnerMessage.innerHTML = `<p>${playerName} WON THE GAME!</p>`;
 
     /* Change Background */

@@ -1,6 +1,7 @@
 /* Tic-Tac-Toe Game Styling */
 html {
     background-color: #131313;
+    transition: opacity 1s ease-in-out;
 }
 
 /* HEADER */
@@ -189,4 +190,16 @@ html {
     background: rgb(77, 77, 77);
     color: white;
     cursor: pointer;
+}
+
+/* Transitions */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.25s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
 }
