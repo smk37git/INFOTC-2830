@@ -23,6 +23,8 @@ player1.addEventListener("submit", function(event) {
         playerUsername.classList.add("fade-in");
         playerUsername.style.animationDuration = "1s";
         playerUsername.textContent = `${textInput.value}` /* Replace username */
+
+        player1.style.opacity = 0; /* hide form */
     } else {
         errorNames(textInput);
     }
@@ -41,6 +43,8 @@ player2.addEventListener("submit", function(event) {
         playerUsername.classList.add("fade-in");
         playerUsername.style.animationDuration = "1s";
         playerUsername.textContent = `${textInput.value}` /* Replace username */
+
+        player2.style.opacity = 0; /* hide form */
     } else {
         errorNames(textInput);
     }
@@ -104,6 +108,8 @@ function gameCheck(index) {
         return square != 0;
     });
 
+    const squares = document.querySelectorAll(".game-item");
+
     let possibleCombinations = [
         /* Row Wins */
         [0, 1, 2],
@@ -122,7 +128,11 @@ function gameCheck(index) {
         if(game[combination[0]] !== 0 &&
             game[combination[0]] == game[combination[1]] &&
             game[combination[1]] == game[combination[2]] && gameOver != true) {
-                
+
+                squares[combination[0]].style.background = "rgba(225, 225, 225, 1)";
+                squares[combination[1]].style.background = "rgba(225, 225, 225, 1)";
+                squares[combination[2]].style.background = "rgba(225, 225, 225, 1)";
+            
                 gameOver = true;
 
                 if (game[combination[0]] === 'x') {
@@ -148,6 +158,7 @@ resetButton.addEventListener('click', function() {
             game[index] = 0;
             box.innerHTML = "";
         }
+        box.style.background = "rgb(40, 40, 40)";
     });
     gameOver = false; /* Reset game variables */
     currentPlayer = 0;
