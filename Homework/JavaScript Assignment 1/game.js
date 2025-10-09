@@ -43,20 +43,22 @@ player2.addEventListener("submit", function(event) {
 });
 
 /* Square Data */
-const squares = document.querySelectorAll(".game-item");
-squares.forEach(function (box, index) {
-    box.addEventListener("click", function() {
-        if (playerNames.size === 2 && gameOver != true) {
-            if (game[index] === 0) {
-                checkTurn(box, index);
-                gameCheck(index);
-            }
-        } else if (playerNames !== 2 && gameOver != true) {
-            missingNames();
-            return;
-        } 
+function playGame() {
+    const squares = document.querySelectorAll(".game-item");
+    squares.forEach(function (box, index) {
+        box.addEventListener("click", function() {
+            if (playerNames.size === 2 && gameOver != true) {
+                if (game[index] === 0) {
+                    checkTurn(box, index);
+                    gameCheck(index);
+                }
+            } else if (playerNames !== 2 && gameOver != true) {
+                missingNames();
+                return;
+            } 
+        });
     });
-});
+}
 
 /* EVENT DATA */
 function playerXTurn (box, index) {
@@ -153,7 +155,9 @@ function missingNames() {
 function startGame() {
     let beginMessage = document.getElementById("message-text");
     setTimeout(function() {
-        beginMessage.innerHTML = `<p>The Game Has Begun!</p>`;}, 3000); /* Start Game Message */
+        beginMessage.innerHTML = `<p>The Game Has Begun!</p>`;
+        playGame();
+    }, 3000); /* Start Game Message */
 }
 
 function tiedGame() {
