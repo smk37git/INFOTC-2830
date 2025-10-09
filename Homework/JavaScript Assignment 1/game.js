@@ -174,19 +174,35 @@ function startGame() {
         beginMessage.innerHTML = `<p>The Game Has Begun!</p>`;
         playGame();
     }, 3000); /* Start Game Message */
+
+    /* Change Background */
+    const winnerBackground = document.getElementById("background");
+    winnerBackground.style.backgroundImage = "";
 }
 
 function tiedGame() {
     let tiedMessage = document.getElementById("message-text");
     tiedMessage.innerHTML = `<p>Tied Game! No One Wins!</p>`;
+
+    /* Change Background */
+    const winnerBackground = document.getElementById("background");
+    winnerBackground.style.backgroundImage = "radial-gradient(circle at center, rgba(137, 73, 255, 0.86), #0a0a0a)";
 }
 
 function XwinnerMessage(playerName) {
     let winnerMessage = document.getElementById("message-text");
     winnerMessage.innerHTML = `<p>${playerName} WON THE GAME!</p>`;
+
+    /* Change Background */
+    const winnerBackground = document.getElementById("background");
+    winnerBackground.style.backgroundImage = "radial-gradient(circle at center, rgba(255, 73, 73, 0.863), #0a0a0a)";
 }
 
 function OwinnerMessage(playerName) {
     let winnerMessage = document.getElementById("message-text");
     winnerMessage.innerHTML = `<p>${playerName} WON THE GAME!</p>`;
+
+    /* Change Background */
+    const winnerBackground = document.getElementById("background");
+    winnerBackground.style.backgroundImage = "radial-gradient(circle at center, rgba(73, 131, 255, 0.863), #0a0a0a)";
 }
