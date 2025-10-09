@@ -95,8 +95,12 @@ function playerOTurn (box, index) {
 
 function checkTurn(box, index) {
     if (currentPlayer % 2 === 0) {
+        let playerSymbol = "O";
+        playerTurnMessage(playerSymbol, playerNames.get("Player 2"));
         playerXTurn(box, index);
     } else if (currentPlayer % 2 !== 0) {
+        let playerSymbol = "X";
+        playerTurnMessage(playerSymbol, playerNames.get("Player 1"));
         playerOTurn(box, index);
     } else if(currentPlayer === 9) {
         gameOver = true;
@@ -194,7 +198,7 @@ function startGame() {
     let beginMessage = document.getElementById("message-text");
     setTimeout(function() {
         beginMessage.classList.add("fade-in");
-        beginMessage.innerHTML = `<p>The Game Has Begun!</p>`;
+        beginMessage.innerHTML = `<p>The Game Has Begun! X Goes First!</p>`;
         playGame();
     }, 3000); /* Start Game Message */
 
@@ -231,4 +235,10 @@ function OwinnerMessage(playerName) {
     /* Change Background */
     const winnerBackground = document.getElementById("background");
     winnerBackground.style.backgroundImage = "radial-gradient(circle at center, rgba(73, 131, 255, 0.863), #0a0a0a)";
+}
+
+function playerTurnMessage(playerSymbol, playerName) {
+    let playerTurnMessage = document.getElementById("message-text");
+    playerTurnMessage.classList.add("fade-in");
+    playerTurnMessage.innerHTML = `<p> It is ${playerName}'s turn (${playerSymbol})!`
 }
