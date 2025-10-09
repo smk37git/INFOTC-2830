@@ -16,7 +16,14 @@ player1.addEventListener("submit", function(event) {
 
     const textInput = document.getElementById("player1-input"); /* Store Player 1's Name in Map */
     playerNames.set("Player 1", textInput.value);
-    displayNames(textInput)
+
+    if (textInput.value.length) {
+        displayNames(textInput)
+        let playerUsername = document.getElementById("player-one"); /* Get the username text */
+        playerUsername.textContent = `${textInput.value}` /* Replace username */
+    } else {
+        errorNames(textInput);
+    }
 });
 
 const player2 = document.getElementById("player2"); /* Get Player 2's Name Submit */
@@ -25,7 +32,14 @@ player2.addEventListener("submit", function(event) {
 
     const textInput = document.getElementById("player2-input"); /* Store Player 2's Name in Map */
     playerNames.set("Player 2", textInput.value);
-    displayNames(textInput)
+
+    if (textInput.value.length > 0) {
+        displayNames(textInput);
+        let playerUsername = document.getElementById("player-two"); /* Get the username text */
+        playerUsername.textContent = `${textInput.value}` /* Replace username */
+    } else {
+        errorNames(textInput);
+    }
 });
 
 /* Square Data */
@@ -124,6 +138,11 @@ function displayNames(textInput) {
     if (messageTracker == 2) {
         startGame();
     }
+}
+
+function errorNames(textInput) {
+    let nameErrorMessage = document.getElementById("message-text");
+    nameErrorMessage.innerHTML = `<p>Error With Name, Please Try Again.</p>`
 }
 
 function missingNames() {
