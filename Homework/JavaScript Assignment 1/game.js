@@ -32,15 +32,15 @@ player2.addEventListener("submit", function(event) {
 const squares = document.querySelectorAll(".game-item");
 squares.forEach(function (box, index) {
     box.addEventListener("click", function() {
-        if (playerNames.size === 2) {
+        if (playerNames.size === 2 && gameOver != true) {
             if (game[index] === 0) {
                 checkTurn(box, index);
                 gameCheck(index);
             }
-        }else{
+        } else if (playerNames !== 2 && gameOver != true) {
             missingNames();
             return;
-        }
+        } 
     });
 });
 
@@ -95,7 +95,7 @@ function gameCheck(index) {
     for (let combination of possibleCombinations) {
         if(game[combination[0]] !== 0 &&
             game[combination[0]] == game[combination[1]] &&
-            game[combination[1]] == game[combination[2]]) {
+            game[combination[1]] == game[combination[2]] && gameOver != true) {
                 
                 gameOver = true;
 
@@ -107,7 +107,7 @@ function gameCheck(index) {
             }
     }
 
-    if (filledGame) {
+    if (filledGame && gameOver != true) {
         gameOver = true;
         tiedGame();
     }
