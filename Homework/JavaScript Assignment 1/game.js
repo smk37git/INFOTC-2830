@@ -129,6 +129,22 @@ function gameCheck(index) {
     }
 }
 
+/* Reset Game */
+const resetButton = document.getElementById("reset-button");
+resetButton.addEventListener('click', function() {
+    const squares = document.querySelectorAll(".game-item");
+    squares.forEach(function (box, index) {
+        if (game[index] !== 0) { /* Reset each index to 0 */
+            game[index] = 0;
+            box.textContent = "";
+        }
+    });
+    gameOver = false; /* Reset game variables */
+    currentPlayer = 0;
+    startGame();
+});
+
+
 
 /* Messages */
 let messageTracker = 0;
