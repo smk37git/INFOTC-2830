@@ -115,7 +115,7 @@ export class Emitter extends Sprite {
         const spawnRate = cfg.spawnRate;
 
         // TODO[Student]: make this depend on settings
-        for (let i=0;i<3;i++) {
+        for (let i = 0; i < cfg.spawnRate; i++) {
             outArray.push(new Particle(
                 ex, ey,
                 vx*(0.8+0.4*Math.random()),
