@@ -94,8 +94,8 @@ function handleKey(e) {
         case 'ArrowDown': settings.adjustScale( -0.1 ); break;
         case 'b': case 'B': settings.toggleBlend(); break;
         // TODO[Student]: Add keys for your new features (e.g., 'C' to clear, 'T' to cycle theme)
-        case '+' : settings.adjustSpawnRate( +0.5 ); break;
-        case '-' : settings.adjustSpawnRate ( -0.5 ); break;
+        case '+' : settings.adjustSpawnRate( +1 ); break;
+        case '-' : settings.adjustSpawnRate ( -1 ); break;
     }
 }
 addEventListener('keydown', handleKey);
