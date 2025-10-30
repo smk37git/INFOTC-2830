@@ -45,72 +45,72 @@
  */
 
 export function createRenderer(canvas, ctx) {
-// Simple starfield background held in a closure (private to renderer)
-const stars = (() => {
-const pts = [];
-for (let i=0;i<200;i++) pts.push([Math.random()*innerWidth, Math.random()*innerHeight, Math.random()*0.8+0.2]);
-return pts;
-})();
+    // Simple starfield background held in a closure (private to renderer)
+    const stars = (() => {
+    const pts = [];
+    for (let i=0;i<200;i++) pts.push([Math.random()*innerWidth, Math.random()*innerHeight, Math.random()*0.8+0.2]);
+        return pts;
+    })();
 
 
-function clear(bg = '#111') {
-ctx.save();
-ctx.setTransform(1,0,0,1,0,0); // reset for full-canvas clear
-ctx.fillStyle = bg;
-ctx.fillRect(0,0,canvas.width, canvas.height);
-ctx.restore();
-}
+    function clear(bg = '#111') {
+        ctx.save();
+        ctx.setTransform(1,0,0,1,0,0); // reset for full-canvas clear
+        ctx.fillStyle = bg;
+        ctx.fillRect(0,0,canvas.width, canvas.height);
+        ctx.restore();
+    }
 
 
 function draw(state, settings) {
-clear('#0b0b0f');
-const cfg = settings.get();
+    clear('#0b0b0f');
+    const cfg = settings.get();
 
 
-// Background stars (no transforms)
-ctx.save();
-for (const [sx, sy, a] of stars) {
-ctx.fillStyle = `rgba(255,255,255,${a})`;
-ctx.fillRect(sx, sy, 1, 1);
-}
-ctx.restore();
+    // Background stars (no transforms)
+    ctx.save();
+    for (const [sx, sy, a] of stars) {
+    ctx.fillStyle = `rgba(255,255,255,${a})`;
+    ctx.fillRect(sx, sy, 1, 1);
+    }
+    ctx.restore();
 
 
-// Optional blend trails
-ctx.save();
-ctx.globalCompositeOperation = cfg.blend ? 'lighter' : 'source-over';
+    // Optional blend trails
+    ctx.save();
+    ctx.globalCompositeOperation = cfg.blend ? 'lighter' : 'source-over';
 
 
-// Draw emitter arm using transforms
-ctx.save();
-ctx.translate(state.emitter.x, state.emitter.y);
-ctx.rotate(state.emitter.theta);
-// TODO[Student-Transforms]: Add a subtle pulsating factor here for extra credit.
-ctx.scale(cfg.scale, cfg.scale); 
-ctx.strokeStyle = '#6cf';
-ctx.lineWidth = 2;
-ctx.beginPath();
-ctx.moveTo(0,0);
-ctx.lineTo(state.emitter.armLen, 0);
-ctx.stroke();
+    // Draw emitter arm using transforms
+    ctx.save();
+    ctx.translate(state.emitter.x, state.emitter.y);
+    ctx.rotate(state.emitter.theta);
+    // TODO[Student-Transforms]: Add a subtle pulsating factor here for extra credit.
+    ctx.scale(cfg.scale, cfg.scale); 
+    ctx.strokeStyle = '#6cf';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(0,0);
+    ctx.lineTo(state.emitter.armLen, 0);
+    ctx.stroke();
 
 
-// Emitter head
-ctx.fillStyle = '#6cf';
-ctx.beginPath();
-ctx.arc(state.emitter.armLen, 0, 6, 0, Math.PI*2);
-ctx.fill();
-ctx.restore();
+    // Emitter head
+    ctx.fillStyle = '#6cf';
+    ctx.beginPath();
+    ctx.arc(state.emitter.armLen, 0, 6, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
 
 
-// Particles
-for (const p of state.particles) p.draw(ctx);
-ctx.restore();
+    // Particles
+    for (const p of state.particles) p.draw(ctx);
+    ctx.restore();
 
 
-// TODO[Student-Optional]: Draw a HUD overlay (FPS, particle count) using transforms
-// Example: translate to top-right and scale text.
-}
+    // TODO[Student-Optional]: Draw a HUD overlay (FPS, particle count) using transforms
+    // Example: translate to top-right and scale text.
+    }
 
 
     function drawPaused(state, settings) {
