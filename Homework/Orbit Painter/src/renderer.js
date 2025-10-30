@@ -98,7 +98,11 @@ function draw(state, settings) {
     // Emitter head
     ctx.fillStyle = '#6cf';
     ctx.beginPath();
-    ctx.arc(state.emitter.armLen, 0, 6, 0, Math.PI*2);
+
+    // Add pulsing radius variable using Sin WAVES
+    const pulseRadius = 6 + 2 * Math.sin(state.emitter.theta * 3);
+    ctx.arc(state.emitter.armLen, 0, pulseRadius, 0, Math.PI*2);
+
     ctx.fill();
     ctx.restore();
 
