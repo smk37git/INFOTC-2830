@@ -1,5 +1,12 @@
 # Orbit Painter (Canvas + Modules + Classes + Closures)
 
+# SEBASTIAN MAIN
+All these files use the ES6 import and export because main.js imports and puts them all together.
+Each file has it's own responsibility so therefore they fit the requirements for modules. For classes and inheritence, I created the 'RingParticle' that extends 'Particle' and has its own unqiue shape (circle) with it's own size and colors. Closures were implemented in the makeFPSMeter function where private variables (frames, time, frameCounter) were initalized and returned by the tick or value statements. Finally, transforms were used mainly for the emitter head pulse effect. Where the header size is determined by a SIN math function and then applied in a smooth transition. Addtionally, the HUD elements were added by translating the elements to the bottom left of the page.
+
+![alt text](image1.png)
+![alt text](image2.png)
+
 
 ## Purpose
 Build a modular Canvas app demonstrating:
@@ -40,8 +47,8 @@ Build a modular Canvas app demonstrating:
 - [X] Make a **closure-backed utility** (e.g., seeded RNG or FPS meter) separate from classes. (`engine.js` or `settings.js` or a new file)
 
 
-- [ ] Ensure **resource cleanup** (particle culling, clamp dt). (`main.js`, `sprites.js`)
-- [ ] Comment where you met each rubric line.
+- [X] Ensure **resource cleanup** (particle culling, clamp dt). (`main.js`, `sprites.js`)
+- [X] Comment where you met each rubric line.
 
 
 ## Where to Work (TODO map)
