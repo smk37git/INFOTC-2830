@@ -12,7 +12,6 @@
  *       Examples:
  *         - 'C' → clear particles array
  *         - 'T' → cycle theme (if implemented)
- *         - '+'/'-' → adjust spawnRate (if implemented)
  *     - Keep the switch concise; avoid repeating logic across cases.
  *
  *  2) Settings Integration (Required):

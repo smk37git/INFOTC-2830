@@ -14,7 +14,6 @@
  *      DONE
  *
  *  2) Settings Integration (Required):
- *     - Make emission count depend on a setting (e.g., cfg.spawnRate).
  *     - You can also read cfg.scale, cfg.speed, or any new setting you add (theme, color mode).
  * 
  * 

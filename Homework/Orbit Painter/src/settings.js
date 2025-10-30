@@ -25,11 +25,8 @@
  *     - `get()` should return a fresh POJO snapshot, not live references to internal state.
  *
  *  4) Wire your new setting into the rest of the app:
- *     - In `Emitter.emitInto(...)` use `cfg.spawnRate` to decide how many particles to create.
-*            DONE
  *     - In `renderer.draw(...)` use `cfg.theme` for background or styling if you add themes.
- *     - In `main.js` bind keys to your mutators (e.g., +/- to adjust spawn rate, T to cycle theme).
- *           Done for spawn rate
+ *     - In `main.js` bind keys to your mutators (e.g., T to cycle theme).
  *
  * INTEGRATION CHECKPOINTS (Rubric hooks)
  * - Closures: This file is your primary evidence. No `class` here.
