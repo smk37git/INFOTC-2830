@@ -98,6 +98,21 @@ function draw(state, settings) {
 
     // TODO[Student-Optional]: Draw a HUD overlay (FPS, particle count) using transforms
     // Example: translate to top-right and scale text.
+
+    // HUD code for particles, spawnRate, speed, scale, blend
+    ctx.save();
+    ctx.translate(20, innerHeight - 20);
+    ctx.fillStyle = '#fff';
+    ctx.font = '16px system-ui';
+
+    ctx.fillText(`Particles: ${state.particles.length}`, 0, 0);
+    ctx.fillText(`Spawn Rate: ${cfg.spawnRate}`, 0, -20);
+    ctx.fillText(`Speed: ${cfg.speed.toFixed(1)}`, 0, -40);
+    ctx.fillText(`Scale: ${cfg.scale.toFixed(1)}`, 0, -60);
+    ctx.fillText(`Blend: ${cfg.blend ? 'ON' : 'OFF'}`, 0, -80);
+
+    ctx.restore();
+
     }
 
 
