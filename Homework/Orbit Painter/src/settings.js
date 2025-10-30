@@ -65,7 +65,7 @@ return {
 
   // TODO[Student]: add mutators, e.g., cycleTheme()
   // Adjust spawn rate, with a max rate of 20, a min of 1
-  adjustSpawnRate(d) { spawnRate = spawnRate = Math.max(1, Math.min(20, spawnRate + d));
+  adjustSpawnRate(d) { spawnRate = Math.max(1, Math.min(20, spawnRate + d));
 
   }
 
