@@ -115,11 +115,19 @@ export class Emitter extends Sprite {
 
         // TODO[Student]: make this depend on settings
         for (let i = 0; i < spawnRate; i++) {
-            outArray.push(new Particle(
-                ex, ey,
-                vx*(0.8+0.4*Math.random()),
-                vy*(0.8+0.4*Math.random())
-            ));
+            if (Math.random() > 0.5) {
+                outArray.push(new Particle(
+                    ex, ey,
+                    vx*(0.8+0.4*Math.random()),
+                    vy*(0.8+0.4*Math.random())
+                ));
+            } else {
+                outArray.push(new RingParticle(
+                    ex, ey,
+                    vx*(0.30+0.7*Math.random()),
+                    vy*(0.30+0.7*Math.random())
+                ));
+            }
         }
     }
 }
@@ -127,16 +135,16 @@ export class Emitter extends Sprite {
 // export class RingParticle extends Particle { /* ... */ }
 // SUBCLASS OF PARTICLE
 export class RingParticle extends Particle {
-    constructor() {
+    constructor(x, y, vx, vy, life=1) {
         // Get parent variables
         super(x, y, vx, vy, life);
         this.vx = vx; this.vy = vy;
         this.life = life; // seconds
         this.age = 0;
         // Smaller size
-        this.size = 2 + Math.random()*4;
+        this.size = 3 + Math.random()*4;
         // Change hue slightly
-        this.hue = (Math.random()*180)|0;
+        this.hue = (Math.random()*350)|0;
         this.dead = false;
     }
 
@@ -150,18 +158,18 @@ export class RingParticle extends Particle {
         this.scale = 1 + 0.5*Math.sin(this.age*6);
     }
 
-    // Rings aren't as bright (1/2 hue %), double line width and size is /3 instead of /2
+    // Rings have 3 size line-width, size 3 overall NOW in ARC instead of ctx.rec
     draw(ctx) {
         const a = 1 - (this.age / this.life);
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rot);
         ctx.scale(this.scale, this.scale);
-        ctx.fillStyle = `hsla(${this.hue} 45% 30% / ${a.toFixed(3)})`;
-        ctx.strokeStyle = `hsla(${this.hue} 45% 15% / ${a.toFixed(3)})`;
+        ctx.fillStyle = `hsla(${this.hue} 90% 60% / ${a.toFixed(3)})`;
+        ctx.strokeStyle = `hsla(${this.hue} 90% 30% / ${a.toFixed(3)})`;
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.rect(-this.size/3, -this.size/3, this.size, this.size);
+        ctx.arc(0, 0, 3, 0, Math.PI * 2);
         ctx.fill(); ctx.stroke();
         ctx.restore();
     }
