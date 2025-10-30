@@ -113,12 +113,15 @@ ctx.restore();
 }
 
 
-function drawPaused(state, settings) {
-draw(state, settings);
-ctx.save();
-ctx.fillStyle = '#fff';
-ctx.font = '600 20px system-ui';
-ctx.fillText('PAUSED', 20, 40);
-ctx.restore();
-}
+    function drawPaused(state, settings) {
+        draw(state, settings);
+        ctx.save();
+        ctx.fillStyle = '#fff';
+        ctx.font = '600 20px system-ui';
+        ctx.fillText('PAUSED', 20, 40);
+        ctx.restore();
+    }
+
+    return { draw, drawPaused };
+
 }
