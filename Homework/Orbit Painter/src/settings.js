@@ -17,6 +17,7 @@
  *
  *  2) Enforce bounds/validation inside mutators:
  *     - Clamp numbers (e.g., `spawnRate` between 1 and 20).
+ *          DONE
  *     - Cycle indices safely for theme arrays.
  *
  *  3) Keep the state PRIVATE:
@@ -25,6 +26,7 @@
  *
  *  4) Wire your new setting into the rest of the app:
  *     - In `Emitter.emitInto(...)` use `cfg.spawnRate` to decide how many particles to create.
+*            DONE
  *     - In `renderer.draw(...)` use `cfg.theme` for background or styling if you add themes.
  *     - In `main.js` bind keys to your mutators (e.g., +/- to adjust spawn rate, T to cycle theme).
  *
@@ -60,7 +62,7 @@ return {
   toggleBlend() { blend = !blend; },
 
   // TODO[Student]: add mutators, e.g., cycleTheme()
-  adjustSpawnRate(d) { spawn = Math.max(0.3, Math.min(3, scale + d)); },
+  adjustSpawnRate(d) { spawn = Math.max(20, Math.min(1, spawnRate + d)); },
 
 };
 }

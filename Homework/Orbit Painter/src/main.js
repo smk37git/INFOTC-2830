@@ -85,16 +85,18 @@ state.emitter = new Emitter(innerWidth/2, innerHeight/2);
 
 
 function handleKey(e) {
-if (e.repeat) return;
-switch (e.key) {
-case ' ': state.running = !state.running; break;
-case 'ArrowRight': settings.adjustSpeed( +0.2 ); break;
-case 'ArrowLeft': settings.adjustSpeed( -0.2 ); break;
-case 'ArrowUp': settings.adjustScale( +0.1 ); break;
-case 'ArrowDown': settings.adjustScale( -0.1 ); break;
-case 'b': case 'B': settings.toggleBlend(); break;
-// TODO[Student]: Add keys for your new features (e.g., 'C' to clear, 'T' to cycle theme)
-}
+    if (e.repeat) return;
+    switch (e.key) {
+        case ' ': state.running = !state.running; break;
+        case 'ArrowRight': settings.adjustSpeed( +0.2 ); break;
+        case 'ArrowLeft': settings.adjustSpeed( -0.2 ); break;
+        case 'ArrowUp': settings.adjustScale( +0.1 ); break;
+        case 'ArrowDown': settings.adjustScale( -0.1 ); break;
+        case 'b': case 'B': settings.toggleBlend(); break;
+        // TODO[Student]: Add keys for your new features (e.g., 'C' to clear, 'T' to cycle theme)
+        case '+' : settings.adjustSpawnRate( +0.5 ); break;
+        case '-' : settings.adjustSpawnRate ( -0.5 ); break;
+    }
 }
 addEventListener('keydown', handleKey);
 

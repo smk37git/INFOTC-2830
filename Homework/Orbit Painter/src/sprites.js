@@ -94,35 +94,36 @@ export class Particle extends Sprite {
 
 export class Emitter extends Sprite {
     constructor(cx, cy) {
-    super(cx, cy);
-    this.armLen = 140;
-    this.theta = 0;
-}
-
-update(dt, cfg) {
-    this.theta += dt * cfg.speed; // radians
-}
-
-emitInto(outArray, cfg) {
-    // TODO[Student]: Consider using cfg.spawnRate (if you add it) to vary emission count.
-    const arm = this.armLen * cfg.scale;
-    const ex = this.x + Math.cos(this.theta) * arm;
-    const ey = this.y + Math.sin(this.theta) * arm;
-    const speed = 60 + Math.random()*40;
-    const ang = this.theta + (Math.random()-0.5)*0.6;
-    const vx = Math.cos(ang) * speed;
-    const vy = Math.sin(ang) * speed;
-
-    // TODO[Student]: make this depend on settings
-    for (let i=0;i<3;i++) {
-        outArray.push(new Particle(
-            ex, ey,
-            vx*(0.8+0.4*Math.random()),
-            vy*(0.8+0.4*Math.random())
-        ));
+        super(cx, cy);
+        this.armLen = 140;
+        this.theta = 0;
     }
-}}
 
+    update(dt, cfg) {
+        this.theta += dt * cfg.speed; // radians
+    }
+
+    emitInto(outArray, cfg) {
+        // TODO[Student]: Consider using cfg.spawnRate (if you add it) to vary emission count.
+        const arm = this.armLen * cfg.scale;
+        const ex = this.x + Math.cos(this.theta) * arm;
+        const ey = this.y + Math.sin(this.theta) * arm;
+        const speed = 60 + Math.random()*40;
+        const ang = this.theta + (Math.random()-0.5)*0.6;
+        const vx = Math.cos(ang) * speed;
+        const vy = Math.sin(ang) * speed;
+        const spawnRate = cfg.spawnRate;
+
+        // TODO[Student]: make this depend on settings
+        for (let i=0;i<3;i++) {
+            outArray.push(new Particle(
+                ex, ey,
+                vx*(0.8+0.4*Math.random()),
+                vy*(0.8+0.4*Math.random())
+            ));
+        }
+    }
+}
 
 // export class RingParticle extends Particle { /* ... */ }
 // SUBCLASS OF PARTICLE
