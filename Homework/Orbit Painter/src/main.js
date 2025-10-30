@@ -46,7 +46,9 @@ import { createRenderer } from './renderer.js';
 import { Engine } from './engine.js';
 import { Emitter } from './sprites.js';
 import { makeSettings } from './settings.js';
-// import { makeFpsMeter } from './engine.js'; // Optional closure example
+
+// FPS meter
+import { makeFpsMeter } from './engine.js';
 
 
 const canvas = /** @type {HTMLCanvasElement} */ (document.getElementById('c'));
@@ -56,24 +58,26 @@ const ctx = canvas.getContext('2d');
 const renderer = createRenderer(canvas, ctx);
 const engine = new Engine();
 const settings = makeSettings(); // closure-backed settings (private)
-// const fps = makeFpsMeter(); // TODO[Student-Optional]: enable and render in HUD
+
+// FPS MEETER
+const fps = makeFpsMeter();
 
 
 const state = {
-emitter: null,
-particles: [],
-running: true
+    emitter: null,
+    particles: [],
+    running: true
 };
 
 
 function resize() {
-// Device-pixel-ratio aware canvas sizing
-const dpr = Math.max(1, Math.round(window.devicePixelRatio || 1));
-canvas.width = Math.floor(innerWidth * dpr);
-canvas.height = Math.floor(innerHeight * dpr);
-canvas.style.width = innerWidth + 'px';
-canvas.style.height = innerHeight + 'px';
-ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // Device-pixel-ratio aware canvas sizing
+    const dpr = Math.max(1, Math.round(window.devicePixelRatio || 1));
+    canvas.width = Math.floor(innerWidth * dpr);
+    canvas.height = Math.floor(innerHeight * dpr);
+    canvas.style.width = innerWidth + 'px';
+    canvas.style.height = innerHeight + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 addEventListener('resize', resize, { passive: true });
 resize();
@@ -110,7 +114,9 @@ if (!state.running) return renderer.drawPaused(state, settings);
 
 
 const dt = Math.min(0.032, dtMs / 1000); // clamp to ~30ms for stability
-// fps?.tick?.(dtMs); // TODO[Student-Optional]
+
+// Call for FPS Meter
+fps?.tick?.(dtMs);
 
 
 // Emit new particles along a rotated arm
@@ -127,7 +133,8 @@ if (p.dead) state.particles.splice(i, 1);
 }
 
 
-renderer.draw(state, settings);
+// Include to show FPS count
+renderer.draw(state, settings, fps);
 });
 
 // ===== Helper commands students may extend ================================

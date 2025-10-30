@@ -46,7 +46,7 @@ export function createRenderer(canvas, ctx) {
     }
 
 
-function draw(state, settings) {
+function draw(state, settings, fps) {
     clear('#0b0b0f');
     const cfg = settings.get();
 
@@ -104,6 +104,9 @@ function draw(state, settings) {
     ctx.translate(20, innerHeight - 20);
     ctx.fillStyle = '#fff';
     ctx.font = '16px system-ui';
+
+    // FPS + HUD display
+    ctx.fillText(`FPS: ${fps.value()}`, 0, -100);
 
     ctx.fillText(`Particles: ${state.particles.length}`, 0, 0);
     ctx.fillText(`Spawn Rate: ${cfg.spawnRate}`, 0, -20);

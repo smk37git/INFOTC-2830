@@ -32,24 +32,51 @@
 
 // Engine with a closure-like private monotonic timer via private fields
 // TODO[Student-Optional]: Implement an FPS meter here using a closure (see stub below).
+
 export class Engine {
-#raf = 0;
-#last = 0;
+    #raf = 0;
+    #last = 0;
 
 
-start(step) {
-const loop = (t) => {
-if (!this.#last) this.#last = t;
-const dt = t - this.#last;
-this.#last = t;
-step(dt);
-this.#raf = requestAnimationFrame(loop);
-};
-this.#raf = requestAnimationFrame(loop);
+    start(step) {
+        const loop = (t) => {
+        if (!this.#last) this.#last = t;
+        const dt = t - this.#last;
+        this.#last = t;
+        step(dt);
+        this.#raf = requestAnimationFrame(loop);
+        };
+        this.#raf = requestAnimationFrame(loop);
+    }
+
+    stop() { cancelAnimationFrame(this.#raf); }
 }
 
+// FPS Meter function
+export function makeFpsMeter() {
 
-stop() { cancelAnimationFrame(this.#raf); }
+    // variables
+    let frames = 0;
+    let time = 0;
+    let frameCounter = 60;
+
+    return {
+        tick(dtMs) {
+            frames ++;
+
+            time += dtMs;
+            
+            // when time is = 1 second, calculate FPS
+            if (time >= 1000) {
+                frameCounter = frames / (time / 1000)
+
+                // Reset variables
+                frames = 0;
+                time = 0;
+            }
+        },
+        value() {
+            return frameCounter;
+        }
+    }
 }
-
-

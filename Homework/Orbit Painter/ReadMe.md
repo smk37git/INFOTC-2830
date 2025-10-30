@@ -37,7 +37,7 @@ Build a modular Canvas app demonstrating:
 
 - Did pulsing emitter head in renderer.js
 
-- [ ] Make a **closure-backed utility** (e.g., seeded RNG or FPS meter) separate from classes. (`engine.js` or `settings.js` or a new file)
+- [X] Make a **closure-backed utility** (e.g., seeded RNG or FPS meter) separate from classes. (`engine.js` or `settings.js` or a new file)
 
 
 - [ ] Ensure **resource cleanup** (particle culling, clamp dt). (`main.js`, `sprites.js`)
