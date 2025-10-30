@@ -93,8 +93,13 @@ function handleKey(e) {
         case 'ArrowDown': settings.adjustScale( -0.1 ); break;
         case 'b': case 'B': settings.toggleBlend(); break;
         // TODO[Student]: Add keys for your new features (e.g., 'C' to clear, 'T' to cycle theme)
+
+        // Change particle amount
         case '=': case '+': settings.adjustSpawnRate( +1 ); break;
         case '-' : settings.adjustSpawnRate ( -1 ); break;
+
+        // Clear all particles
+        case 'c' : state.particles.length = 0; break;
     }
 }
 addEventListener('keydown', handleKey);
