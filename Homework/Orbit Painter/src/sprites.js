@@ -1,24 +1,8 @@
 /**
  * sprites.js — Entities for the Orbit Painter assignment
  *
- *  2) Settings Integration (Required):
- *     - You can also read cfg.scale, cfg.speed, or any new setting you add (theme, color mode).
- *
- *  3) Transforms & Style (Required):
- *     - Use ctx.save()/restore(), ctx.translate/rotate/scale inside draw().
- *     - Use both fill and stroke at least once in your subclass.
- *
- *  4) Performance & Lifecycle (Required):
- *     - Keep particles short-lived; ensure they set this.dead = true when finished.
- *     - Avoid expensive per-frame allocations inside hot loops where possible.
- *
  *  5) Documentation (Required):
  *     - Comment your subclass: explain what is unique about your draw() and update().
- *
- * OPTIONAL EXTENSIONS (Extra Credit):
- *  - Deterministic visuals using a seeded RNG (passed in via emitInto’s rand parameter).
- *  - Parameterize color by theme or velocity; compose multiple subclasses per frame.
- *  - Add simple collisions or “splash” bursts on certain conditions.
  *
  * RUBRIC HOOKS IN THIS FILE:
  *  - Classes + Inheritance: Sprite, Particle, and YOUR subclass.
@@ -127,10 +111,13 @@ export class RingParticle extends Particle {
         this.vx = vx; this.vy = vy;
         this.life = life; // seconds
         this.age = 0;
+        
         // Smaller size
         this.size = 3 + Math.random()*4;
+
         // Change hue slightly
         this.hue = (Math.random()*350)|0;
+
         this.dead = false;
     }
 
@@ -150,9 +137,14 @@ export class RingParticle extends Particle {
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rot);
+
+        // Set custom scale
         ctx.scale(this.scale, this.scale);
+        
+        // Fill and Stroke styles
         ctx.fillStyle = `hsla(${this.hue} 80% 50% / ${a.toFixed(5)})`;
         ctx.strokeStyle = `hsla(${this.hue} 70% 25% / ${a.toFixed(5)})`;
+
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.arc(0, 0, 3, 0, Math.PI * 2);
