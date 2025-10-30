@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Orbit Painter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+html, body { 
+height:100%;
+ margin:0;
+  background:#111;
+   color:#e6e6e6;
+    font:14px/1.4 system-ui;
+     }
+#hud { 
+    position:fixed;
+    top:10px; 
+    left:10px; 
+    background:#0008; 
+    padding:10px 12px; 
+    border-radius:10px; 
+}
+canvas { 
+    display:block;
+    width:100vw; 
+    height:100vh; }
+kbd { 
+    background:#333; 
+    padding:2px 6px; 
+    border-radius:4px; 
+    }
+</style>
+</head>
+<body>
+<div id="hud">
+<div><strong>Orbit Painter</strong></div>
+<div>Controls: <kbd>Space</kbd> pause, <kbd>←/→</kbd> speed, <kbd>↑/↓</kbd> scale, <kbd>B</kbd> blend</div>
+</div>
+<canvas id="c"></canvas>
+<!-- Entry point uses ES Modules -->
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
