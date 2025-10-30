@@ -29,6 +29,7 @@
 *            DONE
  *     - In `renderer.draw(...)` use `cfg.theme` for background or styling if you add themes.
  *     - In `main.js` bind keys to your mutators (e.g., +/- to adjust spawn rate, T to cycle theme).
+ *           Done for spawn rate
  *
  * INTEGRATION CHECKPOINTS (Rubric hooks)
  * - Closures: This file is your primary evidence. No `class` here.
@@ -48,7 +49,8 @@ export function makeSettings() {
 let speed = 1.2; // radians/sec multiplier
 let scale = 1.0; // emitter arm scale
 let blend = false; // composite toggle
-// TODO[Student]: e.g., let theme = 'vivid'; let spawnRate = 3;
+// TODO[Student]: e.g., let theme = 'vivid';
+// Initial spawn rate is 5
 let spawnRate = 5;
 
 
@@ -62,6 +64,7 @@ return {
   toggleBlend() { blend = !blend; },
 
   // TODO[Student]: add mutators, e.g., cycleTheme()
+  // Adjust spawn rate, with a max rate of 20, a min of 1
   adjustSpawnRate(d) { spawn = Math.max(20, Math.min(1, spawnRate + d)); },
 
 };

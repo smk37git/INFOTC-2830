@@ -129,15 +129,19 @@ export class Emitter extends Sprite {
 // SUBCLASS OF PARTICLE
 export class RingParticle extends Particle {
     constructor() {
+        // Get parent variables
         super(x, y, vx, vy, life);
         this.vx = vx; this.vy = vy;
         this.life = life; // seconds
         this.age = 0;
+        // Smaller size
         this.size = 2 + Math.random()*4;
+        // Change hue slightly
         this.hue = (Math.random()*180)|0;
         this.dead = false;
     }
 
+    // Rings rotate faster, start smaller and get bigger
     update(dt, _cfg) {
         this.age += dt;
         if (this.age >= this.life) { this.dead = true; return; }
@@ -146,6 +150,8 @@ export class RingParticle extends Particle {
         this.rot += 5 * dt;
         this.scale = 1 + 0.5*Math.sin(this.age*6);
     }
+
+    // Rings aren't as bright (1/2 hue %), double line width and size is /3 instead of /2
     draw(ctx) {
         const a = 1 - (this.age / this.life);
         ctx.save();
@@ -154,7 +160,7 @@ export class RingParticle extends Particle {
         ctx.scale(this.scale, this.scale);
         ctx.fillStyle = `hsla(${this.hue} 45% 30% / ${a.toFixed(3)})`;
         ctx.strokeStyle = `hsla(${this.hue} 45% 15% / ${a.toFixed(3)})`;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.rect(-this.size/3, -this.size/3, this.size, this.size);
         ctx.fill(); ctx.stroke();
