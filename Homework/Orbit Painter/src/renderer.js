@@ -12,26 +12,10 @@
  *     - Read `const cfg = settings.get()` and use `cfg.theme.bg` (or similar) as the clear color.
  *     - Replace the hard-coded `'#0b0b0f'` with your theme background.
  *
- *  2) Transform Enhancements (Required):
- *     - Add at least one additional transform-driven effect (e.g., a subtle pulsating scale on the emitter
- *       head or a rotating HUD badge). Keep save()/restore() balanced.
- *
  *  3) HUD Overlay (Recommended or Extra Credit):
  *     - Draw a small heads-up display with FPS, particle count, speed, scale, spawnRate, theme, etc.
  *     - Demonstrate at least one transform in HUD rendering (translate to a corner, optional scale).
  *     - Keep the HUD rendering AFTER particles so it appears on top.
- *
- *  4) Blend Mode Toggle (Already wired):
- *     - Honor `cfg.blend` to switch `globalCompositeOperation` between 'lighter' and 'source-over'.
- *     - Ensure you restore globalCompositeOperation (use save()/restore()) to avoid leaking state.
- *
- *  5) Performance Discipline (Required):
- *     - Avoid heavy allocations in tight loops (reuse local variables where possible).
- *     - Keep per-frame state (like `stars`) inside a closure so it is created once, not each frame.
- *
- *  6) DPR / Resize Awareness (Handled in main.js):
- *     - This renderer assumes the 2D context’s transform is already adjusted for DPR by `main.js`.
- *     - Do NOT call `ctx.scale(dpr, dpr)` here; it is handled upstream during resize.
  *
  * RUBRIC HOOKS IN THIS FILE
  * - Transforms: emitter arm and your added transform effects.

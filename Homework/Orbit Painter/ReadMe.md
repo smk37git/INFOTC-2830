@@ -26,9 +26,20 @@ Build a modular Canvas app demonstrating:
 
 ## Your Tasks (checklist)
 - [X] Implement at least **one additional particle shape** or drawing effect. (`sprites.js`, `renderer.js`)
+
+- RingParticle
+
 - [X] Add **one new interaction** (e.g., key to clear canvas, change color scheme). (`main.js`, `renderer.js`)
-- [ ] Implement **at least one new transform usage** (e.g., scaled ring, rotated HUD element). (`renderer.js`)
+
+- Clear particles (c)
+
+- [X] Implement **at least one new transform usage** (e.g., scaled ring, rotated HUD element).(`renderer.js`)
+
+- Did pulsing emitter head in renderer.js
+
 - [ ] Make a **closure-backed utility** (e.g., seeded RNG or FPS meter) separate from classes. (`engine.js` or `settings.js` or a new file)
+
+
 - [ ] Ensure **resource cleanup** (particle culling, clamp dt). (`main.js`, `sprites.js`)
 - [ ] Comment where you met each rubric line.
 
