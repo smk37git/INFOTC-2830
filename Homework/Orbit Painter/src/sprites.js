@@ -1,22 +1,8 @@
 /**
  * sprites.js — Entities for the Orbit Painter assignment
  *
- * WHAT THIS MODULE IS:
- * - Defines the renderable/animatable entities drawn on <canvas>.
- * - Demonstrates ES6 classes and inheritance: Sprite → Particle (and your subclass).
- *
- * WHAT YOU (THE STUDENT) MUST DO IN THIS FILE:
- *  1) Inheritance (Required):
- *     - Create at least ONE subclass of Particle (e.g., RingParticle, SparkParticle).
- *     - Override draw(ctx) to render a different shape/effect (arcs, gradients, lines, etc.).
- *     - Optionally override update(dt, cfg) to change behavior (spin, pulsate, accelerate).
- * 
- *      DONE
- *
  *  2) Settings Integration (Required):
  *     - You can also read cfg.scale, cfg.speed, or any new setting you add (theme, color mode).
- * 
- * 
  *
  *  3) Transforms & Style (Required):
  *     - Use ctx.save()/restore(), ctx.translate/rotate/scale inside draw().
@@ -165,8 +151,8 @@ export class RingParticle extends Particle {
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rot);
         ctx.scale(this.scale, this.scale);
-        ctx.fillStyle = `hsla(${this.hue} 90% 60% / ${a.toFixed(3)})`;
-        ctx.strokeStyle = `hsla(${this.hue} 90% 30% / ${a.toFixed(3)})`;
+        ctx.fillStyle = `hsla(${this.hue} 80% 50% / ${a.toFixed(5)})`;
+        ctx.strokeStyle = `hsla(${this.hue} 70% 25% / ${a.toFixed(5)})`;
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.arc(0, 0, 3, 0, Math.PI * 2);
