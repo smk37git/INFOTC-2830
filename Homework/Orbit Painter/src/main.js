@@ -43,7 +43,7 @@
  * - Holding onto a stale `cfg` object across frames instead of calling `settings.get()` each time.
  */
 
-import { createRenderer } from './renderer.js';
+import { createRenderer } from './render.js';
 import { Engine } from './engine.js';
 import { Emitter } from './sprites.js';
 import { makeSettings } from './settings.js';
