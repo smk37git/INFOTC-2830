@@ -12,6 +12,8 @@
  *     - Store it in private vars next to `speed/scale/blend`.
  *     - Return it from `get()` so renderers/sprites can read it.
  *     - Provide mutators (e.g., `adjustSpawnRate(d)`, `nextTheme()`).
+ * 
+ *    DONE
  *
  *  2) Enforce bounds/validation inside mutators:
  *     - Clamp numbers (e.g., `spawnRate` between 1 and 20).
@@ -45,16 +47,20 @@ let speed = 1.2; // radians/sec multiplier
 let scale = 1.0; // emitter arm scale
 let blend = false; // composite toggle
 // TODO[Student]: e.g., let theme = 'vivid'; let spawnRate = 3;
+let spawnRate = 5;
 
 
   // ---- Public API (methods close over the private vars) --------------------
 
 return {
-      // Always return a read-only snapshot (prevents outside mutation).
-get() { return { speed, scale, blend /*, theme, spawnRate */ }; }, // read-only snapshot
-adjustSpeed(d) { speed = Math.max(0.1, speed + d); },
-adjustScale(d) { scale = Math.max(0.2, Math.min(3, scale + d)); },
-toggleBlend() { blend = !blend; },
-// TODO[Student]: add mutators, e.g., cycleTheme(), adjustSpawnRate(d)
+  // Always return a read-only snapshot (prevents outside mutation).
+  get() { return { speed, scale, blend, spawnRate /*, theme, */ }; }, // read-only snapshot
+  adjustSpeed(d) { speed = Math.max(0.1, speed + d); },
+  adjustScale(d) { scale = Math.max(0.2, Math.min(3, scale + d)); },
+  toggleBlend() { blend = !blend; },
+
+  // TODO[Student]: add mutators, e.g., cycleTheme()
+  adjustSpawnRate(d) { spawn = Math.max(0.3, Math.min(3, scale + d)); },
+
 };
 }
