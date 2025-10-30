@@ -103,7 +103,7 @@ export class Emitter extends Sprite {
 }
 
 // export class RingParticle extends Particle { /* ... */ }
-// SUBCLASS OF PARTICLE
+// SUBCLASS OF PARTICLE -- Unique because it is a circle, has different sizes, hues, and strokes/fills
 export class RingParticle extends Particle {
     constructor(x, y, vx, vy, life=1) {
         // Get parent variables
