@@ -1,7 +1,12 @@
-// GAME DATA
+// === GAME DATA ===
 let gameRunning = true;
 let characterClass = 0;
+
+// === CHARACTER DATA ===
 let selectedClass = 0;
+let health = 1;
+let attackPower = 1;
+let defense = 1;
 
 window.onload = async () => {
     gameData = await fetch('./data.json')
@@ -20,13 +25,6 @@ window.onload = async () => {
     });
 
     pickCharacter(gameRunning, characterClass, gameData);
-    
-    //let gameText = document.getElementsByClassName("game-text")[0];
-    //gameText.innerHTML = gameData.locations[0].name;
-
-    //document.getElementById("option-four").onclick = () => {
-    //    gameText.innerHTML = gameData.locations[2].name;
-    //}
 
 }
 
@@ -39,34 +37,51 @@ function pickCharacter (gameRunning, characterClass, gameData) {
 
             // Warrior
             let optionOne = document.getElementById("option-one");
-            optionOne.innerHTML = "Warrior";
+            optionOne.innerHTML = gameData.playerClasses[0].class;
             document.getElementById("option-one").onclick = () => {
-                gameText.innerHTML = "You selected Warrior!";
-                return selectedClass = 1
+                gameText.innerHTML = "You selected " + gameData.playerClasses[0].class;
+
+                // Assign character valuess
+                health = gameData.playerClasses[0].health;
+                attackPower = gameData.playerClasses[0].attackPower;
+                defense = gameData.playerClasses[0].defense;
+                level = gameData.playerClasses[0].level;
             }
 
             // Mage
             let optionTwo = document.getElementById("option-two");
-            optionTwo.innerHTML = "Mage";
+            optionTwo.innerHTML = gameData.playerClasses[1].class;
             document.getElementById("option-two").onclick = () => {
-                gameText.innerHTML = "You selected Mage!";
-                return selectedClass = 2
+                gameText.innerHTML = "You selected " + gameData.playerClasses[1].class;
+                
+                health = gameData.playerClasses[1].health;
+                attackPower = gameData.playerClasses[1].attackPower;
+                defense = gameData.playerClasses[1].defense;
+                level = gameData.playerClasses[1].level;
             }
 
             // Thief
             let optionThree = document.getElementById("option-three");
-            optionThree.innerHTML = "Thief";
+            optionThree.innerHTML = gameData.playerClasses[2].class;
             document.getElementById("option-three").onclick = () => {
-                gameText.innerHTML = "You selected Thief!";
-                return selectedClass = 3
+                gameText.innerHTML = "You selected " + gameData.playerClasses[2].class;
+
+                health = gameData.playerClasses[2].health;
+                attackPower = gameData.playerClasses[2].attackPower;
+                defense = gameData.playerClasses[2].defense;
+                level = gameData.playerClasses[2].level;
             }
 
             // Archer
             let optionFour = document.getElementById("option-four");
-            optionFour.innerHTML = "Archer";
+            optionFour.innerHTML = gameData.playerClasses[3].class;
             document.getElementById("option-four").onclick = () => {
-                gameText.innerHTML = "You selected Archer!";
-                return selectedClass = 4
+                gameText.innerHTML = "You selected " + gameData.playerClasses[3].class;
+                
+                health = gameData.playerClasses[3].health;
+                attackPower = gameData.playerClasses[3].attackPower;
+                defense = gameData.playerClasses[3].defense;
+                level = gameData.playerClasses[3].level;
             }
         }
     }
