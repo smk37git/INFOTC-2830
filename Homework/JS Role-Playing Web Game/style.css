@@ -81,12 +81,26 @@ body {
     margin-bottom: 15px;
 }
 
-.option-one, .option-two, .option-three, .option-four {
+.option {
+    color: white;
     background: #1d1d1d;
     border: 2px solid white;
     border-radius: 5px;
     width: 200px;
     height: 50px;
+}
+
+.option-button {
+    color: white;
+    background: #1d1d1d;
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+}
+
+.option-button:hover {
+    background: white;
+    color: black;
 }
 
 .option-text {

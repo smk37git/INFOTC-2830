@@ -9,33 +9,30 @@
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <!-- IMPORT GAME SCRIPT -->
-        <script src="main.js" async defer></script>
-
         <!-- DISPLAY AREA -->
         <div class="hero">
             <h1 class="title-text">JavaScript Role-Playing Web Game</h1>
-            <h2 classs="subtitle-text">Welcome to the Game!</p>
-        </div>
-
-        <div class="hero-separator"></div>
-
-        <div class="game-container">
-
-            <div class="game-sub-container">
-                <!-- HEALTH CONTAINER -->
-                <div class="health-container">
-                    <div class="panel-title-container">
-                        
-                    </div>
+            <h2 classs="subtitle-text" id="game-text">Welcome to the Game!</p>
+            </div>
+            
+            <div class="hero-separator"></div>
+            
+            <div class="game-container">
+                
+                <div class="game-sub-container">
+                    <!-- HEALTH CONTAINER -->
+                    <div class="health-container">
+                        <div class="panel-title-container">
+                            
+                        </div>
                     <h3 class="panel-title">HEALTH</h3>
                     <div id="health-canvas">
                         <canvas id="health"></canvas>
                     </div>
-
-
+                    
+                    
                 </div>
-
+                
                 <!-- PICTURE CONTAINER -->
                 <div>
                     <div class="picture-area">
@@ -48,29 +45,31 @@
                 <div class="inventory-container">
                     <h3 class="panel-title">INVENTORY</h3>
                     <div id="inventory-list">
-
+                        
                     </div>
                 </div>
             </div>
-
+            
             <div class="game-separator"></div>
-
+            
             <div class="game-options-container">
-                <div class="option-one">
-                    <p class="option-text">TEMP OPTION 1</p>
+                <div class="option">
+                    <button class="option-button" id="option-one" onClick="console.log('Test')">OPTION 1</button>
                 </div>
-                <div class="option-two">
-                    <p class="option-text">TEMP OPTION 2</p>
+                <div class="option">
+                    <button class="option-button" id="option-two" onClick="console.log('Test')">OPTION 2</button>
                 </div>
-                <div class="option-three">
-                    <p class="option-text">TEMP OPTION 3</p>
+                <div class="option">
+                     <button class="option-button" id="option-three" onClick="console.log('Test')">OPTION 3</button>
                 </div>
-                <div class="option-four">
-                    <p class="option-text">TEMP OPTION 4</p>
+                <div class="option">
+                     <button class="option-button" id="option-four" onClick="console.log('Test')">OPTION 4</button>
                 </div>
             </div>
         </div>
 
-
+         <!-- IMPORT GAME SCRIPT -->
+        <script src="main.js" async defer></script>
+        
     </body>
-</html>
+    </html>
