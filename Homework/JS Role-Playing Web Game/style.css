@@ -1,0 +1,95 @@
+body {
+    background-image: linear-gradient(to right, #0a0a0a, #101010);
+}
+
+.hero {
+    margin: 0 auto;
+    text-align: center;
+    width: fit-content;
+    padding: 10px;
+
+    border: 2px solid white;
+    border-radius: 12px;
+    background: #0a0a0a;
+    font-family: 'Trebuchet MS';
+    color: white;
+}
+
+.hero-separator {
+    margin: 25px auto;
+    width: 75%;
+    border: 1px solid rgba(255, 255, 255, 0.349);
+}
+
+.game-container {
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 8px;
+    background: #0a0a0a;
+    font-family: 'Trebuchet MS';
+    color: white;
+}
+
+.game-sub-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.health-container, .inventory-container {
+    background: #1d1d1d;
+    border: 2px solid white;
+    border-radius: 5px;
+    width: 225px;
+    height: 300px;
+}
+
+.panel-title {
+    background: #131313;
+    font-size: 16px;
+    margin: 0;
+    padding: 8px 0px;
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom: 1px solid white;
+}
+
+.game-picture {
+    margin-top: 15px;
+    border: 2px solid white;
+    border-radius: 8px;
+    max-height: 350px;
+    max-width: 350px;
+}
+
+.game-separator {
+    margin: 25px auto;
+    width: 80%;
+    border: 1px solid rgba(255, 255, 255, 0.349);
+}
+
+.game-options-container {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.option-one, .option-two, .option-three {
+    background: #1d1d1d;
+    border: 2px solid white;
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+}
+
+.option-text {
+    font-size: 15px;
+    font-family: 'Trebuchet MS';
+}
