@@ -1,5 +1,145 @@
 {
     "playerClasses": [
-        
+        {
+            "class": "Warrior",
+            "health": 100,
+            "attackPower": 15,
+            "defense": 10
+        },
+        {
+            "class": "Mage",
+            "health": 60,
+            "attackPower": 12,
+            "defense": 5
+        },
+        {
+            "class": "Thief",
+            "health": 40,
+            "attackPower": 10,
+            "defense": 2
+        },
+        {
+            "class": "Archer",
+            "health": 75,
+            "attackPower": 14,
+            "defense": 8
+        }
+    ],
+
+    "enemyClasses": [
+        {
+            "class": "Goblin",
+            "health": 100,
+            "attackPower": 5,
+            "defense": 1
+        },
+        {
+            "class": "Troll",
+            "health": 100,
+            "attackPower": 10,
+            "defense": 8
+        },
+        {
+            "class": "Dragon",
+            "health": 100,
+            "attackPower": 25,
+            "defense": 15
+        },
+        {
+            "class": "Soldier",
+            "health": 90,
+            "attackPower": 14,
+            "defense": 6
+        },
+        {
+            "class": "Evil Soldier",
+            "health": 100,
+            "attackPower": 18,
+            "defense": 6
+        }
+    ],
+    
+    "weapons": [
+        {
+            "name": "Sword",
+            "damage": 15,
+            "cost": 100
+        },
+        {
+            "name": "Club",
+            "damage":10,
+            "cost": 50
+        },
+        {
+            "name": "Spear",
+            "damage": 14,
+            "cost": 90
+        },
+        {
+            "name": "Bow",
+            "damage": 16,
+            "cost": 75
+        },
+        {
+            "name": "Dagger",
+            "damage": 10,
+            "cost": 20
+        },
+        {
+            "name": "Staff",
+            "damage": 18,
+            "cost": 200
+        }
+    ],
+
+    "armor": [
+        {
+            "name": "Leather Armor",
+            "defense": 5,
+            "cost": 100
+        },
+        {
+            "name": "Chainmail Armor",
+            "defense": 10,
+            "cost": 200
+        },
+        {
+            "name": "Knight Armor",
+            "defense": 20,
+            "cost": 500
+        },
+        {
+            "name": "Mage Armor",
+            "defense": 10,
+            "cost": 100
+        },
+        {
+            "name": "Thief Armor",
+            "defense": 15,
+            "cost": 150
+        }
+    ],
+
+    "locations": [
+        {
+            "name": "Forest",
+            "description": "A dark, dense forest full of lurking goblins.",
+            "enemyTypes": ["Goblin", "Troll"]
+        },
+        {
+            "name": "Castle Ruins",
+            "description": "The haunted remains of an ancient battleground.",
+            "enemyTypes": ["Evil Soldier", "Soldier"]
+        },
+        {
+            "name": "Mountain Cave",
+            "description": "A dragon's lair hidden deep within the mountains.",
+            "enemyTypes": ["Dragon"]
+        },
+        {
+            "name": "Village Market",
+            "description": "A place to trade goods and rest.",
+            "enemyTypes": []
+        }
     ]
 }
