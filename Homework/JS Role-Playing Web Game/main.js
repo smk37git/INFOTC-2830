@@ -21,12 +21,8 @@ window.onload = async () => {
     // Start game by picking character
     await pickCharacter(gameRunning, gameData);
 
-
-    console.log(PlayerCharacter.type);
-
-    // 5 Second Timer Before Quest Starts
-    //setTimeout(() => {
-    //}, 5000);
+    // 5 Second Delay before Triggering Quests
+    setTimeout(triggerQuest, 5000, PlayerCharacter, gameData);
 
 }
 
@@ -34,15 +30,18 @@ window.onload = async () => {
 function pickCharacter (gameRunning, gameData) {
     if(gameRunning != false && PlayerCharacter == null) {
 
-        let gameText = document.getElementsByClassName("game-text")[0];
-        gameText.innerHTML = "Begin Game by Selecting Character Type";
+        let gameText = document.getElementById("game-text");
+        gameText.innerHTML = "Start by Selecting a Character!";
 
         return (new Promise((resolve) => {
             // == Warrior ==
             let optionOne = document.getElementById("option-one");
             optionOne.innerHTML = gameData.playerClasses[0].type;
+
             document.getElementById("option-one").onclick = () => {
-                gameText.innerHTML = "You selected " + gameData.playerClasses[0].type;
+
+            document.getElementById("game-text-title").innerHTML = "CHARACTER SELECTED";
+            gameText.innerHTML = "You selected " + gameData.playerClasses[0].type;
 
                 // === Create new Warrior Character ===
                 PlayerCharacter = new Warrior(
@@ -86,6 +85,8 @@ function pickCharacter (gameRunning, gameData) {
             let optionTwo = document.getElementById("option-two");
             optionTwo.innerHTML = gameData.playerClasses[1].type;
             document.getElementById("option-two").onclick = () => {
+
+                document.getElementById("game-text-title").innerHTML = "CHARACTER SELECTED";
                 gameText.innerHTML = "You selected " + gameData.playerClasses[1].type;
 
                 // === Create new Mage Character ===
@@ -130,6 +131,8 @@ function pickCharacter (gameRunning, gameData) {
             let optionThree = document.getElementById("option-three");
             optionThree.innerHTML = gameData.playerClasses[2].type;
             document.getElementById("option-three").onclick = () => {
+
+                document.getElementById("game-text-title").innerHTML = "CHARACTER SELECTED";
                 gameText.innerHTML = "You selected " + gameData.playerClasses[2].type;
 
                 // === Create new Thief Character ===
@@ -174,6 +177,8 @@ function pickCharacter (gameRunning, gameData) {
             let optionFour = document.getElementById("option-four");
             optionFour.innerHTML = gameData.playerClasses[3].type;
             document.getElementById("option-four").onclick = () => {
+
+                document.getElementById("game-text-title").innerHTML = "CHARACTER SELECTED";
                 gameText.innerHTML = "You selected " + gameData.playerClasses[3].type;
                 
                 // === Create new Archer Character ===
@@ -253,5 +258,59 @@ class Archer extends BaseCharacter {
 }
 
 // ========== QUEST TRIGGERING ==========
-function triggerQuest (PlayerCharacter) {
+function triggerQuest (PlayerCharacter, gameData) {
+
+    // Switch Case Statement for starting location, depending on class
+    switch (PlayerCharacter.type) {
+        case "Warrior":
+            // ==== WARRIOR LOCATION: CASTLE RUINS ====
+
+            // Show Location
+            document.getElementById("game-picture").src="RPGImages/Castle1.webp";
+
+            // State Location
+            document.getElementById("game-text-title").innerHTML = gameData.locations[1].name;
+            document.getElementById("game-text").innerHTML = gameData.locations[1].description;
+
+            break;
+
+        case "Mage":
+            // ==== MAGE LOCATION: WIZARDS TOWER ====
+
+            // Show Location
+            document.getElementById("game-picture").src="RPGImages/Wizardtower.webp";
+
+            // State Location
+            document.getElementById("game-text-title").innerHTML = gameData.locations[3].name;
+            document.getElementById("game-text").innerHTML = gameData.locations[3].description;
+
+            break;
+    
+        case "Thief":
+            // ==== THIEF LOCATION: VILLAGE MARKET ====
+
+            // Show Location
+            document.getElementById("game-picture").src="RPGImages/shop2.webp";
+
+            // State Location
+            document.getElementById("game-text-title").innerHTML = gameData.locations[4].name;
+            document.getElementById("game-text").innerHTML = gameData.locations[4].description;
+
+            break;
+
+        case "Archer":
+            // ==== ARCHER LOCATION: FOREST ====
+
+            // Show Location
+            document.getElementById("game-picture").src="RPGImages/SpookyForest.webp";
+
+            // State Location
+            document.getElementById("game-text-title").innerHTML = gameData.locations[0].name;
+            document.getElementById("game-text").innerHTML = gameData.locations[0].description;
+
+            break;
+
+        default:
+            break;
+    }
 }

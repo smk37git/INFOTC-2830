@@ -132,13 +132,18 @@
         },
         {
             "name": "Castle Ruins",
-            "description": "The haunted remains of an ancient battleground.",
+            "description": "The last stronghold of pure evil within the realm.",
             "enemyTypes": ["Evil Soldier", "Soldier"]
         },
         {
             "name": "Mountain Cave",
             "description": "A dragon's lair hidden deep within the mountains.",
             "enemyTypes": ["Dragon"]
+        },
+        {
+            "name": "Wizard's Tower",
+            "description": "A large tower in the forest where mages can concentrate.",
+            "enemyTypes": ["Goblin", "Troll"]
         },
         {
             "name": "Village Market",
