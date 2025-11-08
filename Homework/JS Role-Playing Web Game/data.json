@@ -1,29 +1,29 @@
 {
     "playerClasses": [
         {
-            "class": "Warrior",
+            "type": "Warrior",
             "health": 100,
             "attackPower": 15,
             "defense": 10,
             "level": 1
         },
         {
-            "class": "Mage",
-            "health": 60,
+            "type": "Mage",
+            "health": 100,
             "attackPower": 12,
             "defense": 5,
             "level": 1
         },
         {
-            "class": "Thief",
-            "health": 40,
+            "type": "Thief",
+            "health": 100,
             "attackPower": 10,
             "defense": 2,
             "level": 1
         },
         {
-            "class": "Archer",
-            "health": 75,
+            "type": "Archer",
+            "health": 100,
             "attackPower": 14,
             "defense": 8,
             "level": 1
@@ -32,31 +32,31 @@
 
     "enemyClasses": [
         {
-            "class": "Goblin",
+            "type": "Goblin",
             "health": 100,
             "attackPower": 5,
             "defense": 1
         },
         {
-            "class": "Troll",
+            "type": "Troll",
             "health": 100,
             "attackPower": 10,
             "defense": 8
         },
         {
-            "class": "Dragon",
+            "type": "Dragon",
             "health": 100,
             "attackPower": 25,
             "defense": 15
         },
         {
-            "class": "Soldier",
-            "health": 90,
+            "type": "Soldier",
+            "health": 100,
             "attackPower": 14,
             "defense": 6
         },
         {
-            "class": "Evil Soldier",
+            "type": "Evil Soldier",
             "health": 100,
             "attackPower": 18,
             "defense": 6
