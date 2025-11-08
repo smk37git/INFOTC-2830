@@ -59,6 +59,17 @@ body {
     border-bottom: 1px solid white;
 }
 
+.health-text {
+    margin-left: 20px;
+    text-align: left;
+}
+
+.health-bar-text {
+    margin-top: 50px;
+    margin-left: 20px;
+    text-align: left;
+}
+
 .game-picture {
     margin-top: 15px;
     border: 2px solid white;

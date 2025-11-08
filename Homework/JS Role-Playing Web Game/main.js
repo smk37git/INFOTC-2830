@@ -24,6 +24,7 @@ window.onload = async () => {
         console.error('Failed to fetch data:', error);
     });
 
+    // Start game by picking character
     pickCharacter(gameRunning, characterClass, gameData);
 
 }
@@ -35,68 +36,156 @@ function pickCharacter (gameRunning, characterClass, gameData) {
         let gameText = document.getElementsByClassName("game-text")[0];
         gameText.innerHTML = "Begin Game by Selecting Character Type";
 
-        // Warrior
+        // == Warrior ==
         let optionOne = document.getElementById("option-one");
         optionOne.innerHTML = gameData.playerClasses[0].type;
         document.getElementById("option-one").onclick = () => {
             gameText.innerHTML = "You selected " + gameData.playerClasses[0].type;
 
-            // Create new Warrior Character
+            // === Create new Warrior Character ===
             const newWarrior = new BaseCharacter(
-                "Warrior", 
                 gameData.playerClasses[0].type,
+                gameData.playerClasses[0].health,
                 gameData.playerClasses[0].attackPower,
                 gameData.playerClasses[0].defense,
                 gameData.playerClasses[0].level
             )
+
+            // === Assign values to stats in HTML ===
+
+            // = Class =
+            let classText = document.getElementById("class-text");
+            classText.innerHTML = "Class: " + newWarrior.type;
+
+            // = Attack Power =
+            let attackpowerText = document.getElementById("attackpower-text");
+            attackpowerText.innerHTML = "Attack Power: " + newWarrior.attackPower;
+
+            // = Defense =
+            let defenseText = document.getElementById("defense-text");
+            defenseText.innerHTML = "Defense: " + newWarrior.defense;
+
+            // = Level =
+            let levelText = document.getElementById("level-text");
+            levelText.innerHTML = "Level: " + newWarrior.level;
+
+            // = Health =
+            let healthbarText = document.getElementById("health-bar-text");
+            healthbarText.innerHTML = "Health: " + newWarrior.health;
         }
 
-        // Mage
+        // == Mage ==
         let optionTwo = document.getElementById("option-two");
         optionTwo.innerHTML = gameData.playerClasses[1].type;
         document.getElementById("option-two").onclick = () => {
             gameText.innerHTML = "You selected " + gameData.playerClasses[1].type;
             
-            // Create new Warrior Character
+            // === Create new Warrior Character ===
             const newMage = new BaseCharacter(
-                "Warrior", 
                 gameData.playerClasses[1].type,
+                gameData.playerClasses[1].health,
                 gameData.playerClasses[1].attackPower,
                 gameData.playerClasses[1].defense,
                 gameData.playerClasses[1].level
             )
+
+            // === Assign values to stats in HTML ===
+
+            // = Class =
+            let classText = document.getElementById("class-text");
+            classText.innerHTML = "Class: " + newMage.type;
+
+            // = Attack Power =
+            let attackpowerText = document.getElementById("attackpower-text");
+            attackpowerText.innerHTML = "Attack Power: " + newMage.attackPower;
+
+            // = Defense =
+            let defenseText = document.getElementById("defense-text");
+            defenseText.innerHTML = "Defense: " + newMage.defense;
+
+            // = Level =
+            let levelText = document.getElementById("level-text");
+            levelText.innerHTML = "Level: " + newMage.level;
+
+            // = Health =
+            let healthbarText = document.getElementById("health-bar-text");
+            healthbarText.innerHTML = "Health: " + newMage.health;
         }
 
-        // Thief
+        // == Thief ==
         let optionThree = document.getElementById("option-three");
         optionThree.innerHTML = gameData.playerClasses[2].type;
         document.getElementById("option-three").onclick = () => {
             gameText.innerHTML = "You selected " + gameData.playerClasses[2].type;
 
-            // Create new Thief Character
+            // === Create new Thief Character ===
             const newThief = new BaseCharacter(
-                "Warrior", 
                 gameData.playerClasses[2].type,
+                gameData.playerClasses[2].health,
                 gameData.playerClasses[2].attackPower,
                 gameData.playerClasses[2].defense,
                 gameData.playerClasses[2].level
             )
+
+            // === Assign values to stats in HTML ===
+
+            // = Class =
+            let classText = document.getElementById("class-text");
+            classText.innerHTML = "Class: " + newThief.type;
+
+            // = Attack Power =
+            let attackpowerText = document.getElementById("attackpower-text");
+            attackpowerText.innerHTML = "Attack Power: " + newThief.attackPower;
+
+            // = Defense =
+            let defenseText = document.getElementById("defense-text");
+            defenseText.innerHTML = "Defense: " + newThief.defense;
+
+            // = Level =
+            let levelText = document.getElementById("level-text");
+            levelText.innerHTML = "Level: " + newThief.level;
+
+            // = Health =
+            let healthbarText = document.getElementById("health-bar-text");
+            healthbarText.innerHTML = "Health: " + newThief.health;
         }
 
-        // Archer
+        // == Archer ==
         let optionFour = document.getElementById("option-four");
         optionFour.innerHTML = gameData.playerClasses[3].type;
         document.getElementById("option-four").onclick = () => {
             gameText.innerHTML = "You selected " + gameData.playerClasses[3].type;
             
-            // Create new Archer Character
+            // === Create new Archer Character ===
             const newArcher = new BaseCharacter(
-                "Warrior", 
                 gameData.playerClasses[3].type,
+                gameData.playerClasses[3].health,
                 gameData.playerClasses[3].attackPower,
                 gameData.playerClasses[3].defense,
                 gameData.playerClasses[3].level
             )
+
+            // === Assign values to stats in HTML ===
+
+            // = Class =
+            let classText = document.getElementById("class-text");
+            classText.innerHTML = "Class: " + newArcher.type;
+
+            // = Attack Power =
+            let attackpowerText = document.getElementById("attackpower-text");
+            attackpowerText.innerHTML = "Attack Power: " + newArcher.attackPower;
+
+            // = Defense =
+            let defenseText = document.getElementById("defense-text");
+            defenseText.innerHTML = "Defense: " + newArcher.defense;
+
+            // = Level =
+            let levelText = document.getElementById("level-text");
+            levelText.innerHTML = "Level: " + newArcher.level;
+
+            // = Health =
+            let healthbarText = document.getElementById("health-bar-text");
+            healthbarText.innerHTML = "Health: " + newArcher.health;
         }
     }
 }
