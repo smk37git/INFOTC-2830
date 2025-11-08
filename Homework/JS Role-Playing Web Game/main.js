@@ -1,12 +1,6 @@
 // === GAME DATA ===
 let gameRunning = true;
-let characterClass = 0;
-
-// === CHARACTER DATA ===
-let health = 1;
-let attackPower = 1;
-let defense = 1;
-let level = 1;
+let PlayerCharacter = null;
 
 window.onload = async () => {
     gameData = await fetch('./data.json')
@@ -25,186 +19,201 @@ window.onload = async () => {
     });
 
     // Start game by picking character
-    pickCharacter(gameRunning, characterClass, gameData);
+    await pickCharacter(gameRunning, gameData);
+
+
+    console.log(PlayerCharacter.type);
 
     // 5 Second Timer Before Quest Starts
-    setTimeout(() => {
-    }, 5000);
+    //setTimeout(() => {
+    //}, 5000);
 
 }
 
 // ========== PICK CHARACTER FUNCTION ==========
-function pickCharacter (gameRunning, characterClass, gameData) {
-    if(gameRunning != false && characterClass == 0) {
-
-        let PlayerCharacter = null;
+function pickCharacter (gameRunning, gameData) {
+    if(gameRunning != false && PlayerCharacter == null) {
 
         let gameText = document.getElementsByClassName("game-text")[0];
         gameText.innerHTML = "Begin Game by Selecting Character Type";
 
-        // == Warrior ==
-        let optionOne = document.getElementById("option-one");
-        optionOne.innerHTML = gameData.playerClasses[0].type;
-        document.getElementById("option-one").onclick = () => {
-            gameText.innerHTML = "You selected " + gameData.playerClasses[0].type;
+        return (new Promise((resolve) => {
+            // == Warrior ==
+            let optionOne = document.getElementById("option-one");
+            optionOne.innerHTML = gameData.playerClasses[0].type;
+            document.getElementById("option-one").onclick = () => {
+                gameText.innerHTML = "You selected " + gameData.playerClasses[0].type;
 
-            // === Create new Warrior Character ===
-            PlayerCharacter = new Mage(
-                gameData.playerClasses[0].type,
-                gameData.playerClasses[0].health,
-                gameData.playerClasses[0].attackPower,
-                gameData.playerClasses[0].defense,
-                gameData.playerClasses[0].level
-            );
+                // === Create new Warrior Character ===
+                PlayerCharacter = new Warrior(
+                    gameData.playerClasses[0].type,
+                    gameData.playerClasses[0].health,
+                    gameData.playerClasses[0].attackPower,
+                    gameData.playerClasses[0].defense,
+                    gameData.playerClasses[0].level
+                );
 
-            // === Change Picture ===
-            document.getElementById("game-picture").src="RPGImages/Warrior.webp";
+                // === Change Picture ===
+                document.getElementById("game-picture").src="RPGImages/Warrior.webp";
 
-            // === Assign values to stats in HTML ===
+                // === Assign values to stats in HTML ===
 
-            // = Class =
-            let classText = document.getElementById("class-text");
-            classText.innerHTML = "Class: " + PlayerCharacter.type;
+                // = Class =
+                let classText = document.getElementById("class-text");
+                classText.innerHTML = "Class: " + PlayerCharacter.type;
 
-            // = Attack Power =
-            let attackpowerText = document.getElementById("attackpower-text");
-            attackpowerText.innerHTML = "Attack Power: " + PlayerCharacter.attackPower;
+                // = Attack Power =
+                let attackpowerText = document.getElementById("attackpower-text");
+                attackpowerText.innerHTML = "Attack Power: " + PlayerCharacter.attackPower;
 
-            // = Defense =
-            let defenseText = document.getElementById("defense-text");
-            defenseText.innerHTML = "Defense: " + PlayerCharacter.defense;
+                // = Defense =
+                let defenseText = document.getElementById("defense-text");
+                defenseText.innerHTML = "Defense: " + PlayerCharacter.defense;
 
-            // = Level =
-            let levelText = document.getElementById("level-text");
-            levelText.innerHTML = "Level: " + PlayerCharacter.level;
+                // = Level =
+                let levelText = document.getElementById("level-text");
+                levelText.innerHTML = "Level: " + PlayerCharacter.level;
 
-            // = Health =
-            let healthbarText = document.getElementById("health-bar-text");
-            healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
-        }
+                // = Health =
+                let healthbarText = document.getElementById("health-bar-text");
+                healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
 
-        // == Mage ==
-        let optionTwo = document.getElementById("option-two");
-        optionTwo.innerHTML = gameData.playerClasses[1].type;
-        document.getElementById("option-two").onclick = () => {
-            gameText.innerHTML = "You selected " + gameData.playerClasses[1].type;
+                // === RETURN PLAYER CHARACTER ===
+                resolve(PlayerCharacter)
+            }
 
-            // === Create new Mage Character ===
-            PlayerCharacter = new Mage(
-                gameData.playerClasses[1].type,
-                gameData.playerClasses[1].health,
-                gameData.playerClasses[1].attackPower,
-                gameData.playerClasses[1].defense,
-                gameData.playerClasses[1].level
-            );
+            // == Mage ==
+            let optionTwo = document.getElementById("option-two");
+            optionTwo.innerHTML = gameData.playerClasses[1].type;
+            document.getElementById("option-two").onclick = () => {
+                gameText.innerHTML = "You selected " + gameData.playerClasses[1].type;
 
-            // === Change Picture ===
-            document.getElementById("game-picture").src="RPGImages/Mage.webp";
+                // === Create new Mage Character ===
+                PlayerCharacter = new Mage(
+                    gameData.playerClasses[1].type,
+                    gameData.playerClasses[1].health,
+                    gameData.playerClasses[1].attackPower,
+                    gameData.playerClasses[1].defense,
+                    gameData.playerClasses[1].level
+                );
 
-            // === Assign values to stats in HTML ===
+                // === Change Picture ===
+                document.getElementById("game-picture").src="RPGImages/Mage.webp";
 
-            // = Class =
-            let classText = document.getElementById("class-text");
-            classText.innerHTML = "Class: " + PlayerCharacter.type;
+                // === Assign values to stats in HTML ===
 
-            // = Attack Power =
-            let attackpowerText = document.getElementById("attackpower-text");
-            attackpowerText.innerHTML = "Attack Power: " + PlayerCharacter.attackPower;
+                // = Class =
+                let classText = document.getElementById("class-text");
+                classText.innerHTML = "Class: " + PlayerCharacter.type;
 
-            // = Defense =
-            let defenseText = document.getElementById("defense-text");
-            defenseText.innerHTML = "Defense: " + PlayerCharacter.defense;
+                // = Attack Power =
+                let attackpowerText = document.getElementById("attackpower-text");
+                attackpowerText.innerHTML = "Attack Power: " + PlayerCharacter.attackPower;
 
-            // = Level =
-            let levelText = document.getElementById("level-text");
-            levelText.innerHTML = "Level: " + PlayerCharacter.level;
+                // = Defense =
+                let defenseText = document.getElementById("defense-text");
+                defenseText.innerHTML = "Defense: " + PlayerCharacter.defense;
 
-            // = Health =
-            let healthbarText = document.getElementById("health-bar-text");
-            healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
-        }
+                // = Level =
+                let levelText = document.getElementById("level-text");
+                levelText.innerHTML = "Level: " + PlayerCharacter.level;
 
-        // == Thief ==
-        let optionThree = document.getElementById("option-three");
-        optionThree.innerHTML = gameData.playerClasses[2].type;
-        document.getElementById("option-three").onclick = () => {
-            gameText.innerHTML = "You selected " + gameData.playerClasses[2].type;
+                // = Health =
+                let healthbarText = document.getElementById("health-bar-text");
+                healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
 
-            // === Create new Thief Character ===
-            PlayerCharacter = new Mage(
-                gameData.playerClasses[2].type,
-                gameData.playerClasses[2].health,
-                gameData.playerClasses[2].attackPower,
-                gameData.playerClasses[2].defense,
-                gameData.playerClasses[2].level
-            );
+                // === RETURN PLAYER CHARACTER ===
+                resolve(PlayerCharacter)
+            }
 
-            // === Change Picture ===
-            document.getElementById("game-picture").src="RPGImages/Thief.webp";
+            // == Thief ==
+            let optionThree = document.getElementById("option-three");
+            optionThree.innerHTML = gameData.playerClasses[2].type;
+            document.getElementById("option-three").onclick = () => {
+                gameText.innerHTML = "You selected " + gameData.playerClasses[2].type;
 
-            // === Assign values to stats in HTML ===
+                // === Create new Thief Character ===
+                PlayerCharacter = new Thief(
+                    gameData.playerClasses[2].type,
+                    gameData.playerClasses[2].health,
+                    gameData.playerClasses[2].attackPower,
+                    gameData.playerClasses[2].defense,
+                    gameData.playerClasses[2].level
+                );
 
-            // = Class =
-            let classText = document.getElementById("class-text");
-            classText.innerHTML = "Class: " + PlayerCharacter.type;
+                // === Change Picture ===
+                document.getElementById("game-picture").src="RPGImages/Thief.webp";
 
-            // = Attack Power =
-            let attackpowerText = document.getElementById("attackpower-text");
-            attackpowerText.innerHTML = "Attack Power: " + PlayerCharacter.attackPower;
+                // === Assign values to stats in HTML ===
 
-            // = Defense =
-            let defenseText = document.getElementById("defense-text");
-            defenseText.innerHTML = "Defense: " + PlayerCharacter.defense;
+                // = Class =
+                let classText = document.getElementById("class-text");
+                classText.innerHTML = "Class: " + PlayerCharacter.type;
 
-            // = Level =
-            let levelText = document.getElementById("level-text");
-            levelText.innerHTML = "Level: " + PlayerCharacter.level;
+                // = Attack Power =
+                let attackpowerText = document.getElementById("attackpower-text");
+                attackpowerText.innerHTML = "Attack Power: " + PlayerCharacter.attackPower;
 
-            // = Health =
-            let healthbarText = document.getElementById("health-bar-text");
-            healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
-        }
+                // = Defense =
+                let defenseText = document.getElementById("defense-text");
+                defenseText.innerHTML = "Defense: " + PlayerCharacter.defense;
 
-        // == Archer ==
-        let optionFour = document.getElementById("option-four");
-        optionFour.innerHTML = gameData.playerClasses[3].type;
-        document.getElementById("option-four").onclick = () => {
-            gameText.innerHTML = "You selected " + gameData.playerClasses[3].type;
-            
-            // === Create new Archer Character ===
-            PlayerCharacter = new Mage(
-                gameData.playerClasses[3].type,
-                gameData.playerClasses[3].health,
-                gameData.playerClasses[3].attackPower,
-                gameData.playerClasses[3].defense,
-                gameData.playerClasses[3].level
-            );
+                // = Level =
+                let levelText = document.getElementById("level-text");
+                levelText.innerHTML = "Level: " + PlayerCharacter.level;
 
-            // === Change Picture ===
-            document.getElementById("game-picture").src="RPGImages/Archer.webp";
+                // = Health =
+                let healthbarText = document.getElementById("health-bar-text");
+                healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
 
-            // === Assign values to stats in HTML ===
+                // === RETURN PLAYER CHARACTER ===
+                resolve(PlayerCharacter)
+            }
 
-            // = Class =
-            let classText = document.getElementById("class-text");
-            classText.innerHTML = "Class: " + PlayerCharacter.type;
+            // == Archer ==
+            let optionFour = document.getElementById("option-four");
+            optionFour.innerHTML = gameData.playerClasses[3].type;
+            document.getElementById("option-four").onclick = () => {
+                gameText.innerHTML = "You selected " + gameData.playerClasses[3].type;
+                
+                // === Create new Archer Character ===
+                PlayerCharacter = new Archer(
+                    gameData.playerClasses[3].type,
+                    gameData.playerClasses[3].health,
+                    gameData.playerClasses[3].attackPower,
+                    gameData.playerClasses[3].defense,
+                    gameData.playerClasses[3].level
+                );
 
-            // = Attack Power =
-            let attackpowerText = document.getElementById("attackpower-text");
-            attackpowerText.innerHTML = "Attack Power: " + PlayerCharacter.attackPower;
+                // === Change Picture ===
+                document.getElementById("game-picture").src="RPGImages/Archer.webp";
 
-            // = Defense =
-            let defenseText = document.getElementById("defense-text");
-            defenseText.innerHTML = "Defense: " + PlayerCharacter.defense;
+                // === Assign values to stats in HTML ===
 
-            // = Level =
-            let levelText = document.getElementById("level-text");
-            levelText.innerHTML = "Level: " + PlayerCharacter.level;
+                // = Class =
+                let classText = document.getElementById("class-text");
+                classText.innerHTML = "Class: " + PlayerCharacter.type;
 
-            // = Health =
-            let healthbarText = document.getElementById("health-bar-text");
-            healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
-        }
+                // = Attack Power =
+                let attackpowerText = document.getElementById("attackpower-text");
+                attackpowerText.innerHTML = "Attack Power: " + PlayerCharacter.attackPower;
+
+                // = Defense =
+                let defenseText = document.getElementById("defense-text");
+                defenseText.innerHTML = "Defense: " + PlayerCharacter.defense;
+
+                // = Level =
+                let levelText = document.getElementById("level-text");
+                levelText.innerHTML = "Level: " + PlayerCharacter.level;
+
+                // = Health =
+                let healthbarText = document.getElementById("health-bar-text");
+                healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
+
+                // === RETURN PLAYER CHARACTER ===
+                resolve(PlayerCharacter)
+            }
+        }))
     }
 }
 
