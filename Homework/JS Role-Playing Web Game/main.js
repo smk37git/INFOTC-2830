@@ -51,6 +51,9 @@ function pickCharacter (gameRunning, characterClass, gameData) {
                 gameData.playerClasses[0].level
             )
 
+            // === Change Picture ===
+            document.getElementById("game-picture").src="RPGImages/Warrior.webp";
+
             // === Assign values to stats in HTML ===
 
             // = Class =
@@ -88,6 +91,9 @@ function pickCharacter (gameRunning, characterClass, gameData) {
                 gameData.playerClasses[1].defense,
                 gameData.playerClasses[1].level
             )
+
+            // === Change Picture ===
+            document.getElementById("game-picture").src="RPGImages/Mage.webp";
 
             // === Assign values to stats in HTML ===
 
@@ -127,6 +133,9 @@ function pickCharacter (gameRunning, characterClass, gameData) {
                 gameData.playerClasses[2].level
             )
 
+            // === Change Picture ===
+            document.getElementById("game-picture").src="RPGImages/Thief.webp";
+
             // === Assign values to stats in HTML ===
 
             // = Class =
@@ -164,6 +173,9 @@ function pickCharacter (gameRunning, characterClass, gameData) {
                 gameData.playerClasses[3].defense,
                 gameData.playerClasses[3].level
             )
+
+            // === Change Picture ===
+            document.getElementById("game-picture").src="RPGImages/Archer.webp";
 
             // === Assign values to stats in HTML ===
 
