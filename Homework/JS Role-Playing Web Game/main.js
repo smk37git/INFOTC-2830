@@ -50,7 +50,8 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.playerClasses[0].health,
                     gameData.playerClasses[0].attackPower,
                     gameData.playerClasses[0].defense,
-                    gameData.playerClasses[0].level
+                    gameData.playerClasses[0].level,
+                    gameData.playerClasses[0].skill
                 );
 
                 // === Assign Inventory Items ===
@@ -98,6 +99,10 @@ function pickCharacter (gameRunning, gameData) {
                 let levelText = document.getElementById("level-text");
                 levelText.innerHTML = "Level: " + PlayerCharacter.level;
 
+                // = Skill =
+                let skillText = document.getElementById("skill-text");
+                skillText.innerHTML = "Skill: " + PlayerCharacter.skill;
+
                 // = Health =
                 let healthbarText = document.getElementById("health-bar-text");
                 healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
@@ -126,7 +131,8 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.playerClasses[1].health,
                     gameData.playerClasses[1].attackPower,
                     gameData.playerClasses[1].defense,
-                    gameData.playerClasses[1].level
+                    gameData.playerClasses[1].level,
+                    gameData.playerClasses[1].skill
                 );
 
                 // === Assign Inventory Items ===
@@ -174,6 +180,10 @@ function pickCharacter (gameRunning, gameData) {
                 let levelText = document.getElementById("level-text");
                 levelText.innerHTML = "Level: " + PlayerCharacter.level;
 
+                // = Skill =
+                let skillText = document.getElementById("skill-text");
+                skillText.innerHTML = "Skill: " + PlayerCharacter.skill;
+
                 // = Health =
                 let healthbarText = document.getElementById("health-bar-text");
                 healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
@@ -202,7 +212,8 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.playerClasses[2].health,
                     gameData.playerClasses[2].attackPower,
                     gameData.playerClasses[2].defense,
-                    gameData.playerClasses[2].level
+                    gameData.playerClasses[2].level,
+                    gameData.playerClasses[2].skill
                 );
 
                 // === Assign Inventory Items ===
@@ -250,6 +261,10 @@ function pickCharacter (gameRunning, gameData) {
                 let levelText = document.getElementById("level-text");
                 levelText.innerHTML = "Level: " + PlayerCharacter.level;
 
+                // = Skill =
+                let skillText = document.getElementById("skill-text");
+                skillText.innerHTML = "Skill: " + PlayerCharacter.skill;
+
                 // = Health =
                 let healthbarText = document.getElementById("health-bar-text");
                 healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
@@ -278,7 +293,8 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.playerClasses[3].health,
                     gameData.playerClasses[3].attackPower,
                     gameData.playerClasses[3].defense,
-                    gameData.playerClasses[3].level
+                    gameData.playerClasses[3].level,
+                    gameData.playerClasses[3].skill
                 );
 
                 // === Assign Inventory Items ===
@@ -325,6 +341,10 @@ function pickCharacter (gameRunning, gameData) {
                 // = Level =
                 let levelText = document.getElementById("level-text");
                 levelText.innerHTML = "Level: " + PlayerCharacter.level;
+
+                // = Skill =
+                let skillText = document.getElementById("skill-text");
+                skillText.innerHTML = "Skill: " + PlayerCharacter.skill;
 
                 // = Health =
                 let healthbarText = document.getElementById("health-bar-text");
@@ -635,7 +655,7 @@ function changeLocation(gameData, location) {
 
 
 // ========== COMBAT EVENTS ==========
-function attack() {
+function attack(gameData, location, PlayerCharacter) {
     return console.log("FIGHT!");
 }
 
@@ -756,36 +776,37 @@ function rollMine() {
 
 // ========== CHARACTER CONSTRUCTOR ==========
 class BaseCharacter {
-    constructor(type, health, attackPower, defense, level) {
+    constructor(type, health, attackPower, defense, level, skill) {
         this.type = type;
         this.health = health;
         this.attackPower = attackPower;
         this.defense = defense;
         this.level = level;
+        this.skill = skill;
     }
 }
 
 class Warrior extends BaseCharacter {
-    constructor(type, health, attackPower, defense, level){
-        super(type, health, attackPower, defense, level);
+    constructor(type, health, attackPower, defense, level, skill){
+        super(type, health, attackPower, defense, level, skill);
     }
 }
 
 class Mage extends BaseCharacter {
-    constructor(type, health, attackPower, defense, level){
-        super(type, health, attackPower, defense, level);
+    constructor(type, health, attackPower, defense, level, skill){
+        super(type, health, attackPower, defense, level, skill);
     }
 }
 
 class Thief extends BaseCharacter {
-    constructor(type, health, attackPower, defense, level){
-        super(type, health, attackPower, defense, level);
+    constructor(type, health, attackPower, defense, level, skill){
+        super(type, health, attackPower, defense, level, skill);
     }
 }
 
 class Archer extends BaseCharacter {
-    constructor(type, health, attackPower, defense, level){
-        super(type, health, attackPower, defense, level);
+    constructor(type, health, attackPower, defense, level, skill){
+        super(type, health, attackPower, defense, level, skill);
     }
 }
 

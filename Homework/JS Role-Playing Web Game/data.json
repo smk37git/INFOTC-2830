@@ -5,28 +5,32 @@
             "health": 100,
             "attackPower": 15,
             "defense": 10,
-            "level": 1
+            "level": 1,
+            "skill": "Power Strike"
         },
         {
             "type": "Mage",
             "health": 100,
             "attackPower": 12,
             "defense": 5,
-            "level": 1
+            "level": 1,
+            "skill": "Fireball"
         },
         {
             "type": "Thief",
             "health": 100,
             "attackPower": 10,
             "defense": 2,
-            "level": 1
+            "level": 1,
+            "skill": "Backstab"
         },
         {
             "type": "Archer",
             "health": 100,
             "attackPower": 14,
             "defense": 8,
-            "level": 1
+            "level": 1,
+            "skill": "Arrow Storm"
         }
     ],
 
