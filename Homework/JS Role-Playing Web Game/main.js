@@ -31,6 +31,8 @@ window.onload = async () => {
 function pickCharacter (gameRunning, gameData) {
     while(gameRunning != false && PlayerCharacter == null) {
 
+        document.getElementById("game-text-title").innerHTML = "WELCOME TO THE GAME";
+
         let gameText = document.getElementById("game-text");
         gameText.innerHTML = "Start by Selecting a Character!";
 
@@ -441,8 +443,6 @@ function updateDefense (PlayerCharacter) {
 // ========== CHANGE LOCATION ==========
 function changeLocation(gameData, location) {
 
-    console.log(location);
-
     switch (location) {
         case 1: // FOREST
 
@@ -507,7 +507,7 @@ function changeLocation(gameData, location) {
                 
                 // = Trigger Option 2 =
                 document.getElementById("option-two").onclick = () => {
-                    attack();
+                    attack(gameData, location, PlayerCharacter);
                 }
 
                 // = Trigger Option 3 =
@@ -524,6 +524,8 @@ function changeLocation(gameData, location) {
                         )) 
 
                         updateInventory(gameData);
+                    } else {
+                        document.getElementById("game-text").innerHTML = "You Found Nothing!";
                     }
                 }
 
@@ -656,11 +658,213 @@ function changeLocation(gameData, location) {
 
 // ========== COMBAT EVENTS ==========
 function attack(gameData, location, PlayerCharacter) {
-    return console.log("FIGHT!");
+
+    let Enemy = null;
+
+    switch (location) {
+        case 1:
+
+            break;
+
+        case 2: // CASTLE RUINS
+
+            // = Roll to Fight Enemy =
+            let result = Math.random() < 0.5 ? true : false;
+
+            if (result == true) { // True -- Fight Evil Soldier
+
+                // === Create new Evil Soldier Character ===
+                Enemy = new EvilSoldier(
+                    gameData.enemyClasses[4].type,
+                    gameData.enemyClasses[4].health,
+                    gameData.enemyClasses[4].attackPower,
+                    gameData.enemyClasses[4].defense,
+                );
+
+                // = Change to Evil Soldier Pic =
+                document.getElementById("game-picture").src="RPGImages/evilSoldier.webp";
+
+                // = State Event = 
+                document.getElementById("game-text-title").innerHTML = "Enemy Encountered - "
+                 + Enemy.type 
+                 + " - [HP: " + Enemy.health + "] "
+                 + "[AP: " + Enemy.attackPower + "] "
+                 + "[D: " + Enemy.defense + "]";
+                document.getElementById("game-text").innerHTML = "Fight or Flee!";
+
+                // = Options =
+                document.getElementById("option-one").innerHTML = "Flee";
+                document.getElementById("option-two").innerHTML = "Attack";
+                document.getElementById("option-three").innerHTML = "Use Skill";
+                document.getElementById("option-four").innerHTML = "";
+
+                // = Trigger Option 1 =
+                document.getElementById("option-one").onclick = () => {
+                    location = 1; // Forest
+                    changeLocation(gameData, location);
+                }
+                
+                // = Trigger Option 2 =
+                document.getElementById("option-two").onclick = () => {
+                    doDamage(PlayerCharacter, Enemy, gameData)
+
+                    if (Enemy.health <= 0) {
+                        // = State Result = 
+                        document.getElementById("game-text-title").innerHTML = "Enemy Vanquished!";
+                        document.getElementById("game-text").innerHTML = "You won the battle!";
+
+                        // === CLEAR BUTTONS ===
+                        clearButtons();
+
+                        // === RETURN PLAYER ===
+                        location = 2; // Back to Original Location
+                        setTimeout(changeLocation, 3000, gameData, location);
+                    }
+                }
+
+                // = Trigger Option 3 =
+                document.getElementById("option-three").onclick = () => {
+                    // useSkill();
+                }
+
+                // = Trigger Option 4 =
+                document.getElementById("option-four").onclick = () => {
+                    
+                }
+
+            } else { // False -- Fight Soldier
+
+                // === Create new Soldier Character ===
+                Enemy = new Soldier(
+                    gameData.enemyClasses[3].type,
+                    gameData.enemyClasses[3].health,
+                    gameData.enemyClasses[3].attackPower,
+                    gameData.enemyClasses[3].defense,
+                );
+
+                // = Change to Evil Soldier Pic =
+                document.getElementById("game-picture").src="RPGImages/EvilSoldier2.webp";
+
+                // = State Event = 
+                document.getElementById("game-text-title").innerHTML = "Enemy Encountered - "
+                 + Enemy.type 
+                 + " - [HP: " + Enemy.health + "] "
+                 + "[AP: " + Enemy.attackPower + "] "
+                 + "[D: " + Enemy.defense + "]";
+                document.getElementById("game-text").innerHTML = "Fight or Flee!";
+
+                // = Options =
+                document.getElementById("option-one").innerHTML = "Flee";
+                document.getElementById("option-two").innerHTML = "Attack";
+                document.getElementById("option-three").innerHTML = "Use Skill";
+                document.getElementById("option-four").innerHTML = "";
+
+                // = Trigger Option 1 =
+                document.getElementById("option-one").onclick = () => {
+                    location = 1; // Forest
+                    changeLocation(gameData, location);
+                }
+                
+                // = Trigger Option 2 =
+                document.getElementById("option-two").onclick = () => {
+                    doDamage(PlayerCharacter, Enemy, gameData)
+
+                    if (Enemy.health <= 0) {
+                        // = State Result = 
+                        document.getElementById("game-text-title").innerHTML = "Enemy Vanquished!";
+                        document.getElementById("game-text").innerHTML = "You won the battle!";
+
+                        // === CLEAR BUTTONS ===
+                        clearButtons();
+
+                        // === RETURN PLAYER ===
+                        location = 2; // Back to Original Location
+                        setTimeout(changeLocation, 3000, gameData, location);
+                    }
+                }
+
+                // = Trigger Option 3 =
+                document.getElementById("option-three").onclick = () => {
+                    // useSkill();
+                }
+
+                // = Trigger Option 4 =
+                document.getElementById("option-four").onclick = () => {
+                    
+                }
+
+            }
+
+            break;
+    
+        default:
+            break;
+    }
 }
 
-function takeDamage() {
-    return console.log("Damage Taken!")
+function doDamage(PlayerCharacter, Enemy, gameData) {
+
+    // Calculate Player Damage
+    playerDamage = (PlayerCharacter.attackPower + gameData.playerInventory[1].damage);
+
+    // Add Enemy's Defense to Player Damage
+    playerDamage -= Enemy.defense;
+    
+    // Calculate Final Damage
+    Enemy.health -= playerDamage;
+
+    // Display Enemy Health
+    document.getElementById("game-text-title").innerHTML = "Enemy Encountered - "
+    + Enemy.type 
+    + " - [HP: " + Enemy.health + "] "
+    + "[AP: " + Enemy.attackPower + "] "
+    + "[D: " + Enemy.defense + "]";
+
+    // Enemy Attack
+    takeDamage(PlayerCharacter, Enemy, gameData);
+
+    // Return Enemy HP
+    return Enemy.health;
+}
+
+function takeDamage(PlayerCharacter, Enemy, gameData) {
+    
+    // Calculate Enemy Damage
+    enemyDamage = (Enemy.attackPower);
+
+    // Add Players's Defense to Enemy Damage
+    enemyDamage *= (2 * (PlayerCharacter.defense/100));
+    
+    // Calculate Final Damage
+    PlayerCharacter.health -= enemyDamage;
+
+    // Return Player's HP and check if Dead
+    if(Math.floor(PlayerCharacter.health) > 0){
+        document.getElementById("health-bar-text").innerHTML = "Health: " + Math.floor(PlayerCharacter.health);
+    } else {
+
+        // == Display Defeat Message ==
+        document.getElementById("game-text-title").innerHTML = "You Died!";
+        document.getElementById("game-text").innerHTML = "You lost the battle!";
+
+        // = Update Player HP =
+        document.getElementById("health-bar-text").innerHTML = "Health: 0";
+
+        // = Clear Buttons =
+        clearButtons();
+
+        // == End Game ==
+        gameRunning = false;
+        
+        setTimeout(endGame, 5000);
+    }
+
+
+    return Math.floor(PlayerCharacter.health);
+}
+
+function useSkill() {
+    return console.log("Skill Used!");
 }
 
 function levelUp() {
@@ -703,7 +907,6 @@ function rollSteal() {
 }
 
 function rollHunt() {
-
     // = Roll to Hunt =
     let result = Math.random() < 0.5 ? true : false;
 
@@ -724,8 +927,6 @@ function rollHunt() {
         // Failed -- Try again
         document.getElementById("game-text").innerHTML = "Hunt Failed!"
     }
-
-    console.log(result);
 }
 
 function createPotion() {
@@ -774,6 +975,71 @@ function rollMine() {
     }
 }
 
+// ========== CLEAR BUTTONS ==========
+function clearButtons () {
+    document.getElementById("option-one").innerHTML = "";
+    document.getElementById("option-two").innerHTML = "";
+    document.getElementById("option-three").innerHTML = "";
+    document.getElementById("option-four").innerHTML = "";
+
+    document.getElementById("option-one").onclick = null;
+    document.getElementById("option-two").onclick = null;
+    document.getElementById("option-three").onclick = null;
+    document.getElementById("option-four").onclick = null;
+}
+
+// ========== END GAME ==========
+function endGame() {
+
+    // === Change Picture ===
+    document.getElementById("game-picture").src="RPGImages/map4.webp";
+
+    // == Display Defeat Message ==
+    document.getElementById("game-text-title").innerHTML = "Game Over!";
+    document.getElementById("game-text").innerHTML = "You bones are scraped clean by the desolate wind, your Village will now surely die as you have...";
+
+    // == Restart Game Option ==
+    document.getElementById("option-one").innerHTML = "Restart Game";
+    document.getElementById("option-one").onclick = () => {
+
+        // = Wipe Player Data =
+        PlayerCharacter = null;
+        // = Class =
+        let classText = document.getElementById("class-text");
+        classText.innerHTML = "Class: ";
+
+        // = Attack Power =
+        let attackpowerText = document.getElementById("attackpower-text");
+        attackpowerText.innerHTML = "Attack Power: ";
+
+        // = Defense =
+        let defenseText = document.getElementById("defense-text");
+        defenseText.innerHTML = "Defense: ";
+
+        // = Level =
+        let levelText = document.getElementById("level-text");
+        levelText.innerHTML = "Level: ";
+
+        // = Skill =
+        let skillText = document.getElementById("skill-text");
+        skillText.innerHTML = "Skill: ";
+
+        // = Health =
+        let healthbarText = document.getElementById("health-bar-text");
+        healthbarText.innerHTML = "Health: ";
+
+        // = Wipe Inventory =
+        playerGold = 0;
+        document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
+        gameData.playerInventory = [];
+        updateInventory(gameData);
+    
+        // === Finally set game to True and pick character ===
+        gameRunning = true;
+        pickCharacter(gameRunning, gameData);
+    }
+}
+
 // ========== CHARACTER CONSTRUCTOR ==========
 class BaseCharacter {
     constructor(type, health, attackPower, defense, level, skill) {
@@ -807,6 +1073,19 @@ class Thief extends BaseCharacter {
 class Archer extends BaseCharacter {
     constructor(type, health, attackPower, defense, level, skill){
         super(type, health, attackPower, defense, level, skill);
+    }
+}
+
+// ========== ENEMY CONSTRUCTOR ==========
+class EvilSoldier extends BaseCharacter {
+    constructor(type, health, attackPower, defense){
+        super(type, health, attackPower, defense);
+    }
+}
+
+class Soldier extends BaseCharacter {
+    constructor(type, health, attackPower, defense){
+        super(type, health, attackPower, defense);
     }
 }
 

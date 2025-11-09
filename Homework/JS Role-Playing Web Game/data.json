@@ -112,18 +112,18 @@
             "value": 200
         },
         {
-            "name": "Knight Armor [D20]",
-            "defense": 20,
+            "name": "Knight Armor [D15]",
+            "defense": 15,
             "value": 500
         },
         {
-            "name": "Mage Armor [D10]",
-            "defense": 10,
+            "name": "Mage Armor [D8]",
+            "defense": 8,
             "value": 100
         },
         {
-            "name": "Thief Armor [D15]",
-            "defense": 15,
+            "name": "Thief Armor [D8]",
+            "defense": 8,
             "value": 150
         }
     ],
