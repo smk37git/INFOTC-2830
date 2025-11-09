@@ -467,8 +467,13 @@ function changeLocation(gameData, location) {
                 
                 // = Trigger Option 2 =
                 document.getElementById("option-two").onclick = () => {
-                    location = 2; // Castle Ruins
-                    changeLocation(gameData, location);
+                    result = Math.random() < 0.5 ? true : false;
+                    if (result == true) { // If True --> Forest
+                        location = 2; // Castle Ruins
+                        changeLocation(gameData, location);
+                    } else { // If False -- Fight
+                        attack(gameData, location, PlayerCharacter);
+                    }
                 }
 
                 // = Trigger Option 3 =
@@ -479,8 +484,13 @@ function changeLocation(gameData, location) {
 
                 // = Trigger Option 4 =
                 document.getElementById("option-four").onclick = () => {
-                    location = 4 // Wizards Tower
-                    changeLocation(gameData, location);
+                    result = Math.random() < 0.5 ? true : false;
+                    if (result == true) { // If True --> Forest
+                        location = 4; // Wizards Tower
+                        changeLocation(gameData, location);
+                    } else { // If False -- Fight
+                        attack(gameData, location, PlayerCharacter);
+                    }
                 }
 
             break;
@@ -560,7 +570,7 @@ function changeLocation(gameData, location) {
                 
                 // = Trigger Option 2 =
                 document.getElementById("option-two").onclick = () => {
-                    attack();
+                    attack(gameData, location, PlayerCharacter);
                 }
 
                 // = Trigger Option 3 =
@@ -593,7 +603,7 @@ function changeLocation(gameData, location) {
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
                     location = 5; // Village Market
-                    changeLocation();
+                    changeLocation(gameData, location);
                 }
                 
                 // = Trigger Option 2 =
@@ -603,13 +613,19 @@ function changeLocation(gameData, location) {
 
                 // = Trigger Option 3 =
                 document.getElementById("option-three").onclick = () => {
-                    attack();
+                    attack(gameData, location, PlayerCharacter);
                 }
 
                 // = Trigger Option 4 =
                 document.getElementById("option-four").onclick = () => {
-                    location = 1; // Forest
-                    changeLocation(gameData, location);
+
+                    result = Math.random() < 0.5 ? true : false;
+                    if (result == true) { // If True --> Forest
+                        location = 1; // Forest
+                        changeLocation(gameData, location);
+                    } else { // If False -- Fight
+                        attack(gameData, location, PlayerCharacter);
+                    }
                 }
             
             break;
@@ -661,16 +677,128 @@ function changeLocation(gameData, location) {
 function attack(gameData, location, PlayerCharacter) {
 
     let Enemy = null;
+    let result = null;
+    let skillUsed = false;
 
     switch (location) {
-        case 1:
+        case 1: // FOREST
+
+            // = Roll to Fight Enemy =
+            result = Math.random() < 0.5 ? true : false;
+
+            if (result == true) { // True -- Fight Goblin
+
+                // === Create new Goblin Character ===
+                Enemy = new Goblin(
+                    gameData.enemyClasses[0].type,
+                    gameData.enemyClasses[0].health,
+                    gameData.enemyClasses[0].attackPower,
+                    gameData.enemyClasses[0].defense,
+                );
+
+                // = Change to Goblin Pic =
+                document.getElementById("game-picture").src="RPGImages/Goblin.webp";
+
+                // = State Event = 
+                document.getElementById("game-text-title").innerHTML = "Enemy Encountered - "
+                 + Enemy.type 
+                 + " - [HP: " + Enemy.health + "] "
+                 + "[AP: " + Enemy.attackPower + "] "
+                 + "[D: " + Enemy.defense + "]";
+                document.getElementById("game-text").innerHTML = "Fight or Flee!";
+
+                // = Options =
+                document.getElementById("option-one").innerHTML = "Flee";
+                document.getElementById("option-two").innerHTML = "Attack";
+                document.getElementById("option-three").innerHTML = "Use Skill";
+                document.getElementById("option-four").innerHTML = "";
+
+                // = Trigger Option 1 =
+                document.getElementById("option-one").onclick = () => {
+                    location = 1; // Forest
+                    changeLocation(gameData, location);
+                }
+                
+                // = Trigger Option 2 =
+                document.getElementById("option-two").onclick = () => {
+                    doDamage(PlayerCharacter, Enemy, gameData, location)
+                }
+
+                // = Trigger Option 3 =
+                document.getElementById("option-three").onclick = () => {
+                    if (skillUsed == false) {
+                        // Activate Skill
+                        skillUsed = true;
+                        useSkill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                    
+                    } else {
+                        document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
+                    }
+                }
+
+                // = Trigger Option 4 =
+                document.getElementById("option-four").onclick = () => {}
+
+            } else { // False -- Fight Troll
+
+                // === Create new Troll Character ===
+                Enemy = new Troll(
+                    gameData.enemyClasses[1].type,
+                    gameData.enemyClasses[1].health,
+                    gameData.enemyClasses[1].attackPower,
+                    gameData.enemyClasses[1].defense,
+                );
+
+                // = Change to Troll Pic =
+                document.getElementById("game-picture").src="RPGImages/Troll.webp";
+
+                // = State Event = 
+                document.getElementById("game-text-title").innerHTML = "Enemy Encountered - "
+                 + Enemy.type 
+                 + " - [HP: " + Enemy.health + "] "
+                 + "[AP: " + Enemy.attackPower + "] "
+                 + "[D: " + Enemy.defense + "]";
+                document.getElementById("game-text").innerHTML = "Fight or Flee!";
+
+                // = Options =
+                document.getElementById("option-one").innerHTML = "Flee";
+                document.getElementById("option-two").innerHTML = "Attack";
+                document.getElementById("option-three").innerHTML = "Use Skill";
+                document.getElementById("option-four").innerHTML = "";
+
+                // = Trigger Option 1 =
+                document.getElementById("option-one").onclick = () => {
+                    location = 1; // Forest
+                    changeLocation(gameData, location);
+                }
+                
+                // = Trigger Option 2 =
+                document.getElementById("option-two").onclick = () => {
+                    doDamage(PlayerCharacter, Enemy, gameData, location)
+                }
+
+                // = Trigger Option 3 =
+                document.getElementById("option-three").onclick = () => {
+                    if (skillUsed == false) {
+                        // Activate Skill
+                        skillUsed = true;
+                        useSkill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                    
+                    } else {
+                        document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
+                    }
+                }
+
+                // = Trigger Option 4 =
+                document.getElementById("option-four").onclick = () => {}
+            }
 
             break;
 
         case 2: // CASTLE RUINS
 
             // = Roll to Fight Enemy =
-            let result = Math.random() < 0.5 ? true : false;
+            result = Math.random() < 0.5 ? true : false;
 
             if (result == true) { // True -- Fight Evil Soldier
 
@@ -712,13 +840,18 @@ function attack(gameData, location, PlayerCharacter) {
 
                 // = Trigger Option 3 =
                 document.getElementById("option-three").onclick = () => {
-                    // useSkill();
+                   if (skillUsed == false) {
+                        // Activate Skill
+                        skillUsed = true;
+                        useSkill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                
+                    } else {
+                        document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
+                    }
                 }
 
                 // = Trigger Option 4 =
-                document.getElementById("option-four").onclick = () => {
-                    
-                }
+                document.getElementById("option-four").onclick = () => {}
 
             } else { // False -- Fight Soldier
 
@@ -760,14 +893,18 @@ function attack(gameData, location, PlayerCharacter) {
 
                 // = Trigger Option 3 =
                 document.getElementById("option-three").onclick = () => {
-                    // useSkill();
+                    if (skillUsed == false) {
+                        // Activate Skill
+                        skillUsed = true;
+                        useSkill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                    
+                    } else {
+                        document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
+                    }
                 }
 
                 // = Trigger Option 4 =
-                document.getElementById("option-four").onclick = () => {
-                    
-                }
-
+                document.getElementById("option-four").onclick = () => {}
             }
 
             break;
@@ -795,6 +932,8 @@ function doDamage(PlayerCharacter, Enemy, gameData, location) {
     + "[AP: " + Enemy.attackPower + "] "
     + "[D: " + Enemy.defense + "]";
 
+    document.getElementById("game-text").innerHTML = "Attacked for " + playerDamage + " damage!";
+
     // Enemy Attack
     takeDamage(PlayerCharacter, Enemy, gameData);
 
@@ -803,6 +942,7 @@ function doDamage(PlayerCharacter, Enemy, gameData, location) {
         // = State Result = 
         document.getElementById("game-text-title").innerHTML = "Enemy Vanquished!";
         document.getElementById("game-text").innerHTML = "You won the battle!";
+        document.getElementById("health-bar-text").innerHTML = "Health: " + Math.floor(PlayerCharacter.health);
 
         // == Add to Total Kills ==
         enemyKills += 1;
@@ -836,7 +976,7 @@ function takeDamage(PlayerCharacter, Enemy, gameData) {
 
     // Return Player's HP and check if Dead
     if(Math.floor(PlayerCharacter.health) > 0){
-        document.getElementById("health-bar-text").innerHTML = "Health: " + Math.floor(PlayerCharacter.health);
+        document.getElementById("health-bar-text").innerHTML = "Health: " + Math.floor(PlayerCharacter.health) + " [-" + Math.floor(enemyDamage) + " HP]";
     } else {
 
         // == Display Defeat Message ==
@@ -859,8 +999,51 @@ function takeDamage(PlayerCharacter, Enemy, gameData) {
     return Math.floor(PlayerCharacter.health);
 }
 
-function useSkill() {
-    return console.log("Skill Used!");
+function useSkill(PlayerCharacter, Enemy, gameData, location, skillUsed) {
+    // Calculate Player Damage with Skill -- 2x Damage
+    playerDamage = (PlayerCharacter.attackPower + (2 * gameData.playerInventory[1].damage));
+
+    // Add Enemy's Defense to Player Damage
+    playerDamage -= Enemy.defense;
+    
+    // Calculate Final Damage
+    Enemy.health -= playerDamage;
+
+    // Display Enemy Health
+    document.getElementById("game-text-title").innerHTML = "Enemy Encountered - "
+    + Enemy.type 
+    + " - [HP: " + Enemy.health + "] "
+    + "[AP: " + Enemy.attackPower + "] "
+    + "[D: " + Enemy.defense + "]";
+
+    // Enemy Attack
+    document.getElementById("game-text").innerHTML = "Used " + PlayerCharacter.skill + " skill for " + playerDamage + " damage!";
+    takeDamage(PlayerCharacter, Enemy, gameData);
+
+    // Check if Enemy Dead
+    if (Enemy.health < 0) {
+        // = State Result = 
+        document.getElementById("game-text-title").innerHTML = "Enemy Vanquished!";
+        document.getElementById("game-text").innerHTML = "You won the battle!";
+        document.getElementById("health-bar-text").innerHTML = "Health: " + Math.floor(PlayerCharacter.health);
+
+        // == Add to Total Kills ==
+        enemyKills += 1;
+        
+        // == Every 3 kills, level up character ==
+        if (enemyKills % 3 == 0) {
+            levelUp(PlayerCharacter)
+        }
+
+        // === CLEAR BUTTONS ===
+        clearButtons();
+
+        // === RETURN PLAYER ===
+        setTimeout(changeLocation, 3000, gameData, location);
+    } else {
+        // Return Enemy HP and used skill
+        return Enemy.health, skillUsed;
+    }
 }
 
 function levelUp(PlayerCharacter) {
@@ -1088,6 +1271,24 @@ class EvilSoldier extends BaseCharacter {
 }
 
 class Soldier extends BaseCharacter {
+    constructor(type, health, attackPower, defense){
+        super(type, health, attackPower, defense);
+    }
+}
+
+class Goblin extends BaseCharacter {
+    constructor(type, health, attackPower, defense){
+        super(type, health, attackPower, defense);
+    }
+}
+
+class Troll extends BaseCharacter {
+    constructor(type, health, attackPower, defense){
+        super(type, health, attackPower, defense);
+    }
+}
+
+class Dragon extends BaseCharacter {
     constructor(type, health, attackPower, defense){
         super(type, health, attackPower, defense);
     }
