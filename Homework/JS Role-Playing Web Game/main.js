@@ -1,6 +1,7 @@
 // === GAME DATA ===
 let gameRunning = true;
 let PlayerCharacter = null;
+let playerGold = null;
 
 window.onload = async () => {
     gameData = await fetch('./data.json')
@@ -61,12 +62,17 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.armor[1].cost
                 ))
 
+                updateDefense(PlayerCharacter);
+
                 // = Sword =
                 gameData.playerInventory.push(new Sword (
                     gameData.weapons[0].name, 
                     gameData.weapons[0].damage, 
                     gameData.weapons[0].cost
                 ));
+
+                // Add some chump change
+                playerGold = 100;
 
                 updateInventory(gameData);
 
@@ -131,12 +137,17 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.armor[3].cost
                 ))
 
+                updateDefense(PlayerCharacter);
+
                 // = Staff =
                 gameData.playerInventory.push(new Staff (
                     gameData.weapons[5].name, 
                     gameData.weapons[5].damage, 
                     gameData.weapons[5].cost
                 ));
+
+                // Add some chump change
+                playerGold = 75;
 
                 updateInventory(gameData);
 
@@ -201,12 +212,17 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.armor[4].cost
                 ))
 
+                updateDefense(PlayerCharacter);
+
                 // = Dagger =
                 gameData.playerInventory.push(new Dagger (
                     gameData.weapons[4].name, 
                     gameData.weapons[4].damage, 
                     gameData.weapons[4].cost
                 ));
+
+                // Add some chump change
+                playerGold = 25;
 
                 updateInventory(gameData);
 
@@ -271,12 +287,17 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.armor[0].cost
                 ))
 
+                updateDefense(PlayerCharacter);
+
                 // = Bow =
                 gameData.playerInventory.push(new Bow (
                     gameData.weapons[3].name, 
                     gameData.weapons[3].damage, 
                     gameData.weapons[3].cost
                 ));
+
+                // Add some chump change
+                playerGold = 50;
 
                 updateInventory(gameData);
 
@@ -453,11 +474,20 @@ function triggerQuest (PlayerCharacter, gameData) {
             document.getElementById("game-text").innerHTML = gameData.locations[1].description;
 
             // = Options =
-            document.getElementById("option-one").innerHTML = "Return to Village";
+            document.getElementById("option-one").innerHTML = "Return to the Village";
             document.getElementById("option-two").innerHTML = "Enter Castle Ruins";
-            document.getElementById("option-three").innerHTML = "TBD";
-            document.getElementById("option-four").innerHTML = "TBD";
+            document.getElementById("option-three").innerHTML = "";
+            document.getElementById("option-four").innerHTML = "";
 
+            // = Trigger Option 1 =
+            document.getElementById("option-one").onclick = () => {
+                // changeLocation();
+            }
+            
+            // = Trigger Option 2 =
+            document.getElementById("option-two").onclick = () => {
+                // initiateFight();
+            }
 
             break;
 
@@ -471,6 +501,27 @@ function triggerQuest (PlayerCharacter, gameData) {
             document.getElementById("game-text-title").innerHTML = gameData.locations[3].name;
             document.getElementById("game-text").innerHTML = gameData.locations[3].description;
 
+            // = Options =
+            document.getElementById("option-one").innerHTML = "Return to the Village";
+            document.getElementById("option-two").innerHTML = "Brew Potion";
+            document.getElementById("option-three").innerHTML = "Walk through the Forest";
+            document.getElementById("option-four").innerHTML = "";
+
+            // = Trigger Option 1 =
+            document.getElementById("option-one").onclick = () => {
+                // changeLocation();
+            }
+            
+            // = Trigger Option 2 =
+            document.getElementById("option-two").onclick = () => {
+                // createPotion();
+            }
+
+            // = Trigger Option 3 =
+            document.getElementById("option-two").onclick = () => {
+                // initiateFight();
+            }
+
             break;
     
         case "Thief":
@@ -482,6 +533,27 @@ function triggerQuest (PlayerCharacter, gameData) {
             // = State Location =
             document.getElementById("game-text-title").innerHTML = gameData.locations[4].name;
             document.getElementById("game-text").innerHTML = gameData.locations[4].description;
+
+            // = Options =
+            document.getElementById("option-one").innerHTML = "Enter Shop";
+            document.getElementById("option-two").innerHTML = "Attempt to Steal";
+            document.getElementById("option-three").innerHTML = "Leave the Village";
+            document.getElementById("option-four").innerHTML = "";
+
+            // = Trigger Option 1 =
+            document.getElementById("option-one").onclick = () => {
+                // changeLocation();
+            }
+            
+            // = Trigger Option 2 =
+            document.getElementById("option-two").onclick = () => {
+                // rollSteal();
+            }
+
+            // = Trigger Option 3 =
+            document.getElementById("option-two").onclick = () => {
+                // changeLocation();
+            }
 
             break;
 
@@ -495,6 +567,27 @@ function triggerQuest (PlayerCharacter, gameData) {
             document.getElementById("game-text-title").innerHTML = gameData.locations[0].name;
             document.getElementById("game-text").innerHTML = gameData.locations[0].description;
 
+            // = Options =
+            document.getElementById("option-one").innerHTML = "Attempt to Hunt";
+            document.getElementById("option-two").innerHTML = "Walk through the Forest";
+            document.getElementById("option-three").innerHTML = "Return to the Village";
+            document.getElementById("option-four").innerHTML = "";
+
+            // = Trigger Option 1 =
+            document.getElementById("option-one").onclick = () => {
+                // rollHunt();
+            }
+            
+            // = Trigger Option 2 =
+            document.getElementById("option-two").onclick = () => {
+                // initiateFight();
+            }
+
+            // = Trigger Option 3 =
+            document.getElementById("option-two").onclick = () => {
+                // changeLocation();
+            }
+
             break;
 
         default:
@@ -503,7 +596,6 @@ function triggerQuest (PlayerCharacter, gameData) {
 }
 
 // ========== PLAYER INVENTORY ==========
-
 function updateInventory (gameData) {
 
     const inventoryList = document.getElementById('inventory-list');
@@ -513,4 +605,8 @@ function updateInventory (gameData) {
         listItem.textContent = `${item.name}`;
         inventoryList.appendChild(listItem);
     });
+}
+
+function updateDefense (PlayerCharacter) {
+    PlayerCharacter.defense += gameData.playerInventory[0].defense;
 }

@@ -65,32 +65,32 @@
     
     "weapons": [
         {
-            "name": "Sword",
+            "name": "Sword [D15]",
             "damage": 15,
             "cost": 100
         },
         {
-            "name": "Club",
+            "name": "Club [D10]",
             "damage":10,
             "cost": 50
         },
         {
-            "name": "Spear",
+            "name": "Spear [D14]",
             "damage": 14,
             "cost": 90
         },
         {
-            "name": "Bow",
+            "name": "Bow [D16]",
             "damage": 16,
             "cost": 75
         },
         {
-            "name": "Dagger",
+            "name": "Dagger [D10]",
             "damage": 10,
             "cost": 20
         },
         {
-            "name": "Staff",
+            "name": "Staff [D18]",
             "damage": 18,
             "cost": 200
         }
@@ -98,27 +98,27 @@
 
     "armor": [
         {
-            "name": "Leather Armor",
+            "name": "Leather Armor [D5]",
             "defense": 5,
             "cost": 100
         },
         {
-            "name": "Chainmail Armor",
+            "name": "Chainmail Armor [D10]",
             "defense": 10,
             "cost": 200
         },
         {
-            "name": "Knight Armor",
+            "name": "Knight Armor [D20]",
             "defense": 20,
             "cost": 500
         },
         {
-            "name": "Mage Armor",
+            "name": "Mage Armor [D10]",
             "defense": 10,
             "cost": 100
         },
         {
-            "name": "Thief Armor",
+            "name": "Thief Armor [D15]",
             "defense": 15,
             "cost": 150
         }
