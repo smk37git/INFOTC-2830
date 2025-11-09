@@ -999,7 +999,7 @@ function endGame() {
 
     // == Restart Game Option ==
     document.getElementById("option-one").innerHTML = "Restart Game";
-    document.getElementById("option-one").onclick = () => {
+    document.getElementById("option-one").onclick = async () => {
 
         // = Wipe Player Data =
         PlayerCharacter = null;
@@ -1032,10 +1032,15 @@ function endGame() {
         document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
         gameData.playerInventory = [];
         updateInventory(gameData);
-    
-        // === Finally set game to True and pick character ===
+
+        // == Set Game State ==
         gameRunning = true;
-        pickCharacter(gameRunning, gameData);
+    
+        // === Pick character ===
+        await pickCharacter(gameRunning, gameData);
+
+        // 5 Second Delay before Triggering Quests
+        setTimeout(triggerQuest, 5000, PlayerCharacter, gameData);
     }
 }
 
