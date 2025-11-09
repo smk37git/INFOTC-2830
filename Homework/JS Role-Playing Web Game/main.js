@@ -28,7 +28,7 @@ window.onload = async () => {
 
 // ========== PICK CHARACTER FUNCTION ==========
 function pickCharacter (gameRunning, gameData) {
-    if(gameRunning != false && PlayerCharacter == null) {
+    while(gameRunning != false && PlayerCharacter == null) {
 
         let gameText = document.getElementById("game-text");
         gameText.innerHTML = "Start by Selecting a Character!";
@@ -51,6 +51,24 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.playerClasses[0].defense,
                     gameData.playerClasses[0].level
                 );
+
+                // === Assign Inventory Items ===
+
+                // = Armor =
+                gameData.playerInventory.push(new ChainmailArmor (
+                    gameData.armor[1].name,
+                    gameData.armor[1].defense,
+                    gameData.armor[1].cost
+                ))
+
+                // = Sword =
+                gameData.playerInventory.push(new Sword (
+                    gameData.weapons[0].name, 
+                    gameData.weapons[0].damage, 
+                    gameData.weapons[0].cost
+                ));
+
+                updateInventory(gameData);
 
                 // === Change Picture ===
                 document.getElementById("game-picture").src="RPGImages/Warrior.webp";
@@ -77,6 +95,12 @@ function pickCharacter (gameRunning, gameData) {
                 let healthbarText = document.getElementById("health-bar-text");
                 healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
 
+                // === CLEAR BUTTONS ===
+                document.getElementById("option-one").onclick = null;
+                document.getElementById("option-two").onclick = null;
+                document.getElementById("option-three").onclick = null;
+                document.getElementById("option-four").onclick = null;
+
                 // === RETURN PLAYER CHARACTER ===
                 resolve(PlayerCharacter)
             }
@@ -97,6 +121,24 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.playerClasses[1].defense,
                     gameData.playerClasses[1].level
                 );
+
+                // === Assign Inventory Items ===
+
+                // = Armor =
+                gameData.playerInventory.push(new MageArmor (
+                    gameData.armor[3].name,
+                    gameData.armor[3].defense,
+                    gameData.armor[3].cost
+                ))
+
+                // = Staff =
+                gameData.playerInventory.push(new Staff (
+                    gameData.weapons[5].name, 
+                    gameData.weapons[5].damage, 
+                    gameData.weapons[5].cost
+                ));
+
+                updateInventory(gameData);
 
                 // === Change Picture ===
                 document.getElementById("game-picture").src="RPGImages/Mage.webp";
@@ -123,6 +165,12 @@ function pickCharacter (gameRunning, gameData) {
                 let healthbarText = document.getElementById("health-bar-text");
                 healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
 
+                // === CLEAR BUTTONS ===
+                document.getElementById("option-one").onclick = null;
+                document.getElementById("option-two").onclick = null;
+                document.getElementById("option-three").onclick = null;
+                document.getElementById("option-four").onclick = null;
+
                 // === RETURN PLAYER CHARACTER ===
                 resolve(PlayerCharacter)
             }
@@ -143,6 +191,24 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.playerClasses[2].defense,
                     gameData.playerClasses[2].level
                 );
+
+                // === Assign Inventory Items ===
+
+                // = Armor =
+                gameData.playerInventory.push(new ThiefArmor (
+                    gameData.armor[4].name,
+                    gameData.armor[4].defense,
+                    gameData.armor[4].cost
+                ))
+
+                // = Dagger =
+                gameData.playerInventory.push(new Dagger (
+                    gameData.weapons[4].name, 
+                    gameData.weapons[4].damage, 
+                    gameData.weapons[4].cost
+                ));
+
+                updateInventory(gameData);
 
                 // === Change Picture ===
                 document.getElementById("game-picture").src="RPGImages/Thief.webp";
@@ -169,6 +235,12 @@ function pickCharacter (gameRunning, gameData) {
                 let healthbarText = document.getElementById("health-bar-text");
                 healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
 
+                // === CLEAR BUTTONS ===
+                document.getElementById("option-one").onclick = null;
+                document.getElementById("option-two").onclick = null;
+                document.getElementById("option-three").onclick = null;
+                document.getElementById("option-four").onclick = null;
+
                 // === RETURN PLAYER CHARACTER ===
                 resolve(PlayerCharacter)
             }
@@ -189,6 +261,24 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.playerClasses[3].defense,
                     gameData.playerClasses[3].level
                 );
+
+                // === Assign Inventory Items ===
+
+                // = Armor =
+                gameData.playerInventory.push(new LeatherArmor (
+                    gameData.armor[0].name,
+                    gameData.armor[0].defense,
+                    gameData.armor[0].cost
+                ))
+
+                // = Bow =
+                gameData.playerInventory.push(new Bow (
+                    gameData.weapons[3].name, 
+                    gameData.weapons[3].damage, 
+                    gameData.weapons[3].cost
+                ));
+
+                updateInventory(gameData);
 
                 // === Change Picture ===
                 document.getElementById("game-picture").src="RPGImages/Archer.webp";
@@ -214,6 +304,12 @@ function pickCharacter (gameRunning, gameData) {
                 // = Health =
                 let healthbarText = document.getElementById("health-bar-text");
                 healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
+
+                // === CLEAR BUTTONS ===
+                document.getElementById("option-one").onclick = null;
+                document.getElementById("option-two").onclick = null;
+                document.getElementById("option-three").onclick = null;
+                document.getElementById("option-four").onclick = null;
 
                 // === RETURN PLAYER CHARACTER ===
                 resolve(PlayerCharacter)
@@ -257,6 +353,90 @@ class Archer extends BaseCharacter {
     }
 }
 
+// ========== WEAPONS CONSTRUCTOR ==========
+class BaseWeapon {
+    constructor(name, damage, cost) {
+        this.name = name;
+        this.damage = damage;
+        this.cost = cost;
+    }
+}
+
+class Sword extends BaseWeapon {
+    constructor(name, damage, cost){
+        super(name, damage, cost);
+    }
+}
+
+class Club extends BaseWeapon {
+    constructor(name, damage, cost){
+        super(name, damage, cost);
+    }
+}
+
+class Spear extends BaseWeapon {
+    constructor(name, damage, cost){
+        super(name, damage, cost);
+    }
+}
+
+class Bow extends BaseWeapon {
+    constructor(name, damage, cost){
+        super(name, damage, cost);
+    }
+}
+
+class Dagger extends BaseWeapon {
+    constructor(name, damage, cost){
+        super(name, damage, cost);
+    }
+}
+
+class Staff extends BaseWeapon {
+    constructor(name, damage, cost){
+        super(name, damage, cost);
+    }
+}
+
+// ========== ARMORS CONSTRUCTOR ==========
+class BaseArmor {
+    constructor(name, defense, cost) {
+        this.name = name;
+        this.defense = defense;
+        this.cost = cost;
+    }
+}
+
+class LeatherArmor extends BaseArmor {
+    constructor(name, defense, cost){
+        super(name, defense, cost);
+    }
+}
+
+class ChainmailArmor extends BaseArmor {
+    constructor(name, defense, cost){
+        super(name, defense, cost);
+    }
+}
+
+class KnightArmor extends BaseArmor {
+    constructor(name, defense, cost){
+        super(name, defense, cost);
+    }
+}
+
+class MageArmor extends BaseArmor {
+    constructor(name, defense, cost){
+        super(name, defense, cost);
+    }
+}
+
+class ThiefArmor extends BaseArmor {
+    constructor(name, defense, cost){
+        super(name, defense, cost);
+    }
+}
+
 // ========== QUEST TRIGGERING ==========
 function triggerQuest (PlayerCharacter, gameData) {
 
@@ -265,22 +445,29 @@ function triggerQuest (PlayerCharacter, gameData) {
         case "Warrior":
             // ==== WARRIOR LOCATION: CASTLE RUINS ====
 
-            // Show Location
+            // = Show Location = 
             document.getElementById("game-picture").src="RPGImages/Castle1.webp";
 
-            // State Location
+            // = State Location = 
             document.getElementById("game-text-title").innerHTML = gameData.locations[1].name;
             document.getElementById("game-text").innerHTML = gameData.locations[1].description;
+
+            // = Options =
+            document.getElementById("option-one").innerHTML = "Return to Village";
+            document.getElementById("option-two").innerHTML = "Enter Castle Ruins";
+            document.getElementById("option-three").innerHTML = "TBD";
+            document.getElementById("option-four").innerHTML = "TBD";
+
 
             break;
 
         case "Mage":
             // ==== MAGE LOCATION: WIZARDS TOWER ====
 
-            // Show Location
+            // = Show Location =
             document.getElementById("game-picture").src="RPGImages/Wizardtower.webp";
 
-            // State Location
+            // = State Location = 
             document.getElementById("game-text-title").innerHTML = gameData.locations[3].name;
             document.getElementById("game-text").innerHTML = gameData.locations[3].description;
 
@@ -289,10 +476,10 @@ function triggerQuest (PlayerCharacter, gameData) {
         case "Thief":
             // ==== THIEF LOCATION: VILLAGE MARKET ====
 
-            // Show Location
+            // = Show Location =
             document.getElementById("game-picture").src="RPGImages/shop2.webp";
 
-            // State Location
+            // = State Location =
             document.getElementById("game-text-title").innerHTML = gameData.locations[4].name;
             document.getElementById("game-text").innerHTML = gameData.locations[4].description;
 
@@ -301,10 +488,10 @@ function triggerQuest (PlayerCharacter, gameData) {
         case "Archer":
             // ==== ARCHER LOCATION: FOREST ====
 
-            // Show Location
+            // = Show Location =
             document.getElementById("game-picture").src="RPGImages/SpookyForest.webp";
 
-            // State Location
+            // = State Location =
             document.getElementById("game-text-title").innerHTML = gameData.locations[0].name;
             document.getElementById("game-text").innerHTML = gameData.locations[0].description;
 
@@ -313,4 +500,17 @@ function triggerQuest (PlayerCharacter, gameData) {
         default:
             break;
     }
+}
+
+// ========== PLAYER INVENTORY ==========
+
+function updateInventory (gameData) {
+
+    const inventoryList = document.getElementById('inventory-list');
+
+    gameData.playerInventory.forEach(item => {
+        const listItem = document.createElement('p');
+        listItem.textContent = `${item.name}`;
+        inventoryList.appendChild(listItem);
+    });
 }

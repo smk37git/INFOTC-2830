@@ -150,5 +150,8 @@
             "description": "A place to trade goods and rest.",
             "enemyTypes": []
         }
+    ],
+
+    "playerInventory": [
     ]
 }
