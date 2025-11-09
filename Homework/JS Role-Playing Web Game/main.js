@@ -2,6 +2,7 @@
 let gameRunning = true;
 let PlayerCharacter = null;
 let playerGold = 0;
+let enemyKills = 0;
 
 window.onload = async () => {
     gameData = await fetch('./data.json')
@@ -700,26 +701,13 @@ function attack(gameData, location, PlayerCharacter) {
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
-                    location = 1; // Forest
+                    location = 2; // Castle Ruins
                     changeLocation(gameData, location);
                 }
                 
                 // = Trigger Option 2 =
                 document.getElementById("option-two").onclick = () => {
-                    doDamage(PlayerCharacter, Enemy, gameData)
-
-                    if (Enemy.health <= 0) {
-                        // = State Result = 
-                        document.getElementById("game-text-title").innerHTML = "Enemy Vanquished!";
-                        document.getElementById("game-text").innerHTML = "You won the battle!";
-
-                        // === CLEAR BUTTONS ===
-                        clearButtons();
-
-                        // === RETURN PLAYER ===
-                        location = 2; // Back to Original Location
-                        setTimeout(changeLocation, 3000, gameData, location);
-                    }
+                    doDamage(PlayerCharacter, Enemy, gameData, location)
                 }
 
                 // = Trigger Option 3 =
@@ -761,26 +749,13 @@ function attack(gameData, location, PlayerCharacter) {
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
-                    location = 1; // Forest
+                    location = 2; // Castle Ruins
                     changeLocation(gameData, location);
                 }
                 
                 // = Trigger Option 2 =
                 document.getElementById("option-two").onclick = () => {
-                    doDamage(PlayerCharacter, Enemy, gameData)
-
-                    if (Enemy.health <= 0) {
-                        // = State Result = 
-                        document.getElementById("game-text-title").innerHTML = "Enemy Vanquished!";
-                        document.getElementById("game-text").innerHTML = "You won the battle!";
-
-                        // === CLEAR BUTTONS ===
-                        clearButtons();
-
-                        // === RETURN PLAYER ===
-                        location = 2; // Back to Original Location
-                        setTimeout(changeLocation, 3000, gameData, location);
-                    }
+                    doDamage(PlayerCharacter, Enemy, gameData, location)
                 }
 
                 // = Trigger Option 3 =
@@ -802,7 +777,7 @@ function attack(gameData, location, PlayerCharacter) {
     }
 }
 
-function doDamage(PlayerCharacter, Enemy, gameData) {
+function doDamage(PlayerCharacter, Enemy, gameData, location) {
 
     // Calculate Player Damage
     playerDamage = (PlayerCharacter.attackPower + gameData.playerInventory[1].damage);
@@ -823,8 +798,29 @@ function doDamage(PlayerCharacter, Enemy, gameData) {
     // Enemy Attack
     takeDamage(PlayerCharacter, Enemy, gameData);
 
-    // Return Enemy HP
-    return Enemy.health;
+    // Check if Enemy Dead
+    if (Enemy.health < 0) {
+        // = State Result = 
+        document.getElementById("game-text-title").innerHTML = "Enemy Vanquished!";
+        document.getElementById("game-text").innerHTML = "You won the battle!";
+
+        // == Add to Total Kills ==
+        enemyKills += 1;
+        
+        // == Every 3 kills, level up character ==
+        if (enemyKills % 3 == 0) {
+            levelUp(PlayerCharacter)
+        }
+
+        // === CLEAR BUTTONS ===
+        clearButtons();
+
+        // === RETURN PLAYER ===
+        setTimeout(changeLocation, 3000, gameData, location);
+    } else {
+        // Return Enemy HP
+        return Enemy.health;
+    }
 }
 
 function takeDamage(PlayerCharacter, Enemy, gameData) {
@@ -867,8 +863,11 @@ function useSkill() {
     return console.log("Skill Used!");
 }
 
-function levelUp() {
-    return console.log("Leveled Up!");
+function levelUp(PlayerCharacter) {
+
+    // == Upgrade Players level by 1 ==
+    PlayerCharacter.level += 1;
+    document.getElementById("level-text").innerHTML = "Level: " + PlayerCharacter.level;
 }
 
 // ========== FUN EVENTS ==========
