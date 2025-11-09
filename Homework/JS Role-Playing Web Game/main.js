@@ -647,12 +647,20 @@ function changeLocation(gameData, location) {
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
-                    attack();
+                    
+                    // Roll for Event
+                    result = Math.random() < 0.3 ? true : false;
+
+                    if (result == true ) { // Bandit Robbery
+                        attack(gameData, location, PlayerCharacter);
+                    } else {
+                        document.getElementById("game-text").innerHTML = "You had a nice stroll.";
+                    }
                 }
         
                 // = Trigger Option 2 =
                 document.getElementById("option-two").onclick = () => {
-                    rollSteal(playerGold);
+                    rollSteal(playerGold, gameData, location, PlayerCharacter);
                 }
 
                 // = Trigger Option 3 =
@@ -729,7 +737,7 @@ function attack(gameData, location, PlayerCharacter) {
                     if (skillUsed == false) {
                         // Activate Skill
                         skillUsed = true;
-                        useSkill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                        skill(PlayerCharacter, Enemy, gameData, location, skillUsed);
                     
                     } else {
                         document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
@@ -782,7 +790,7 @@ function attack(gameData, location, PlayerCharacter) {
                     if (skillUsed == false) {
                         // Activate Skill
                         skillUsed = true;
-                        useSkill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                        skill(PlayerCharacter, Enemy, gameData, location, skillUsed);
                     
                     } else {
                         document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
@@ -843,7 +851,7 @@ function attack(gameData, location, PlayerCharacter) {
                    if (skillUsed == false) {
                         // Activate Skill
                         skillUsed = true;
-                        useSkill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                        skill(PlayerCharacter, Enemy, gameData, location, skillUsed);
                 
                     } else {
                         document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
@@ -896,7 +904,7 @@ function attack(gameData, location, PlayerCharacter) {
                     if (skillUsed == false) {
                         // Activate Skill
                         skillUsed = true;
-                        useSkill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                        skill(PlayerCharacter, Enemy, gameData, location, skillUsed);
                     
                     } else {
                         document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
@@ -908,7 +916,288 @@ function attack(gameData, location, PlayerCharacter) {
             }
 
             break;
-    
+        case 3: // MOUNTAIN CAVE
+            // === Create new Dragon Character ===
+            Enemy = new Dragon(
+                gameData.enemyClasses[2].type,
+                gameData.enemyClasses[2].health,
+                gameData.enemyClasses[2].attackPower,
+                gameData.enemyClasses[2].defense,
+            );
+
+            // = Change to Goblin Pic =
+            document.getElementById("game-picture").src="RPGImages/Dragon.webp";
+
+            // = State Event = 
+            document.getElementById("game-text-title").innerHTML = "Enemy Encountered - "
+                + Enemy.type 
+                + " - [HP: " + Enemy.health + "] "
+                + "[AP: " + Enemy.attackPower + "] "
+                + "[D: " + Enemy.defense + "]";
+            document.getElementById("game-text").innerHTML = "Fight or Flee!";
+
+            // = Options =
+            document.getElementById("option-one").innerHTML = "Flee";
+            document.getElementById("option-two").innerHTML = "Attack";
+            document.getElementById("option-three").innerHTML = "Use Skill";
+            document.getElementById("option-four").innerHTML = "";
+
+            // = Trigger Option 1 =
+            document.getElementById("option-one").onclick = () => {
+                location = 2; // Castle Ruins
+                changeLocation(gameData, location);
+            }
+            
+            // = Trigger Option 2 =
+            document.getElementById("option-two").onclick = () => {
+                doDamage(PlayerCharacter, Enemy, gameData, location)
+            }
+
+            // = Trigger Option 3 =
+            document.getElementById("option-three").onclick = () => {
+                if (skillUsed == false) {
+                    // Activate Skill
+                    skillUsed = true;
+                    skill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                
+                } else {
+                    document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
+                }
+            }
+
+            // = Trigger Option 4 =
+            document.getElementById("option-four").onclick = () => {}
+            
+            break;
+        
+        case 4: // Wizard Tower
+
+            // = Roll to Fight Enemy =
+            result = Math.random() < 0.5 ? true : false;
+
+            if (result == true) { // True -- Fight Goblin
+
+                // === Create new Goblin Character ===
+                Enemy = new Goblin(
+                    gameData.enemyClasses[0].type,
+                    gameData.enemyClasses[0].health,
+                    gameData.enemyClasses[0].attackPower,
+                    gameData.enemyClasses[0].defense,
+                );
+
+                // = Change to Goblin Pic =
+                document.getElementById("game-picture").src="RPGImages/Goblin.webp";
+
+                // = State Event = 
+                document.getElementById("game-text-title").innerHTML = "Enemy Encountered - "
+                 + Enemy.type 
+                 + " - [HP: " + Enemy.health + "] "
+                 + "[AP: " + Enemy.attackPower + "] "
+                 + "[D: " + Enemy.defense + "]";
+                document.getElementById("game-text").innerHTML = "Fight or Flee!";
+
+                // = Options =
+                document.getElementById("option-one").innerHTML = "Flee";
+                document.getElementById("option-two").innerHTML = "Attack";
+                document.getElementById("option-three").innerHTML = "Use Skill";
+                document.getElementById("option-four").innerHTML = "";
+
+                // = Trigger Option 1 =
+                document.getElementById("option-one").onclick = () => {
+                    location = 1; // Forest
+                    changeLocation(gameData, location);
+                }
+                
+                // = Trigger Option 2 =
+                document.getElementById("option-two").onclick = () => {
+                    doDamage(PlayerCharacter, Enemy, gameData, location)
+                }
+
+                // = Trigger Option 3 =
+                document.getElementById("option-three").onclick = () => {
+                    if (skillUsed == false) {
+                        // Activate Skill
+                        skillUsed = true;
+                        skill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                    
+                    } else {
+                        document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
+                    }
+                }
+
+                // = Trigger Option 4 =
+                document.getElementById("option-four").onclick = () => {}
+
+            } else { // False -- Fight Troll
+
+                // === Create new Troll Character ===
+                Enemy = new Troll(
+                    gameData.enemyClasses[1].type,
+                    gameData.enemyClasses[1].health,
+                    gameData.enemyClasses[1].attackPower,
+                    gameData.enemyClasses[1].defense,
+                );
+
+                // = Change to Troll Pic =
+                document.getElementById("game-picture").src="RPGImages/Troll.webp";
+
+                // = State Event = 
+                document.getElementById("game-text-title").innerHTML = "Enemy Encountered - "
+                 + Enemy.type 
+                 + " - [HP: " + Enemy.health + "] "
+                 + "[AP: " + Enemy.attackPower + "] "
+                 + "[D: " + Enemy.defense + "]";
+                document.getElementById("game-text").innerHTML = "Fight or Flee!";
+
+                // = Options =
+                document.getElementById("option-one").innerHTML = "Flee";
+                document.getElementById("option-two").innerHTML = "Attack";
+                document.getElementById("option-three").innerHTML = "Use Skill";
+                document.getElementById("option-four").innerHTML = "";
+
+                // = Trigger Option 1 =
+                document.getElementById("option-one").onclick = () => {
+                    location = 1; // Forest
+                    changeLocation(gameData, location);
+                }
+                
+                // = Trigger Option 2 =
+                document.getElementById("option-two").onclick = () => {
+                    doDamage(PlayerCharacter, Enemy, gameData, location)
+                }
+
+                // = Trigger Option 3 =
+                document.getElementById("option-three").onclick = () => {
+                    if (skillUsed == false) {
+                        // Activate Skill
+                        skillUsed = true;
+                        skill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                    
+                    } else {
+                        document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
+                    }
+                }
+
+                // = Trigger Option 4 =
+                document.getElementById("option-four").onclick = () => {}
+            }
+
+            break;
+        
+        case 5: // VILLAGE MARKET
+            
+            // = Roll to Fight Enemy =
+            result = Math.random() < 0.5 ? true : false;
+
+            if (result == true) { // True -- Fight Soldier
+
+                // === Create new Soldier Character ===
+                Enemy = new Soldier(
+                    gameData.enemyClasses[0].type,
+                    gameData.enemyClasses[0].health,
+                    gameData.enemyClasses[0].attackPower,
+                    gameData.enemyClasses[0].defense,
+                );
+
+                // = Change to Goblin Pic =
+                document.getElementById("game-picture").src="RPGImages/soldier.webp";
+
+                // = State Event = 
+                document.getElementById("game-text-title").innerHTML = "Enemy Encountered - "
+                 + Enemy.type 
+                 + " - [HP: " + Enemy.health + "] "
+                 + "[AP: " + Enemy.attackPower + "] "
+                 + "[D: " + Enemy.defense + "]";
+                document.getElementById("game-text").innerHTML = "Fight or Flee!";
+
+                // = Options =
+                document.getElementById("option-one").innerHTML = "Flee";
+                document.getElementById("option-two").innerHTML = "Attack";
+                document.getElementById("option-three").innerHTML = "Use Skill";
+                document.getElementById("option-four").innerHTML = "";
+
+                // = Trigger Option 1 =
+                document.getElementById("option-one").onclick = () => {
+                    location = 5; // Village Market
+                    changeLocation(gameData, location);
+                }
+                
+                // = Trigger Option 2 =
+                document.getElementById("option-two").onclick = () => {
+                    doDamage(PlayerCharacter, Enemy, gameData, location)
+                }
+
+                // = Trigger Option 3 =
+                document.getElementById("option-three").onclick = () => {
+                    if (skillUsed == false) {
+                        // Activate Skill
+                        skillUsed = true;
+                        skill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                    
+                    } else {
+                        document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
+                    }
+                }
+
+                // = Trigger Option 4 =
+                document.getElementById("option-four").onclick = () => {}
+
+            } else { // False -- Fight Bandit
+
+                // === Create new Bandit Character ===
+                Enemy = new Bandit(
+                    gameData.enemyClasses[5].type,
+                    gameData.enemyClasses[5].health,
+                    gameData.enemyClasses[5].attackPower,
+                    gameData.enemyClasses[5].defense,
+                );
+
+                // = Change to Troll Pic =
+                document.getElementById("game-picture").src="RPGImages/bandit.png";
+
+                // = State Event = 
+                document.getElementById("game-text-title").innerHTML = "Enemy Encountered - "
+                 + Enemy.type 
+                 + " - [HP: " + Enemy.health + "] "
+                 + "[AP: " + Enemy.attackPower + "] "
+                 + "[D: " + Enemy.defense + "]";
+                document.getElementById("game-text").innerHTML = "Fight or Flee!";
+
+                // = Options =
+                document.getElementById("option-one").innerHTML = "Flee";
+                document.getElementById("option-two").innerHTML = "Attack";
+                document.getElementById("option-three").innerHTML = "Use Skill";
+                document.getElementById("option-four").innerHTML = "";
+
+                // = Trigger Option 1 =
+                document.getElementById("option-one").onclick = () => {
+                    location = 5; // Village Market
+                    changeLocation(gameData, location);
+                }
+                
+                // = Trigger Option 2 =
+                document.getElementById("option-two").onclick = () => {
+                    doDamage(PlayerCharacter, Enemy, gameData, location)
+                }
+
+                // = Trigger Option 3 =
+                document.getElementById("option-three").onclick = () => {
+                    if (skillUsed == false) {
+                        // Activate Skill
+                        skillUsed = true;
+                        skill(PlayerCharacter, Enemy, gameData, location, skillUsed);
+                    
+                    } else {
+                        document.getElementById("game-text").innerHTML = PlayerCharacter.skill + " was already used!";
+                    }
+                }
+
+                // = Trigger Option 4 =
+                document.getElementById("option-four").onclick = () => {}
+            }
+
+            break;
+
         default:
             break;
     }
@@ -999,7 +1288,7 @@ function takeDamage(PlayerCharacter, Enemy, gameData) {
     return Math.floor(PlayerCharacter.health);
 }
 
-function useSkill(PlayerCharacter, Enemy, gameData, location, skillUsed) {
+function skill(PlayerCharacter, Enemy, gameData, location, skillUsed) {
     // Calculate Player Damage with Skill -- 2x Damage
     playerDamage = (PlayerCharacter.attackPower + (2 * gameData.playerInventory[1].damage));
 
@@ -1054,7 +1343,7 @@ function levelUp(PlayerCharacter) {
 }
 
 // ========== FUN EVENTS ==========
-function rollSteal() {
+function rollSteal(playerGold, gameData, location, PlayerCharacter) {
 
     // = Roll to Steal =
     let result = Math.random() < 0.4 ? true : false;
@@ -1081,8 +1370,8 @@ function rollSteal() {
     } else {
 
         // Failed -- Start Fight
-        attack()
         document.getElementById("game-text").innerHTML = "You Got Caught! Prepare to Fight!";
+        attack(gameData, location, PlayerCharacter);
     }
 
     return playerGold;
@@ -1289,6 +1578,12 @@ class Troll extends BaseCharacter {
 }
 
 class Dragon extends BaseCharacter {
+    constructor(type, health, attackPower, defense){
+        super(type, health, attackPower, defense);
+    }
+}
+
+class Bandit extends BaseCharacter {
     constructor(type, health, attackPower, defense){
         super(type, health, attackPower, defense);
     }
