@@ -155,13 +155,23 @@
     "randomItems" : [
         {
             "name": "Meat",
-            "description": "Meat harvested from an animal",
+            "description": "Meat harvested from an animal.",
             "value": 15
         },
         {
             "name": "Treasure",
             "description": "Gems, Rare Coins, Spoils of Loot. Try selling it.",
             "value": 50
+        },
+        {
+            "name": "Potion",
+            "description": "A mythical potion brewed by a skilled Mage.",
+            "value": 20
+        },
+        {
+            "name": "Ore",
+            "description": "Precious metals from deep within the Mountain Caves.",
+            "value": 25
         }
     ],
 
