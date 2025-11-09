@@ -67,32 +67,32 @@
         {
             "name": "Sword [D15]",
             "damage": 15,
-            "cost": 100
+            "value": 100
         },
         {
             "name": "Club [D10]",
             "damage":10,
-            "cost": 50
+            "value": 50
         },
         {
             "name": "Spear [D14]",
             "damage": 14,
-            "cost": 90
+            "value": 90
         },
         {
             "name": "Bow [D16]",
             "damage": 16,
-            "cost": 75
+            "value": 75
         },
         {
             "name": "Dagger [D10]",
             "damage": 10,
-            "cost": 20
+            "value": 20
         },
         {
             "name": "Staff [D18]",
             "damage": 18,
-            "cost": 200
+            "value": 200
         }
     ],
 
@@ -100,27 +100,27 @@
         {
             "name": "Leather Armor [D5]",
             "defense": 5,
-            "cost": 100
+            "value": 100
         },
         {
             "name": "Chainmail Armor [D10]",
             "defense": 10,
-            "cost": 200
+            "value": 200
         },
         {
             "name": "Knight Armor [D20]",
             "defense": 20,
-            "cost": 500
+            "value": 500
         },
         {
             "name": "Mage Armor [D10]",
             "defense": 10,
-            "cost": 100
+            "value": 100
         },
         {
             "name": "Thief Armor [D15]",
             "defense": 15,
-            "cost": 150
+            "value": 150
         }
     ],
 
@@ -149,6 +149,19 @@
             "name": "Village Market",
             "description": "A place to trade goods and rest.",
             "enemyTypes": []
+        }
+    ],
+
+    "randomItems" : [
+        {
+            "name": "Meat",
+            "description": "Meat harvested from an animal",
+            "value": 15
+        },
+        {
+            "name": "Treasure",
+            "description": "Gems, Rare Coins, Spoils of Loot. Try selling it.",
+            "value": 50
         }
     ],
 

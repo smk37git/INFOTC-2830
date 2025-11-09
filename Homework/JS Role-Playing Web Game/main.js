@@ -1,7 +1,7 @@
 // === GAME DATA ===
 let gameRunning = true;
 let PlayerCharacter = null;
-let playerGold = null;
+let playerGold = 0;
 
 window.onload = async () => {
     gameData = await fetch('./data.json')
@@ -35,14 +35,14 @@ function pickCharacter (gameRunning, gameData) {
         gameText.innerHTML = "Start by Selecting a Character!";
 
         return (new Promise((resolve) => {
+
             // == Warrior ==
             let optionOne = document.getElementById("option-one");
             optionOne.innerHTML = gameData.playerClasses[0].type;
-
             document.getElementById("option-one").onclick = () => {
 
-            document.getElementById("game-text-title").innerHTML = "CHARACTER SELECTED";
-            gameText.innerHTML = "You selected " + gameData.playerClasses[0].type;
+                document.getElementById("game-text-title").innerHTML = "CHARACTER SELECTED";
+                gameText.innerHTML = "You selected " + gameData.playerClasses[0].type;
 
                 // === Create new Warrior Character ===
                 PlayerCharacter = new Warrior(
@@ -59,7 +59,7 @@ function pickCharacter (gameRunning, gameData) {
                 gameData.playerInventory.push(new ChainmailArmor (
                     gameData.armor[1].name,
                     gameData.armor[1].defense,
-                    gameData.armor[1].cost
+                    gameData.armor[1].value
                 ))
 
                 updateDefense(PlayerCharacter);
@@ -68,11 +68,12 @@ function pickCharacter (gameRunning, gameData) {
                 gameData.playerInventory.push(new Sword (
                     gameData.weapons[0].name, 
                     gameData.weapons[0].damage, 
-                    gameData.weapons[0].cost
+                    gameData.weapons[0].value
                 ));
 
                 // Add some chump change
-                playerGold = 100;
+                playerGold += 100;
+                document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
 
                 updateInventory(gameData);
 
@@ -134,7 +135,7 @@ function pickCharacter (gameRunning, gameData) {
                 gameData.playerInventory.push(new MageArmor (
                     gameData.armor[3].name,
                     gameData.armor[3].defense,
-                    gameData.armor[3].cost
+                    gameData.armor[3].value
                 ))
 
                 updateDefense(PlayerCharacter);
@@ -143,11 +144,12 @@ function pickCharacter (gameRunning, gameData) {
                 gameData.playerInventory.push(new Staff (
                     gameData.weapons[5].name, 
                     gameData.weapons[5].damage, 
-                    gameData.weapons[5].cost
+                    gameData.weapons[5].value
                 ));
 
                 // Add some chump change
-                playerGold = 75;
+                playerGold += 75;
+                document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
 
                 updateInventory(gameData);
 
@@ -209,7 +211,7 @@ function pickCharacter (gameRunning, gameData) {
                 gameData.playerInventory.push(new ThiefArmor (
                     gameData.armor[4].name,
                     gameData.armor[4].defense,
-                    gameData.armor[4].cost
+                    gameData.armor[4].value
                 ))
 
                 updateDefense(PlayerCharacter);
@@ -218,11 +220,12 @@ function pickCharacter (gameRunning, gameData) {
                 gameData.playerInventory.push(new Dagger (
                     gameData.weapons[4].name, 
                     gameData.weapons[4].damage, 
-                    gameData.weapons[4].cost
+                    gameData.weapons[4].value
                 ));
 
                 // Add some chump change
-                playerGold = 25;
+                playerGold += 25;
+                document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
 
                 updateInventory(gameData);
 
@@ -284,7 +287,7 @@ function pickCharacter (gameRunning, gameData) {
                 gameData.playerInventory.push(new LeatherArmor (
                     gameData.armor[0].name,
                     gameData.armor[0].defense,
-                    gameData.armor[0].cost
+                    gameData.armor[0].value
                 ))
 
                 updateDefense(PlayerCharacter);
@@ -293,11 +296,12 @@ function pickCharacter (gameRunning, gameData) {
                 gameData.playerInventory.push(new Bow (
                     gameData.weapons[3].name, 
                     gameData.weapons[3].damage, 
-                    gameData.weapons[3].cost
+                    gameData.weapons[3].value
                 ));
 
                 // Add some chump change
-                playerGold = 50;
+                playerGold += 50;
+                document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
 
                 updateInventory(gameData);
 
@@ -376,85 +380,106 @@ class Archer extends BaseCharacter {
 
 // ========== WEAPONS CONSTRUCTOR ==========
 class BaseWeapon {
-    constructor(name, damage, cost) {
+    constructor(name, damage, value) {
         this.name = name;
         this.damage = damage;
-        this.cost = cost;
+        this.value = value;
     }
 }
 
 class Sword extends BaseWeapon {
-    constructor(name, damage, cost){
-        super(name, damage, cost);
+    constructor(name, damage, value){
+        super(name, damage, value);
     }
 }
 
 class Club extends BaseWeapon {
-    constructor(name, damage, cost){
-        super(name, damage, cost);
+    constructor(name, damage, value){
+        super(name, damage, value);
     }
 }
 
 class Spear extends BaseWeapon {
-    constructor(name, damage, cost){
-        super(name, damage, cost);
+    constructor(name, damage, value){
+        super(name, damage, value);
     }
 }
 
 class Bow extends BaseWeapon {
-    constructor(name, damage, cost){
-        super(name, damage, cost);
+    constructor(name, damage, value){
+        super(name, damage, value);
     }
 }
 
 class Dagger extends BaseWeapon {
-    constructor(name, damage, cost){
-        super(name, damage, cost);
+    constructor(name, damage, value){
+        super(name, damage, value);
     }
 }
 
 class Staff extends BaseWeapon {
-    constructor(name, damage, cost){
-        super(name, damage, cost);
+    constructor(name, damage, value){
+        super(name, damage, value);
     }
 }
 
 // ========== ARMORS CONSTRUCTOR ==========
 class BaseArmor {
-    constructor(name, defense, cost) {
+    constructor(name, defense, value) {
         this.name = name;
         this.defense = defense;
-        this.cost = cost;
+        this.value = value;
     }
 }
 
 class LeatherArmor extends BaseArmor {
-    constructor(name, defense, cost){
-        super(name, defense, cost);
+    constructor(name, defense, value){
+        super(name, defense, value);
     }
 }
 
 class ChainmailArmor extends BaseArmor {
-    constructor(name, defense, cost){
-        super(name, defense, cost);
+    constructor(name, defense, value){
+        super(name, defense, value);
     }
 }
 
 class KnightArmor extends BaseArmor {
-    constructor(name, defense, cost){
-        super(name, defense, cost);
+    constructor(name, defense, value){
+        super(name, defense, value);
     }
 }
 
 class MageArmor extends BaseArmor {
-    constructor(name, defense, cost){
-        super(name, defense, cost);
+    constructor(name, defense, value){
+        super(name, defense, value);
     }
 }
 
 class ThiefArmor extends BaseArmor {
-    constructor(name, defense, cost){
-        super(name, defense, cost);
+    constructor(name, defense, value){
+        super(name, defense, value);
+    }
+}
+
+// ========== RANDOM ITEMS CONSTRUCTOR ==========
+class BaseItem {
+    constructor(name, description, value) {
+        this.name = name;
+        this.description = description;
+        this.value = value;
+    }
+}
+
+class Meat extends BaseItem {
+    constructor(name, description, value){
+        super(name, description, value);
+    }
+}
+
+class Treasure extends BaseItem {
+    constructor(name, description, value) {
+        super(name, description, value);
     }
 }
 
@@ -518,7 +543,7 @@ function triggerQuest (PlayerCharacter, gameData) {
             }
 
             // = Trigger Option 3 =
-            document.getElementById("option-two").onclick = () => {
+            document.getElementById("option-three").onclick = () => {
                 // initiateFight();
             }
 
@@ -544,14 +569,14 @@ function triggerQuest (PlayerCharacter, gameData) {
             document.getElementById("option-one").onclick = () => {
                 // changeLocation();
             }
-            
+     
             // = Trigger Option 2 =
             document.getElementById("option-two").onclick = () => {
-                // rollSteal();
+                rollSteal(playerGold);
             }
 
             // = Trigger Option 3 =
-            document.getElementById("option-two").onclick = () => {
+            document.getElementById("option-three").onclick = () => {
                 // changeLocation();
             }
 
@@ -575,7 +600,7 @@ function triggerQuest (PlayerCharacter, gameData) {
 
             // = Trigger Option 1 =
             document.getElementById("option-one").onclick = () => {
-                // rollHunt();
+                rollHunt();
             }
             
             // = Trigger Option 2 =
@@ -584,7 +609,7 @@ function triggerQuest (PlayerCharacter, gameData) {
             }
 
             // = Trigger Option 3 =
-            document.getElementById("option-two").onclick = () => {
+            document.getElementById("option-three").onclick = () => {
                 // changeLocation();
             }
 
@@ -598,15 +623,92 @@ function triggerQuest (PlayerCharacter, gameData) {
 // ========== PLAYER INVENTORY ==========
 function updateInventory (gameData) {
 
+    // Get INV list and clear it each update
     const inventoryList = document.getElementById('inventory-list');
 
-    gameData.playerInventory.forEach(item => {
-        const listItem = document.createElement('p');
-        listItem.textContent = `${item.name}`;
-        inventoryList.appendChild(listItem);
-    });
+    // Max Inv Size
+    let maxSpace = 6;
+
+    // Add each item
+    if(gameData.playerInventory.length <= maxSpace) {
+        document.getElementById('inventory-list').innerHTML = "";
+        gameData.playerInventory.forEach(item => {
+            const listItem = document.createElement('p');
+            listItem.textContent = `${item.name}`;
+            inventoryList.appendChild(listItem);
+            console.log("Object added:", item);
+        });
+    } else {
+        document.getElementById("game-text").innerHTML = "Inventory Full!";
+    }
 }
 
 function updateDefense (PlayerCharacter) {
     PlayerCharacter.defense += gameData.playerInventory[0].defense;
+}
+
+// ========== COMBAT EVENTS ==========
+function initiateFight() {
+    return console.log("FIGHT");
+}
+
+// ========== FUN EVENTS ==========
+function rollSteal() {
+
+    // = Roll to Steal =
+    let result = Math.random() < 0.5 ? true : false;
+
+    if (result == true) {
+
+        // Success -- Add Gold
+        playerGold += 25
+        document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
+        document.getElementById("game-text").innerHTML = "Theft Successful! Gold: +25";
+
+        // Rare Chance to steal 'Valuables'
+        setTimeout(result = Math.random() < 0.1 ? true : false, 2000)
+        if (result == true) {
+            document.getElementById("game-text").innerHTML = "Bonus Item! Treasure Added!";
+            gameData.playerInventory.push(new Treasure (
+                gameData.randomItems[1].name,
+                gameData.randomItems[1].description,
+                gameData.randomItems[1].value
+            )) 
+
+            updateInventory(gameData);
+        }
+    } else {
+
+        // Failed -- Start Fight
+        initiateFight()
+        document.getElementById("game-text").innerHTML = "You Got Caught! Prepare to Fight!";
+    }
+
+    return playerGold;
+}
+
+function rollHunt() {
+
+    // = Roll to Hunt =
+    let result = Math.random() < 0.5 ? true : false;
+
+    if (result == true) {
+
+        // Success -- Add Meat
+        document.getElementById("game-text").innerHTML = "Hunt Successful! Meat Added!";
+        gameData.playerInventory.push(new Meat (
+            gameData.randomItems[0].name,
+            gameData.randomItems[0].description,
+            gameData.randomItems[0].value
+        )) 
+
+        updateInventory(gameData);
+
+    } else {
+
+        // Failed -- Try again
+        document.getElementById("game-text").innerHTML = "Hunt Failed!"
+    }
+
+    console.log(result);
 }
