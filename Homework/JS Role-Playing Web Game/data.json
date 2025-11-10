@@ -38,13 +38,13 @@
         {
             "type": "Goblin",
             "health": 100,
-            "attackPower": 5,
+            "attackPower": 12,
             "defense": 1
         },
         {
             "type": "Troll",
             "health": 100,
-            "attackPower": 10,
+            "attackPower": 20,
             "defense": 8
         },
         {
@@ -56,19 +56,19 @@
         {
             "type": "Soldier",
             "health": 100,
-            "attackPower": 14,
+            "attackPower": 15,
             "defense": 6
         },
         {
             "type": "Evil Soldier",
             "health": 100,
-            "attackPower": 18,
+            "attackPower": 20,
             "defense": 6
         },
         {
             "type": "Bandit",
             "health": 100,
-            "attackPower": 15,
+            "attackPower": 18,
             "defense": 6
         }
     ],

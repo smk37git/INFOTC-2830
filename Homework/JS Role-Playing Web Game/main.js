@@ -432,6 +432,7 @@ function updateInventory (gameData) {
             inventoryList.appendChild(listItem);
             console.log("Object added:", item);
         });
+
     } else {
         document.getElementById("game-text").innerHTML = "Inventory Full!";
     }
@@ -518,7 +519,7 @@ function changeLocation(gameData, location) {
                 
                 // = Trigger Option 2 =
                 document.getElementById("option-two").onclick = () => {
-                    attack(gameData, location, PlayerCharacter);
+                    attack(gameData, location, PlayerCharacter);;
                 }
 
                 // = Trigger Option 3 =
@@ -719,7 +720,7 @@ function attack(gameData, location, PlayerCharacter) {
                 document.getElementById("option-one").innerHTML = "Flee";
                 document.getElementById("option-two").innerHTML = "Attack";
                 document.getElementById("option-three").innerHTML = "Use Skill";
-                document.getElementById("option-four").innerHTML = "";
+                document.getElementById("option-four").innerHTML = "Heal";
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
@@ -745,7 +746,13 @@ function attack(gameData, location, PlayerCharacter) {
                 }
 
                 // = Trigger Option 4 =
-                document.getElementById("option-four").onclick = () => {}
+                document.getElementById("option-four").onclick = () => {
+                    if (gameData.playerInventory.find(item => item.name === "Potion")) {
+                        heal(gameData, PlayerCharacter);
+                    } else {
+                        document.getElementById("game-text").innerHTML = "You have no Healing Items!";
+                    }
+                }
 
             } else { // False -- Fight Troll
 
@@ -772,7 +779,7 @@ function attack(gameData, location, PlayerCharacter) {
                 document.getElementById("option-one").innerHTML = "Flee";
                 document.getElementById("option-two").innerHTML = "Attack";
                 document.getElementById("option-three").innerHTML = "Use Skill";
-                document.getElementById("option-four").innerHTML = "";
+                document.getElementById("option-four").innerHTML = "Heal";
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
@@ -798,7 +805,13 @@ function attack(gameData, location, PlayerCharacter) {
                 }
 
                 // = Trigger Option 4 =
-                document.getElementById("option-four").onclick = () => {}
+                document.getElementById("option-four").onclick = () => {
+                    if (gameData.playerInventory.find(item => item.name === "Potion")) {
+                        heal(gameData, PlayerCharacter);
+                    } else {
+                        document.getElementById("game-text").innerHTML = "You have no Healing Items!";
+                    }
+                }
             }
 
             break;
@@ -833,7 +846,7 @@ function attack(gameData, location, PlayerCharacter) {
                 document.getElementById("option-one").innerHTML = "Flee";
                 document.getElementById("option-two").innerHTML = "Attack";
                 document.getElementById("option-three").innerHTML = "Use Skill";
-                document.getElementById("option-four").innerHTML = "";
+                document.getElementById("option-four").innerHTML = "Heal";
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
@@ -859,7 +872,13 @@ function attack(gameData, location, PlayerCharacter) {
                 }
 
                 // = Trigger Option 4 =
-                document.getElementById("option-four").onclick = () => {}
+                document.getElementById("option-four").onclick = () => {
+                    if (gameData.playerInventory.find(item => item.name === "Potion")) {
+                        heal(gameData, PlayerCharacter);
+                    } else {
+                        document.getElementById("game-text").innerHTML = "You have no Healing Items!";
+                    }
+                }
 
             } else { // False -- Fight Soldier
 
@@ -886,7 +905,7 @@ function attack(gameData, location, PlayerCharacter) {
                 document.getElementById("option-one").innerHTML = "Flee";
                 document.getElementById("option-two").innerHTML = "Attack";
                 document.getElementById("option-three").innerHTML = "Use Skill";
-                document.getElementById("option-four").innerHTML = "";
+                document.getElementById("option-four").innerHTML = "Heal";
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
@@ -912,7 +931,13 @@ function attack(gameData, location, PlayerCharacter) {
                 }
 
                 // = Trigger Option 4 =
-                document.getElementById("option-four").onclick = () => {}
+                document.getElementById("option-four").onclick = () => {
+                    if (gameData.playerInventory.find(item => item.name === "Potion")) {
+                        heal(gameData, PlayerCharacter);
+                    } else {
+                        document.getElementById("game-text").innerHTML = "You have no Healing Items!";
+                    }
+                }
             }
 
             break;
@@ -940,7 +965,7 @@ function attack(gameData, location, PlayerCharacter) {
             document.getElementById("option-one").innerHTML = "Flee";
             document.getElementById("option-two").innerHTML = "Attack";
             document.getElementById("option-three").innerHTML = "Use Skill";
-            document.getElementById("option-four").innerHTML = "";
+            document.getElementById("option-four").innerHTML = "Heal";
 
             // = Trigger Option 1 =
             document.getElementById("option-one").onclick = () => {
@@ -966,7 +991,13 @@ function attack(gameData, location, PlayerCharacter) {
             }
 
             // = Trigger Option 4 =
-            document.getElementById("option-four").onclick = () => {}
+            document.getElementById("option-four").onclick = () => {
+                if (gameData.playerInventory.find(item => item.name === "Potion")) {
+                    heal(gameData, PlayerCharacter);
+                } else {
+                    document.getElementById("game-text").innerHTML = "You have no Healing Items!";
+                }
+            }
             
             break;
         
@@ -1000,7 +1031,7 @@ function attack(gameData, location, PlayerCharacter) {
                 document.getElementById("option-one").innerHTML = "Flee";
                 document.getElementById("option-two").innerHTML = "Attack";
                 document.getElementById("option-three").innerHTML = "Use Skill";
-                document.getElementById("option-four").innerHTML = "";
+                document.getElementById("option-four").innerHTML = "Heal";
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
@@ -1026,7 +1057,13 @@ function attack(gameData, location, PlayerCharacter) {
                 }
 
                 // = Trigger Option 4 =
-                document.getElementById("option-four").onclick = () => {}
+                document.getElementById("option-four").onclick = () => {
+                    if (gameData.playerInventory.find(item => item.name === "Potion")) {
+                        heal(gameData, PlayerCharacter);
+                    } else {
+                        document.getElementById("game-text").innerHTML = "You have no Healing Items!";
+                    }
+                }
 
             } else { // False -- Fight Troll
 
@@ -1053,7 +1090,7 @@ function attack(gameData, location, PlayerCharacter) {
                 document.getElementById("option-one").innerHTML = "Flee";
                 document.getElementById("option-two").innerHTML = "Attack";
                 document.getElementById("option-three").innerHTML = "Use Skill";
-                document.getElementById("option-four").innerHTML = "";
+                document.getElementById("option-four").innerHTML = "Heal";
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
@@ -1079,7 +1116,13 @@ function attack(gameData, location, PlayerCharacter) {
                 }
 
                 // = Trigger Option 4 =
-                document.getElementById("option-four").onclick = () => {}
+                document.getElementById("option-four").onclick = () => {
+                    if (gameData.playerInventory.find(item => item.name === "Potion")) {
+                        heal(gameData, PlayerCharacter);
+                    } else {
+                        document.getElementById("game-text").innerHTML = "You have no Healing Items!";
+                    }
+                }
             }
 
             break;
@@ -1114,7 +1157,7 @@ function attack(gameData, location, PlayerCharacter) {
                 document.getElementById("option-one").innerHTML = "Flee";
                 document.getElementById("option-two").innerHTML = "Attack";
                 document.getElementById("option-three").innerHTML = "Use Skill";
-                document.getElementById("option-four").innerHTML = "";
+                document.getElementById("option-four").innerHTML = "Heal";
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
@@ -1140,7 +1183,13 @@ function attack(gameData, location, PlayerCharacter) {
                 }
 
                 // = Trigger Option 4 =
-                document.getElementById("option-four").onclick = () => {}
+                document.getElementById("option-four").onclick = () => {
+                    if (gameData.playerInventory.find(item => item.name === "Potion")) {
+                        heal(gameData, PlayerCharacter);
+                    } else {
+                        document.getElementById("game-text").innerHTML = "You have no Healing Items!";
+                    }
+                }
 
             } else { // False -- Fight Bandit
 
@@ -1167,7 +1216,7 @@ function attack(gameData, location, PlayerCharacter) {
                 document.getElementById("option-one").innerHTML = "Flee";
                 document.getElementById("option-two").innerHTML = "Attack";
                 document.getElementById("option-three").innerHTML = "Use Skill";
-                document.getElementById("option-four").innerHTML = "";
+                document.getElementById("option-four").innerHTML = "Heal";
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
@@ -1193,7 +1242,13 @@ function attack(gameData, location, PlayerCharacter) {
                 }
 
                 // = Trigger Option 4 =
-                document.getElementById("option-four").onclick = () => {}
+                document.getElementById("option-four").onclick = () => {
+                    if (gameData.playerInventory.find(item => item.name === "Potion")) {
+                        heal(gameData, PlayerCharacter);
+                    } else {
+                        document.getElementById("game-text").innerHTML = "You have no Healing Items!";
+                    }
+                }
             }
 
             break;
@@ -1335,6 +1390,33 @@ function skill(PlayerCharacter, Enemy, gameData, location, skillUsed) {
     }
 }
 
+function heal (gameData, PlayerCharacter) {
+
+    // Let Healing Items be Potions
+    let healingItem = gameData.randomItems[2].name;
+
+    // If Used, remove it from inventory
+    let removeItem = gameData.playerInventory.findIndex(item => item.name === healingItem);
+
+    if (removeItem !== -1) {
+      gameData.playerInventory.splice(removeItem, 1);
+    }
+
+    updateInventory(gameData);
+
+    // Apply Healing to PlayerCharacter
+    PlayerCharacter.health += 15;
+
+    if (PlayerCharacter.health >= 100 ){
+        PlayerCharacter.health = 100;
+        document.getElementById("health-bar-text").innerHTML = "Health: 100";
+    } else {
+        document.getElementById("health-bar-text").innerHTML = "Health: " + Math.floor(PlayerCharacter.health);
+    }
+
+    return PlayerCharacter.health;
+}
+
 function levelUp(PlayerCharacter) {
 
     // == Upgrade Players level by 1 ==
@@ -1408,7 +1490,7 @@ function createPotion() {
 
         // Success -- Add Potion
         document.getElementById("game-text").innerHTML = "Brew Successful! Potion Added!";
-        gameData.playerInventory.push(new Meat (
+        gameData.playerInventory.push(new Potion (
             gameData.randomItems[2].name,
             gameData.randomItems[2].description,
             gameData.randomItems[2].value
