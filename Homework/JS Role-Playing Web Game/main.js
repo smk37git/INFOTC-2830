@@ -1,7 +1,9 @@
 // === GAME DATA ===
 let gameRunning = true;
 let PlayerCharacter = null;
+let characterPicked = false;
 let playerGold = 0;
+let playerInventory = null;
 let enemyKills = 0;
 
 window.onload = async () => {
@@ -20,17 +22,29 @@ window.onload = async () => {
         console.error('Failed to fetch data:', error);
     });
 
+    // Load Save Function
+    document.getElementById("load-game").onclick = async () => {
+        ({ character: PlayerCharacter, gold: playerGold } = await loadGame(gameData, location, PlayerCharacter, playerGold));
+    }
+
     // Start game by picking character
     await pickCharacter(gameRunning, gameData);
 
     // 5 Second Delay before Triggering Quests
     setTimeout(triggerQuest, 5000, PlayerCharacter, gameData);
 
+    // Save Game Function
+    document.getElementById("save-game").onclick = async () => {
+        saveGame(gameData, location, PlayerCharacter, playerGold);
+    }
+    
 }
 
 // ========== PICK CHARACTER FUNCTION ==========
 function pickCharacter (gameRunning, gameData) {
     while(gameRunning != false && PlayerCharacter == null) {
+
+        characterPicked = true;
 
         document.getElementById("game-text-title").innerHTML = "WELCOME TO THE GAME";
 
@@ -364,6 +378,8 @@ function pickCharacter (gameRunning, gameData) {
             }
         }))
     }
+
+    return characterPicked;
 }
 
 // ========== QUEST TRIGGERING ==========
@@ -1136,13 +1152,13 @@ function attack(gameData, location, PlayerCharacter) {
 
                 // === Create new Soldier Character ===
                 Enemy = new Soldier(
-                    gameData.enemyClasses[0].type,
-                    gameData.enemyClasses[0].health,
-                    gameData.enemyClasses[0].attackPower,
-                    gameData.enemyClasses[0].defense,
+                    gameData.enemyClasses[3].type,
+                    gameData.enemyClasses[3].health,
+                    gameData.enemyClasses[3].attackPower,
+                    gameData.enemyClasses[3].defense,
                 );
 
-                // = Change to Goblin Pic =
+                // = Change to Soldier Pic =
                 document.getElementById("game-picture").src="RPGImages/soldier.webp";
 
                 // = State Event = 
@@ -1201,7 +1217,7 @@ function attack(gameData, location, PlayerCharacter) {
                     gameData.enemyClasses[5].defense,
                 );
 
-                // = Change to Troll Pic =
+                // = Change to Bandit Pic =
                 document.getElementById("game-picture").src="RPGImages/bandit.png";
 
                 // = State Event = 
@@ -1618,6 +1634,146 @@ function endGame() {
         setTimeout(triggerQuest, 5000, PlayerCharacter, gameData);
     }
 }
+
+// ========== SAVE GAME ==========
+function saveGame(gameData, location, PlayerCharacter, playerGold) {
+
+    location = 5; // Always restart at Village for Saftey
+
+    const player = {
+        type: PlayerCharacter.type,
+        health: PlayerCharacter.health,
+        attackPower: PlayerCharacter.attackPower,
+        defense: PlayerCharacter.defense,
+        level: PlayerCharacter.level,
+        skill: PlayerCharacter.skill,
+
+        playerGold: playerGold,
+
+        location: location,
+
+        inventory: gameData.playerInventory
+    }
+
+    localStorage.setItem("savedPlayer", JSON.stringify(player));
+    
+    alert("Game Saved");
+}
+
+// ========== Load GAME ==========
+async function loadGame(gameData, location, PlayerCharacter, playerGold) {
+
+    location = 5; // Always restart at Village for Saftey
+
+    const data = localStorage.getItem("savedPlayer");
+    if (data) {
+        const loadedCharacter = JSON.parse(data);
+
+        location = 5;
+        changeLocation(gameData, location);
+
+        // === Recreate the PlayerCharacter saved type ===
+        if (loadedCharacter.type === "Warrior") {
+            PlayerCharacter = new Warrior(
+                loadedCharacter.type,
+                loadedCharacter.health,
+                loadedCharacter.attackPower,
+                loadedCharacter.defense,
+                loadedCharacter.level,
+                loadedCharacter.skill
+            );
+        } else if (loadedCharacter.type === "Mage") {
+            PlayerCharacter = new Mage(
+                loadedCharacter.type,
+                loadedCharacter.health,
+                loadedCharacter.attackPower,
+                loadedCharacter.defense,
+                loadedCharacter.level,
+                loadedCharacter.skill
+            );
+        } else if (loadedCharacter.type === "Thief") {
+            PlayerCharacter = new Thief(
+                loadedCharacter.type,
+                loadedCharacter.health,
+                loadedCharacter.attackPower,
+                loadedCharacter.defense,
+                loadedCharacter.level,
+                loadedCharacter.skill
+            );
+        } else if (loadedCharacter.type === "Archer") {
+            PlayerCharacter = new Archer(
+                loadedCharacter.type,
+                loadedCharacter.health,
+                loadedCharacter.attackPower,
+                loadedCharacter.defense,
+                loadedCharacter.level,
+                loadedCharacter.skill
+            );
+        }
+
+        console.log(PlayerCharacter.health);
+
+        // === Assign values to stats in HTML ===
+        // = Class =
+        let classText = document.getElementById("class-text");
+        classText.innerHTML = "Class: " + loadedCharacter.type;
+
+        // = Attack Power =
+        let attackpowerText = document.getElementById("attackpower-text");
+        attackpowerText.innerHTML = "Attack Power: " + loadedCharacter.attackPower;
+
+        // = Defense =
+        let defenseText = document.getElementById("defense-text");
+        defenseText.innerHTML = "Defense: " + loadedCharacter.defense;
+
+        // = Level =
+        let levelText = document.getElementById("level-text");
+        levelText.innerHTML = "Level: " + loadedCharacter.level;
+
+        // = Skill =
+        let skillText = document.getElementById("skill-text");
+        skillText.innerHTML = "Skill: " + loadedCharacter.skill;
+
+        // = Health =
+        let healthbarText = document.getElementById("health-bar-text");
+        healthbarText.innerHTML = "Health: " + Math.floor(loadedCharacter.health);
+
+        // = Gold =
+        playerGold = loadedCharacter.playerGold;
+        document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
+
+        // = Inventory =
+        const inventoryList = document.getElementById('inventory-list');
+
+        // Max Inv Size
+        let maxSpace = 6;
+
+        // Clear existing inventory
+        gameData.playerInventory = [];
+
+        // Add each item
+        if(loadedCharacter.inventory.length <= maxSpace) {
+            document.getElementById('inventory-list').innerHTML = "";
+            loadedCharacter.inventory.forEach(item => {
+                gameData.playerInventory.push(item);
+                const listItem = document.createElement('p');
+                listItem.textContent = `${item.name}`;
+                inventoryList.appendChild(listItem);
+                console.log("Object added:", item);
+            });
+
+        } else {
+            document.getElementById("game-text").innerHTML = "Inventory Full!";
+        }
+
+        alert(`Loaded Player Character: ${loadedCharacter.type}, Level: ${loadedCharacter.level}`);
+    } else {
+        alert("No Save Game Found!");
+    }
+
+    return { character: PlayerCharacter, gold: playerGold };
+}
+
 
 // ========== CHARACTER CONSTRUCTOR ==========
 class BaseCharacter {
