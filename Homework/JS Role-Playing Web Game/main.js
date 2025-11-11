@@ -24,7 +24,7 @@ window.onload = async () => {
 
     // Load Save Function
     document.getElementById("load-game").onclick = async () => {
-        ({ character: PlayerCharacter, gold: playerGold } = await loadGame(gameData, location, PlayerCharacter, playerGold));
+        ({ player: PlayerCharacter, gold: playerGold } = await loadGame(gameData, location, PlayerCharacter, playerGold));
     }
 
     // Start game by picking character
@@ -94,6 +94,8 @@ function pickCharacter (gameRunning, gameData) {
                 document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
 
                 updateInventory(gameData);
+                updateDefense(PlayerCharacter);
+                updateDamage(PlayerCharacter);
 
                 // === Change Picture ===
                 document.getElementById("game-picture").src="RPGImages/Warrior.webp";
@@ -175,6 +177,8 @@ function pickCharacter (gameRunning, gameData) {
                 document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
 
                 updateInventory(gameData);
+                updateDefense(PlayerCharacter);
+                updateDamage(PlayerCharacter);
 
                 // === Change Picture ===
                 document.getElementById("game-picture").src="RPGImages/Mage.webp";
@@ -243,6 +247,7 @@ function pickCharacter (gameRunning, gameData) {
                 ))
 
                 updateDefense(PlayerCharacter);
+                updateDefense(PlayerCharacter);
 
                 // = Dagger =
                 gameData.playerInventory.push(new Dagger (
@@ -250,6 +255,8 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.weapons[4].damage, 
                     gameData.weapons[4].value
                 ));
+
+                updateDamage(PlayerCharacter);
 
                 // Add some chump change
                 playerGold += 25;
@@ -324,6 +331,7 @@ function pickCharacter (gameRunning, gameData) {
                 ))
 
                 updateDefense(PlayerCharacter);
+                updateDefense(PlayerCharacter);
 
                 // = Bow =
                 gameData.playerInventory.push(new Bow (
@@ -331,6 +339,8 @@ function pickCharacter (gameRunning, gameData) {
                     gameData.weapons[3].damage, 
                     gameData.weapons[3].value
                 ));
+
+                updateDamage(PlayerCharacter);
 
                 // Add some chump change
                 playerGold += 50;
@@ -456,6 +466,16 @@ function updateInventory (gameData) {
 
 function updateDefense (PlayerCharacter) {
     PlayerCharacter.defense += gameData.playerInventory[0].defense;
+
+    let defenseText = document.getElementById("defense-text");
+    defenseText.innerHTML = "Defense: " + PlayerCharacter.defense;
+}
+
+function updateDamage (PlayerCharacter) {
+    PlayerCharacter.attackPower += gameData.playerInventory[1].damage;
+
+    let defenseText = document.getElementById("attackpower-text");
+    defenseText.innerHTML = "Attack Power: " + PlayerCharacter.attackPower;
 }
 
 // ========== CHANGE LOCATION ==========
@@ -1277,7 +1297,7 @@ function attack(gameData, location, PlayerCharacter) {
 function doDamage(PlayerCharacter, Enemy, gameData, location) {
 
     // Calculate Player Damage
-    playerDamage = (PlayerCharacter.attackPower + gameData.playerInventory[1].damage);
+    playerDamage = (PlayerCharacter.attackPower);
 
     // Add Enemy's Defense to Player Damage
     playerDamage -= Enemy.defense;
@@ -1292,7 +1312,7 @@ function doDamage(PlayerCharacter, Enemy, gameData, location) {
     + "[AP: " + Enemy.attackPower + "] "
     + "[D: " + Enemy.defense + "]";
 
-    document.getElementById("game-text").innerHTML = "Attacked for " + playerDamage + " damage!";
+    document.getElementById("game-text").innerHTML = "You Attacked for " + playerDamage + " damage!";
 
     // Enemy Attack
     takeDamage(PlayerCharacter, Enemy, gameData);
@@ -1314,6 +1334,9 @@ function doDamage(PlayerCharacter, Enemy, gameData, location) {
 
         // === CLEAR BUTTONS ===
         clearButtons();
+
+        // === REWARD LOOT ===
+        lootReward(gameData, location, PlayerCharacter);
 
         // === RETURN PLAYER ===
         setTimeout(changeLocation, 3000, gameData, location);
@@ -1438,6 +1461,174 @@ function levelUp(PlayerCharacter) {
     // == Upgrade Players level by 1 ==
     PlayerCharacter.level += 1;
     document.getElementById("level-text").innerHTML = "Level: " + PlayerCharacter.level;
+}
+
+// ========== LOOT REWARD ==========
+function lootReward(gameData, location, PlayerCharacter) {
+
+    let result = null;
+
+    switch (location) {
+        case 1: // FOREST
+
+            // = Roll to Find Potion Loot =
+            result = Math.random() < 0.9 ? true : false;
+
+            if (result == true) {
+
+                // Success -- Add Potion
+                document.getElementById("game-text").innerHTML = "You found a Potion!";
+                gameData.playerInventory.push(new Potion (
+                    gameData.randomItems[2].name,
+                    gameData.randomItems[2].description,
+                    gameData.randomItems[2].value
+                )) 
+
+                updateInventory(gameData);
+
+            } else {
+
+                // Failed -- Try again
+                document.getElementById("game-text").innerHTML = "You Found Nothing!"
+            }
+
+            break;
+    
+        case 2: // CASTLE RUINS
+
+            // = Roll to Find Knight Loot =
+            result = Math.random() < 0.3 ? true : false;
+
+            if (result == true) {
+                // == Change Pic to Loot ==
+                document.getElementById("game-picture").src="RPGImages/Armor1.webp";
+
+                // Success -- Remove Old Armor and Add Dragon Gear
+                document.getElementById("game-text").innerHTML = "You found a New Item: " + gameData.armor[2].name;
+
+                PlayerCharacter.defense -= gameData.playerInventory[0].defense;
+                gameData.playerInventory.shift();
+
+                gameData.playerInventory.unshift(new KnightArmor (
+                    gameData.armor[2].name,
+                    gameData.armor[2].defense,
+                    gameData.armor[2].value
+                ))
+
+                // = Update Defense + Inventory =
+                updateInventory(gameData);
+                updateDefense(PlayerCharacter);
+
+            } else {
+
+                // Failed -- Try again
+                document.getElementById("game-text").innerHTML = "You Found Nothing!"
+            }
+            
+            break;
+
+        case 3: // MOUNTAIN CAVES
+
+            // = Roll to Find Dragon Loot =
+            result = Math.random() < 0.2 ? true : false;
+
+            if (result == true) {
+                // == Change Pic to Loot ==
+                document.getElementById("game-picture").src="RPGImages/DragonArmor.webp";
+
+                // Success -- Remove Old Armor and Add Dragon Gear
+                document.getElementById("game-text").innerHTML = "You found a New Item: " + gameData.armor[5].name;
+
+                PlayerCharacter.defense -= gameData.playerInventory[0].defense;
+                gameData.playerInventory.shift();
+
+                gameData.playerInventory.unshift(new DragonArmor (
+                    gameData.armor[5].name,
+                    gameData.armor[5].defense,
+                    gameData.armor[5].value
+                ))
+
+                // = Update Defense + Inventory =
+                updateInventory(gameData);
+                updateDefense(PlayerCharacter);
+
+            } else {
+
+                // Failed -- Try again
+                document.getElementById("game-text").innerHTML = "You Found Nothing!"
+            }
+            
+            break;
+
+        case 4: // WIZARDS TOWER
+            
+            // = Roll to Find Wizard Loot =
+            result = Math.random() < 0.6 ? true : false;
+
+            if (result == true) {
+                // == Change Pic to Loot ==
+                document.getElementById("game-picture").src="RPGImages/MageRobe.webp";
+
+                // Success -- Remove Old Armor and Add Robe Gear
+                document.getElementById("game-text").innerHTML = "You found a New Item: " + gameData.armor[6].name;
+
+                PlayerCharacter.defense -= gameData.playerInventory[0].defense;
+                gameData.playerInventory.shift();
+
+                gameData.playerInventory.unshift(new MageRobeArmor (
+                    gameData.armor[6].name,
+                    gameData.armor[6].defense,
+                    gameData.armor[6].value
+                ))
+
+                // = Update Defense + Inventory =
+                updateInventory(gameData);
+                updateDefense(PlayerCharacter);
+
+            } else {
+
+                // Failed -- Try again
+                document.getElementById("game-text").innerHTML = "You Found Nothing!"
+            }
+            
+            break;
+
+        case 5: // VILLAGE MARKET
+
+            // = Roll to Find Thief Loot =
+            result = Math.random() < 0.2 ? true : false;
+
+            if (result == true) {
+                // == Change Pic to Loot ==
+                document.getElementById("game-picture").src="RPGImages/Thiefclothes1.webp";
+
+                // Success -- Remove Old Armor and Add Thief Gear
+                document.getElementById("game-text").innerHTML = "You found a New Item: " + gameData.armor[7].name;
+
+                PlayerCharacter.defense -= gameData.playerInventory[0].defense;
+                gameData.playerInventory.shift();
+
+                gameData.playerInventory.unshift(new UpgradedThiefArmor (
+                    gameData.armor[7].name,
+                    gameData.armor[7].defense,
+                    gameData.armor[7].value
+                ))
+
+                // = Update Defense + Inventory =
+                updateInventory(gameData);
+                updateDefense(PlayerCharacter);
+
+            } else {
+
+                // Failed -- Try again
+                document.getElementById("game-text").innerHTML = "You Found Nothing!"
+            }
+            
+            break;
+
+        default:
+            break;
+    }
 }
 
 // ========== FUN EVENTS ==========
@@ -1771,7 +1962,7 @@ async function loadGame(gameData, location, PlayerCharacter, playerGold) {
         alert("No Save Game Found!");
     }
 
-    return { character: PlayerCharacter, gold: playerGold };
+    return { player: PlayerCharacter, gold: playerGold };
 }
 
 
@@ -1927,6 +2118,24 @@ class MageArmor extends BaseArmor {
 }
 
 class ThiefArmor extends BaseArmor {
+    constructor(name, defense, value){
+        super(name, defense, value);
+    }
+}
+
+class DragonArmor extends BaseArmor {
+    constructor(name, defense, value){
+        super(name, defense, value);
+    }
+}
+
+class MageRobeArmor extends BaseArmor {
+    constructor(name, defense, value){
+        super(name, defense, value);
+    }
+}
+
+class UpgradedThiefArmor extends BaseArmor {
     constructor(name, defense, value){
         super(name, defense, value);
     }

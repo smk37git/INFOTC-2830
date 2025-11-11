@@ -131,6 +131,20 @@
             "name": "Thief Armor [D8]",
             "defense": 8,
             "value": 150
+        },
+        {
+            "name": "Dragon Armor [D15]",
+            "defense": 20,
+            "value": 1000
+        },
+        {
+            "name": "Nature Robe Armor [D12]",
+            "defense": 12,
+            "value": 500
+        }, {
+            "name": "Bolsted Thief Armor [D12]",
+            "defense": 12,
+            "value": 200
         }
     ],
 
