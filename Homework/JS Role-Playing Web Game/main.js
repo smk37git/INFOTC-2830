@@ -644,7 +644,7 @@ function changeLocation(gameData, location) {
                 document.getElementById("option-one").innerHTML = "Walk Around Village";
                 document.getElementById("option-two").innerHTML = "Attempt to Steal";
                 document.getElementById("option-three").innerHTML = "Leave the Village";
-                document.getElementById("option-four").innerHTML = "Buy / Sell Goods";
+                document.getElementById("option-four").innerHTML = "Beg For Gold";
 
                 // = Trigger Option 1 =
                 document.getElementById("option-one").onclick = () => {
@@ -661,7 +661,7 @@ function changeLocation(gameData, location) {
         
                 // = Trigger Option 2 =
                 document.getElementById("option-two").onclick = () => {
-                    rollSteal(playerGold, gameData, location, PlayerCharacter);
+                    playerGold = rollSteal(playerGold, gameData, location, PlayerCharacter);
                 }
 
                 // = Trigger Option 3 =
@@ -672,7 +672,7 @@ function changeLocation(gameData, location) {
 
                 // = Trigger Option 4 =
                 document.getElementById("option-four").onclick = () => {
-                    // trade();
+                    playerGold = rollDonation(playerGold);
                 }
 
 
@@ -1433,7 +1433,7 @@ function rollSteal(playerGold, gameData, location, PlayerCharacter) {
     if (result == true) {
 
         // Success -- Add Gold
-        playerGold += 25
+        playerGold += 25;
         document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
         document.getElementById("game-text").innerHTML = "Theft Successful! Gold: +25";
 
@@ -1526,6 +1526,27 @@ function rollMine() {
         // Failed -- Try again
         document.getElementById("game-text").innerHTML = "Mining Failed!"
     }
+}
+
+function rollDonation(playerGold) {
+
+    // = Roll to Steal =
+    let result = Math.random() < 0.2 ? true : false;
+
+    if (result == true) {
+
+        // Success -- Add Gold
+        playerGold += 10;
+        document.getElementById("gold-count").innerHTML = "Gold: " + playerGold;
+        document.getElementById("game-text").innerHTML = "You recieved a donation! Gold: +10";
+
+    } else {
+
+        // Failed
+        document.getElementById("game-text").innerHTML = "There's no place for beggars here!";
+    }
+
+    return playerGold;
 }
 
 // ========== CLEAR BUTTONS ==========
