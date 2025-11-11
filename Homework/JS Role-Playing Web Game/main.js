@@ -126,6 +126,8 @@ function pickCharacter (gameRunning, gameData) {
                 let healthbarText = document.getElementById("health-bar-text");
                 healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
 
+                healthBar(PlayerCharacter);
+
                 // === CLEAR BUTTONS ===
                 document.getElementById("option-one").onclick = null;
                 document.getElementById("option-two").onclick = null;
@@ -208,6 +210,8 @@ function pickCharacter (gameRunning, gameData) {
                 // = Health =
                 let healthbarText = document.getElementById("health-bar-text");
                 healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
+
+                healthBar(PlayerCharacter);
 
                 // === CLEAR BUTTONS ===
                 document.getElementById("option-one").onclick = null;
@@ -293,6 +297,8 @@ function pickCharacter (gameRunning, gameData) {
                 let healthbarText = document.getElementById("health-bar-text");
                 healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
 
+                healthBar(PlayerCharacter);
+
                 // === CLEAR BUTTONS ===
                 document.getElementById("option-one").onclick = null;
                 document.getElementById("option-two").onclick = null;
@@ -376,6 +382,8 @@ function pickCharacter (gameRunning, gameData) {
                 // = Health =
                 let healthbarText = document.getElementById("health-bar-text");
                 healthbarText.innerHTML = "Health: " + PlayerCharacter.health;
+
+                healthBar(PlayerCharacter);
 
                 // === CLEAR BUTTONS ===
                 document.getElementById("option-one").onclick = null;
@@ -1357,8 +1365,11 @@ function takeDamage(PlayerCharacter, Enemy, gameData) {
     // Calculate Final Damage
     PlayerCharacter.health -= enemyDamage;
 
+    // == Redraw Health Bar ==
+    healthBar(PlayerCharacter);
+
     // Return Player's HP and check if Dead
-    if(Math.floor(PlayerCharacter.health) > 0){
+    if(Math.floor(PlayerCharacter.health) >= 0){
         document.getElementById("health-bar-text").innerHTML = "Health: " + Math.floor(PlayerCharacter.health) + " [-" + Math.floor(enemyDamage) + " HP]";
     } else {
 
@@ -1448,8 +1459,14 @@ function heal (gameData, PlayerCharacter) {
 
     if (PlayerCharacter.health >= 100 ){
         PlayerCharacter.health = 100;
+        healthBar(PlayerCharacter);
         document.getElementById("health-bar-text").innerHTML = "Health: 100";
+    } else if (PlayerCharacter.heatlh > 0) {
+        PlayerCharacter.health = 0;
+        healthBar(PlayerCharacter);
+        document.getElementById("health-bar-text").innerHTML = "Health: 0";
     } else {
+        healthBar(PlayerCharacter);
         document.getElementById("health-bar-text").innerHTML = "Health: " + Math.floor(PlayerCharacter.health);
     }
 
@@ -1461,6 +1478,35 @@ function levelUp(PlayerCharacter) {
     // == Upgrade Players level by 1 ==
     PlayerCharacter.level += 1;
     document.getElementById("level-text").innerHTML = "Level: " + PlayerCharacter.level;
+}
+
+function healthBar(PlayerCharacter) {
+
+    // == Grab the canvas element ==
+    const canvas = document.getElementById("health-bar");
+    const ctx = canvas.getContext('2d');
+
+    // = Assign Values =
+    let maxWidth = 215;
+    let maxHeight = 25;
+    const padding = 5;
+
+    let healthPoints = PlayerCharacter.health;
+    const maxHealth = 100;
+
+    // == Create Rectangle ==
+    ctx.clearRect(0,0, maxWidth, maxHeight);
+    ctx.fillStyle = '#121212ff';
+    ctx.fillRect(padding, padding, maxWidth - (2 * padding), maxHeight - (2 * padding));
+
+    const healthWidth = (healthPoints / maxHealth) * (maxWidth - (2 * padding));
+    ctx.fillStyle = '#bc3c3cff';
+
+    if (healthWidth <= 0) {
+        ctx.fillRect(padding, padding, 0, maxHeight - (2 * padding));
+    } else {
+        ctx.fillRect(padding, padding, healthWidth, maxHeight - (2 * padding));
+    }
 }
 
 // ========== LOOT REWARD ==========
@@ -1902,8 +1948,6 @@ async function loadGame(gameData, location, PlayerCharacter, playerGold) {
             );
         }
 
-        console.log(PlayerCharacter.health);
-
         // === Assign values to stats in HTML ===
         // = Class =
         let classText = document.getElementById("class-text");
@@ -1928,6 +1972,8 @@ async function loadGame(gameData, location, PlayerCharacter, playerGold) {
         // = Health =
         let healthbarText = document.getElementById("health-bar-text");
         healthbarText.innerHTML = "Health: " + Math.floor(loadedCharacter.health);
+
+        healthBar(PlayerCharacter);
 
         // = Gold =
         playerGold = loadedCharacter.playerGold;

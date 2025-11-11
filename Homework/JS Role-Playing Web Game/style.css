@@ -36,7 +36,7 @@ body {
 .game-sub-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -65,9 +65,13 @@ body {
 }
 
 .health-bar-text {
-    margin-top: 50px;
+    margin-top: 20px;
     margin-left: 20px;
     text-align: left;
+}
+
+.health-bar {
+    margin-left: 5px;
 }
 
 .game-picture {

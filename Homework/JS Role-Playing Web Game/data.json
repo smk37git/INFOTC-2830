@@ -50,7 +50,7 @@
         {
             "type": "Dragon",
             "health": 100,
-            "attackPower": 25,
+            "attackPower": 30,
             "defense": 15
         },
         {
